@@ -56,6 +56,7 @@ ext('file_browser')
 ext('fzf')
 ext('neoclip')
 ext('notify')
+ext('projects')
 
 -- git_files falling back to find_files if not in a git repo
 Project_files = function()

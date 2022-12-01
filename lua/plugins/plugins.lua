@@ -173,6 +173,9 @@ local pkgs = function(use)
     run = function() vim.fn['firenvim#install'](0) end,
   })
 
+  -- Project management
+  use({ 'ahmedkhalf/project.nvim', config = p('project') })
+
   -- Obsidian
   use({
     'epwalsh/obsidian.nvim',
