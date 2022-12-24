@@ -34,6 +34,11 @@ lsp.gopls.setup({
   end,
 })
 
+-- Haskell
+require('lspconfig').hls.setup({
+  capabilities = capabilities,
+})
+
 -- Java
 -- TODO
 
@@ -116,3 +121,17 @@ lsp.yamlls.setup({
 
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {})
 vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {})
+
+-- keymaps
+local nmap = function(key, target) vim.keymap.set('n', key, target, { remap = false, silent = true }) end
+nmap('K', vim.lsp.buf.hover)
+nmap('<C-k>', vim.lsp.buf.signature_help)
+nmap('gd', vim.lsp.buf.definition)
+nmap('gD', vim.lsp.buf.declaration)
+nmap('gt', vim.lsp.buf.type_definition)
+nmap('gi', vim.lsp.buf.implementation)
+nmap('<space>r', vim.lsp.buf.rename)
+nmap('<space>a', vim.lsp.buf.code_action)
+nmap(']e', vim.diagnostic.goto_next)
+nmap('[e', vim.diagnostic.goto_prev)
+nmap('<leader>f', vim.lsp.buf.format)

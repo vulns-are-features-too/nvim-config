@@ -1,6 +1,3 @@
--- Spell check
-vim.cmd([[set spell spelllang=en_us]])
-
 -- Highlight code inside Markdown
 vim.g.markdown_fenced_languages = {
   'bash',

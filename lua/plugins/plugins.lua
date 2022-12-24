@@ -1,3 +1,18 @@
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
+    vim.cmd([[packadd packer.nvim]])
+    return true
+  end
+  return false
+end
+
+local is_bootstrapping = ensure_packer()
+
+local is_linux = vim.loop.os_uname().sysname == 'Linux'
+
 local function p(plugin)
   -- get string to require plugin config
   return 'require("plugins.' .. plugin .. '")'
@@ -9,68 +24,59 @@ local pkgs = function(use)
 
   -- General UI
   use({ 'arkav/lualine-lsp-progress' })
-  use({ 'chrisbra/colorizer' })
-  use({ 'kyazdani42/nvim-web-devicons', opt = true })
+  use({ 'kyazdani42/nvim-web-devicons' })
   use({ 'morhetz/gruvbox' })
   use({ 'nvim-lualine/lualine.nvim', config = p('lualine') })
-  use({ 'rcarriga/nvim-notify' })
+  use({ 'rcarriga/nvim-notify', config = p('notify') })
   use({ 'szw/vim-maximizer', config = p('maximizer') })
   use({ 'jubnzv/virtual-types.nvim' })
 
   -- Extending basic motions and editing
-  use({ 'AndrewRadev/splitjoin.vim' })
   use({ 'ChocolateOverflow/toggle_words.vim', config = p('toggle_words') })
+  use({ 'ThePrimeagen/harpoon', requires = { 'nvim-lua/plenary.nvim' }, config = p('harpoon') })
+  use({ 'Wansmer/sibling-swap.nvim', config = p('sibling-swap') })
+  use({ 'Wansmer/treesj', config = p('treesj') })
+  use({ 'abecodes/tabout.nvim', wants = { 'nvim-treesitter' }, config = p('tabout') })
   use({ 'andymass/vim-matchup' })
-  use({ 'ggandor/leap.nvim', config = [[require('leap').add_default_mappings()]] })
+  use({ 'cbochs/portal.nvim', requires = { 'ThePrimeagen/harpoon' }, config = p('portal') })
+  use({ 'gbprod/substitute.nvim', config = p('substitute') })
+  use({ 'ggandor/leap.nvim', config = p('leap') })
   use({ 'junegunn/vim-slash' })
+  use({ 'kiyoon/treesitter-indent-object.nvim', config = p('indent_object') })
+  use({ 'kylechui/nvim-surround', tag = '*', config = p('surround') })
+  use({ 'max397574/better-escape.nvim', config = p('better-escape') })
+  use({ 'sQVe/sort.nvim', config = p('sort') })
+  use({ 'tpope/vim-abolish' })
   use({ 'tpope/vim-repeat' })
-  use({ 'kylechui/nvim-surround', tag = '*', config = function() require('nvim-surround').setup({}) end })
   use({ 'unblevable/quick-scope' })
-  use({
-    'gbprod/substitute.nvim',
-    config = [[require('substitute').setup({})]],
-  })
-  use({
-    'sQVe/sort.nvim',
-    config = [[require('sort').setup()]],
-  })
+  use({ 'wellle/targets.vim' })
 
   -- Tags
-  use({ 'preservim/tagbar' })
+  use({ 'preservim/tagbar', config = p('tagbar') })
 
   -- LSP
   use({ 'dense-analysis/ale', config = p('ale') })
   use({ 'hrsh7th/cmp-nvim-lsp-signature-help' })
-  use({ 'https://git.sr.ht/~whynothugo/lsp_lines.nvim', config = p('lsp_lines') })
+  if is_linux then use({ 'https://git.sr.ht/~whynothugo/lsp_lines.nvim', config = p('lsp_lines') }) end
   use({ 'neovim/nvim-lspconfig', config = p('lsp') })
   use({ 'ray-x/lsp_signature.nvim', config = p('lsp_signature') })
 
   -- tree-sitter
-  use({
-    'nvim-treesitter/nvim-treesitter',
-    config = p('tree-sitter'),
-    run = ':TSUpdate',
-  })
+  use({ 'nvim-treesitter/nvim-treesitter', config = p('ts'), run = ':TSUpdate' })
   use({ 'nvim-treesitter/nvim-treesitter-context' })
   use({ 'nvim-treesitter/nvim-treesitter-refactor' })
   use({ 'nvim-treesitter/nvim-treesitter-textobjects' })
   use({ 'RRethy/nvim-treesitter-endwise' })
 
   -- telescope
-  use({
-    'nvim-telescope/telescope.nvim',
-    config = p('telescope'),
-    requires = { 'nvim-lua/plenary.nvim' },
-  })
+  use({ 'nvim-telescope/telescope.nvim', config = p('telescope'), requires = { 'nvim-lua/plenary.nvim' } })
   use({ 'nvim-lua/popup.nvim' })
   use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' })
   use({ 'nvim-telescope/telescope-file-browser.nvim' })
+  use({ 'jvgrootveld/telescope-zoxide' })
 
   -- goto-preview
-  use({
-    'rmagatti/goto-preview',
-    config = [[require('goto-preview').setup()]],
-  })
+  use({ 'rmagatti/goto-preview', config = p('preview') })
 
   -- commenting
   use({ 'numToStr/Comment.nvim', config = p('comment') })
@@ -80,14 +86,7 @@ local pkgs = function(use)
   use({ 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' })
 
   -- yank
-  use({
-    'AckslD/nvim-neoclip.lua',
-    requires = {
-      { 'kkharji/sqlite.lua', module = 'sqlite' },
-      { 'nvim-telescope/telescope.nvim' },
-    },
-    config = p('neoclip'),
-  })
+  use({ 'AckslD/nvim-neoclip.lua', requires = { { 'kkharji/sqlite.lua', module = 'sqlite' } }, config = p('neoclip') })
   use({ 'tversteeg/registers.nvim' })
 
   -- Debugging
@@ -97,10 +96,7 @@ local pkgs = function(use)
   use({ 'rcarriga/cmp-dap' })
   use({ 'rcarriga/nvim-dap-ui' })
   use({ 'theHamsta/nvim-dap-virtual-text' })
-  use({
-    'folke/trouble.nvim',
-    config = [[require('trouble').setup()]],
-  })
+  use({ 'folke/trouble.nvim', config = p('trouble') })
 
   -- Formatting
   use({ 'jose-elias-alvarez/null-ls.nvim', config = p('null-ls') })
@@ -113,17 +109,12 @@ local pkgs = function(use)
   use({ 'hrsh7th/cmp-nvim-lsp' })
   use({ 'hrsh7th/cmp-nvim-lua' }) -- nvim lua config
   use({ 'hrsh7th/cmp-path' })
-  use({ 'hrsh7th/nvim-cmp', config = p('completion') })
+  use({ 'hrsh7th/nvim-cmp', config = p('cmp') })
   use({ 'onsails/lspkind.nvim' }) -- fancy completion menu
   use({ 'saadparwaiz1/cmp_luasnip' })
   use({ 'windwp/nvim-autopairs', config = p('autopair') })
-  use({ 'windwp/nvim-ts-autotag', config = [[require('nvim-ts-autotag').setup()]] })
-  use({
-    'L3MON4D3/luasnip',
-    config = p('luasnip'),
-    rocks = { 'jsregexp' },
-    run = 'make install_jsregexp',
-  }) -- snippets engine
+  use({ 'windwp/nvim-ts-autotag', config = 'require("nvim-ts-autotag").setup()' })
+  use({ 'L3MON4D3/luasnip', config = p('luasnip'), rocks = { 'jsregexp' }, run = 'make install_jsregexp' }) -- snippets engine
   use({ 'tzachar/cmp-tabnine', run = './install.sh' }) -- AI trying to steal my job
 
   -- git
@@ -132,13 +123,11 @@ local pkgs = function(use)
   use({ 'tpope/vim-fugitive' })
 
   -- Building & running code
-  use({ 'tpope/vim-dispatch' })
-  use({ 'michaelb/sniprun', run = 'bash ./install.sh' })
-  use({
-    'CRAG666/code_runner.nvim',
-    config = p('code_runner'),
-    requires = 'nvim-lua/plenary.nvim',
-  })
+  use({ 'michaelb/sniprun', run = 'bash ./install.sh', config = p('sniprun') })
+  use({ 'CRAG666/code_runner.nvim', config = p('code_runner'), requires = 'nvim-lua/plenary.nvim' })
+
+  -- testing
+  use({ 'rest-nvim/rest.nvim', ft = 'http', config = p('rest') })
 
   -- Shell
   use({ 'itspriddle/vim-shellcheck', ft = 'sh' })
@@ -156,32 +145,18 @@ local pkgs = function(use)
   -- Markdown, LaTeX, and text
   use({ 'dkarter/bullets.vim', ft = { 'markdown', 'plaintex', 'text' } })
 
-  -- UML
-  use({ 'aklt/plantuml-syntax', ft = 'plantuml' })
-
-  -- Utilities
-  use({ 'wellle/targets.vim' })
-  use({
-    'pechorin/any-jump.vim',
-    cmd = { 'AnyJump', 'AnyJumpLastResults' },
-    config = p('any-jump'),
-  })
-
   -- Browser
-  use({
-    'glacambre/firenvim',
-    run = function() vim.fn['firenvim#install'](0) end,
-  })
+  use({ 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end })
 
   -- Project management
-  use({ 'ahmedkhalf/project.nvim', config = p('project') })
+  use({ 'cljoly/telescope-repo.nvim' })
+  use({ 'airblade/vim-rooter', config = p('rooter') })
 
   -- Obsidian
-  use({
-    'epwalsh/obsidian.nvim',
-    config = p('obsidian'),
-    ft = { 'lua', 'markdown' },
-  })
+  use({ 'epwalsh/obsidian.nvim', config = p('obsidian'), ft = { 'lua', 'markdown' } })
+
+  -- tmux
+  use({ 'christoomey/vim-tmux-navigator', config = p('tmux') })
 
   -- Misc files
   use({ 'NoahTheDuke/vim-just', ft = 'just' })
@@ -191,14 +166,21 @@ local pkgs = function(use)
   use({ 'axieax/urlview.nvim', config = p('urlview') })
   use({ 'ethanholz/nvim-lastplace', config = p('lastplace') })
   use({ 'lewis6991/impatient.nvim' })
+
+  if is_bootstrapping then require('packer').sync() end
 end
 
 local config = {
-  git = {
-    -- use SSH whenever possible
-    default_url_format = 'git@github.com:%s',
-  },
+  git = { default_url_format = 'git@github.com:%s' }, -- use SSH whenever possible
 }
 
 require('packer').startup({ pkgs, config })
 require('impatient')
+
+local v = vim.api
+-- Reload & recompile plugins when this file is saved
+v.nvim_create_augroup('PackerAug', { clear = true })
+v.nvim_create_autocmd(
+  'BufWritePost',
+  { pattern = 'plugins.lua', group = 'PackerAug', command = 'source <afile> | PackerCompile' }
+)

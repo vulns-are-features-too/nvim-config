@@ -73,3 +73,5 @@ dap.listeners.before['event_progressEnd']['progress-notifications'] = function(s
   })
   notif_data.spinner = nil
 end
+
+vim.keymap.set('n', '<leader><leader>c', notify.dismiss, { remap = false, silent = true })

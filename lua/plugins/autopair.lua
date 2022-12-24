@@ -8,7 +8,7 @@ npairs.setup({
   enable_check_bracket_line = false, -- don't close if the next bracket doesn't have an opening bracket
   ignored_next_char = '[%w%.]', -- ignore alphanumeric and `.` symbol
   fast_wrap = {
-    map = '<c-f>',
+    map = '<C-f>',
     chars = { '{', '[', '(', '"', "'" },
     pattern = [=[[%'%"%)%>%]%)%}%,]]=],
     end_key = '$',

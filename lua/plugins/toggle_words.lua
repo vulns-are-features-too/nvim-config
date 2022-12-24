@@ -1,3 +1,5 @@
+local nmap = function(key, target) vim.keymap.set('n', key, target, { remap = false, silent = true }) end
+
 vim.g.toggle_words_dict = {
   all = {
     { 'true', 'false' },
@@ -30,6 +32,7 @@ vim.g.toggle_words_dict = {
     { 'success', 'failure' },
     { 'up', 'down' },
     { 'yes', 'no' },
+    { 'and', 'or' },
   },
   sh = {
     { 'if', 'elif', 'else', 'fi' },
@@ -53,3 +56,6 @@ vim.g.toggle_words_dict = {
     { 'if', 'else', 'endif' },
   },
 }
+
+nmap('<C-T>', '<Cmd>ToggleWord<CR>')
+nmap('<C-S-T>', '<Cmd>ToggleWordRev<CR>')
