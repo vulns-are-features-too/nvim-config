@@ -22,7 +22,7 @@ local file_browser_opts = {
     },
     ['n'] = {
       ['a'] = fb.create,
-      ['c'] = fb.rename,
+      ['r'] = fb.rename,
       ['y'] = fb.copy,
       ['m'] = fb.move,
       ['d'] = fb.remove,
@@ -54,7 +54,13 @@ t.setup({
   defaults = {
     mappings = {
       i = {
-        ['<C-q>'] = act.send_to_qflist + act.open_qflist,
+        ['<C-j>'] = act.select_horizontal,
+        ['<C-k>'] = act.select_vertical,
+        ['<C-u>'] = false,
+      },
+      n = {
+        ['<C-j>'] = act.select_horizontal,
+        ['<C-k>'] = act.select_vertical,
       },
     },
   },

@@ -4,4 +4,4 @@ require('leap').add_default_mappings()
 
 nmap('s', '<Plug>(leap-forward-to)')
 nmap('S', '<Plug>(leap-backward-to)')
-nmap('<space>gs', '<Plug>(leap-cross-window)')
+nmap('<space>g<space>', '<Plug>(leap-cross-window)')

@@ -62,11 +62,9 @@ cmd('Wq', ':wq', { nargs = 0 })
 cmd('Vs', ':vs', { nargs = 0 })
 map('c', 'qw', 'wq', { remap = false })
 
--- Y yanks to end of line
-nvmap('Y', 'y$')
-
 -- ctrl-S now saves file
 nmap('<C-s>', '<Cmd>w<CR>')
+nmap('<leader>s', '<Cmd>w<CR>')
 imap('<C-s>', '<Esc><Cmd>w<CR>a')
 vmap('<C-s>', '<Esc><Cmd>w<CR>')
 
@@ -77,6 +75,12 @@ vmap('>', '>gv')
 -- move selected stuff up/down
 vmap('<space>j', "<Cmd>m '>+1<CR>gv=gv")
 vmap('<space>k', "<Cmd>m '>-2<CR>gv=gv")
+
+-- closing stuff
+nmap('<leader>q', '<Cmd>bd<CR>')
+
+-- replace word under cursor
+nmap('<space>R', ':%s/<C-r><C-w>/', { remap = false })
 
 -- nvim configs
 aug('nvim_augroup', { clear = true })
@@ -169,15 +173,12 @@ nvmap('<space>gd', '<Cmd>diffget //2<CR>')
 nvmap('<space>gk', '<Cmd>diffget //3<CR>')
 
 -- git-fugitive
-nvmap('<space>gS', '<Cmd>G<CR>')
+nvmap('<space>G', '<Cmd>G<CR>')
 nvmap('<leader>gc', '<Cmd>Git commit<CR>')
 nvmap('<leader>gp', '<Cmd>Git push<CR>')
 
---lazygit
-nmap('<leader>gg', '<Cmd>LazyGit<CR>')
-
 -- :terminal
-nmap('<A-t>', '<Cmd>terminal<CR>')
+-- nmap('<A-t>', '<Cmd>terminal<CR>')
 tmap('<C-space>', '<C-\\><C-n>')
 
 -- make currect script executable

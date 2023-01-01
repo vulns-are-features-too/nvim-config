@@ -118,7 +118,6 @@ local pkgs = function(use)
   use({ 'tzachar/cmp-tabnine', run = './install.sh' }) -- AI trying to steal my job
 
   -- git
-  use({ 'kdheepak/lazygit.nvim', cmd = 'LazyGit' })
   use({ 'lewis6991/gitsigns.nvim', config = p('gitsigns') })
   use({ 'tpope/vim-fugitive' })
 
@@ -145,6 +144,9 @@ local pkgs = function(use)
   -- Markdown, LaTeX, and text
   use({ 'dkarter/bullets.vim', ft = { 'markdown', 'plaintex', 'text' } })
 
+  -- files browsing
+  use({ 'is0n/fm-nvim', config = p('fm') })
+
   -- Browser
   use({ 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end })
 
@@ -155,8 +157,9 @@ local pkgs = function(use)
   -- Obsidian
   use({ 'epwalsh/obsidian.nvim', config = p('obsidian'), ft = { 'lua', 'markdown' } })
 
-  -- tmux
+  -- tmux & terminal integration
   use({ 'christoomey/vim-tmux-navigator', config = p('tmux') })
+  use({ 'akinsho/toggleterm.nvim', tag = '*', config = p('toggleterm') })
 
   -- Misc files
   use({ 'NoahTheDuke/vim-just', ft = 'just' })
