@@ -19,8 +19,19 @@ local function p(plugin)
 end
 
 local pkgs = function(use)
-  -- PACKER
+  -- Core Plugins
   use('wbthomason/packer.nvim')
+  use({ 'neovim/nvim-lspconfig', config = p('lsp') })
+  use({ 'jose-elias-alvarez/null-ls.nvim', config = p('null-ls') })
+  use({
+    'williamboman/mason.nvim',
+    requires = {
+      'williamboman/mason-lspconfig.nvim',
+      'jay-babu/mason-nvim-dap.nvim',
+      'jay-babu/mason-null-ls.nvim',
+    },
+    config = p('mason'),
+  })
 
   -- General UI
   use({ 'arkav/lualine-lsp-progress' })
@@ -58,7 +69,6 @@ local pkgs = function(use)
   use({ 'dense-analysis/ale', config = p('ale') })
   use({ 'hrsh7th/cmp-nvim-lsp-signature-help' })
   if is_linux then use({ 'https://git.sr.ht/~whynothugo/lsp_lines.nvim', config = p('lsp_lines') }) end
-  use({ 'neovim/nvim-lspconfig', config = p('lsp') })
   use({ 'ray-x/lsp_signature.nvim', config = p('lsp_signature') })
 
   -- tree-sitter
@@ -97,9 +107,6 @@ local pkgs = function(use)
   use({ 'rcarriga/nvim-dap-ui' })
   use({ 'theHamsta/nvim-dap-virtual-text' })
   use({ 'folke/trouble.nvim', config = p('trouble') })
-
-  -- Formatting
-  use({ 'jose-elias-alvarez/null-ls.nvim', config = p('null-ls') })
 
   -- Autocomplete & Snippets
   use({ 'ChocolateOverflow/vim-snippets' }) -- my snippets

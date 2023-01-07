@@ -18,7 +18,7 @@ null.setup({
     fmt.rustfmt,
     fmt.shellharden,
     fmt.shfmt.with({ extra_args = { '-i', '2', '-sr' } }),
-    fmt.stylish_haskell,
+    -- fmt.stylish_haskell,
     fmt.stylua,
 
     -- linting & diagnostics

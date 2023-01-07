@@ -37,7 +37,7 @@ lsp.gopls.setup({
 })
 
 -- Haskell
-require('lspconfig').hls.setup({
+lsp.hls.setup({
   capabilities = capabilities,
 })
 
