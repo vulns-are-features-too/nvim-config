@@ -171,6 +171,7 @@ local pkgs = function(use)
   -- Misc files
   use({ 'NoahTheDuke/vim-just', ft = 'just' })
   use({ 'bfrg/vim-jq', ft = 'jq' })
+  use({ 'Fymyte/rasi.vim', ft = 'rasi' })
 
   -- Misc
   use({ 'axieax/urlview.nvim', config = p('urlview') })
