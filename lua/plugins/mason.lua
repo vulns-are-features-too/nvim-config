@@ -1,5 +1,8 @@
 require('mason').setup()
 
+local is_linux = vim.fn.has('linux') or vim.fn.has('unix')
+local php_lsp = is_linux and 'phpactor' or 'intelephense'
+
 require('mason-lspconfig').setup({
   ensure_installed = {
     'bashls',
@@ -11,7 +14,8 @@ require('mason-lspconfig').setup({
     -- 'hls',
     'jsonls',
     'marksman',
-    'phpactor',
+    php_lsp,
+    'psalm',
     'pylsp',
     'rust_analyzer',
     'sqlls',
@@ -31,6 +35,7 @@ require('mason-null-ls').setup({
     'goimports',
     'jq',
     'mypy',
+    'phpstan',
     'prettier',
     'pylint',
     'revive',

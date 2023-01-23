@@ -27,6 +27,7 @@ null.setup({
     diag.eslint,
     diag.mypy,
     diag.php,
+    diag.phpstan,
     diag.pylint,
     diag.revive,
     diag.staticcheck,

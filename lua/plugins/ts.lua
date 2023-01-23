@@ -12,6 +12,7 @@ require('nvim-treesitter.configs').setup({
     'http',
     'java',
     'javascript',
+    'jq',
     'json',
     'latex',
     'lua',
