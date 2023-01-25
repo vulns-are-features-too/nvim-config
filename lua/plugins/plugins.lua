@@ -37,7 +37,7 @@ local plugins = {
   -- General UI
   { 'arkav/lualine-lsp-progress' },
   { 'kyazdani42/nvim-web-devicons' },
-  { 'morhetz/gruvbox' },
+  { 'morhetz/gruvbox', lazy = false, priority = 1000 },
   { 'nvim-lualine/lualine.nvim', config = c('lualine') },
   { 'rcarriga/nvim-notify', config = c('notify') },
   { 'szw/vim-maximizer', config = c('maximizer') },
@@ -149,6 +149,16 @@ local plugins = {
   -- ('ray-x/go.nvim')
   -- ('olexsmir/gopher.nvim')
 
+  -- SQL
+  {
+    'tpope/vim-dadbod',
+    dependencies = {
+      { 'kristijanhusak/vim-dadbod-ui' },
+      { 'kristijanhusak/vim-dadbod-completion' },
+    },
+    ft = { 'sql', 'mysql', 'plsql' },
+  },
+
   -- Markdown, LaTeX, and text
   { 'dkarter/bullets.vim', ft = { 'markdown', 'plaintex', 'text' } },
 
@@ -179,6 +189,7 @@ local plugins = {
 
 local opts = {
   git = { url_format = 'git@github.com:%s' }, -- use SSH whenever possible
+  colorscheme = { 'gruvbox' },
 }
 
 lazy.setup(plugins, opts)

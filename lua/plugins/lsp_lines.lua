@@ -11,4 +11,4 @@ l.setup()
 l.toggle() -- disabled by default
 vim.diagnostic.config({ virtual_text = not LspLineState })
 
-vim.keymap.set('n', '<leader>l', toggle_lsp_lines, { desc = 'Toggle lsp_lines' })
+vim.keymap.set('n', '<leader>L', toggle_lsp_lines, { desc = 'Toggle lsp_lines' })
