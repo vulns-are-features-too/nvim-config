@@ -77,6 +77,7 @@ local plugins = {
   { 'nvim-treesitter/nvim-treesitter-context' },
   { 'nvim-treesitter/nvim-treesitter-textobjects' },
   { 'RRethy/nvim-treesitter-endwise' },
+  { 'nvim-treesitter/playground' },
 
   -- telescope
   { 'nvim-telescope/telescope.nvim', dependencies = { 'nvim-lua/plenary.nvim' }, config = c('telescope') },
