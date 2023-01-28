@@ -28,6 +28,14 @@ dap.configurations.c = dap.configurations.rust
 dap.configurations.cpp = dap.configurations.rust
 
 ---- DAP UI ----
+-- Don't list the [dap-repl] buffer by default
+api.nvim_create_autocmd("FileType", {
+  pattern = "dap-repl",
+  callback = function(args)
+    vim.api.nvim_buf_set_option(args.buf, "buflisted", false)
+  end,
+})
+
 ui.setup({
   icons = { expanded = '▾', collapsed = '▸', current_frame = '▸' },
   mappings = {

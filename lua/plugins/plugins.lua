@@ -42,6 +42,7 @@ local plugins = {
   { 'rcarriga/nvim-notify', config = c('notify') },
   { 'szw/vim-maximizer', config = c('maximizer') },
   { 'jubnzv/virtual-types.nvim' },
+  { 'folke/lsp-colors.nvim' },
 
   -- Extending basic motions and editing
   { 'ChocolateOverflow/toggle_words.vim', config = c('toggle_words') },
@@ -67,7 +68,6 @@ local plugins = {
   { 'preservim/tagbar', config = c('tagbar') },
 
   -- LSP
-  { 'dense-analysis/ale', config = c('ale') },
   { 'hrsh7th/cmp-nvim-lsp-signature-help' },
   { 'https://git.sr.ht/~whynothugo/lsp_lines.nvim', enabled = is_linux, config = c('lsp_lines') },
   { 'ray-x/lsp_signature.nvim', config = c('lsp_signature') },
@@ -75,12 +75,11 @@ local plugins = {
   -- tree-sitter
   { 'nvim-treesitter/nvim-treesitter', config = c('ts'), build = ':TSUpdate' },
   { 'nvim-treesitter/nvim-treesitter-context' },
-  { 'nvim-treesitter/nvim-treesitter-refactor' },
   { 'nvim-treesitter/nvim-treesitter-textobjects' },
   { 'RRethy/nvim-treesitter-endwise' },
 
   -- telescope
-  { 'nvim-telescope/telescope.nvim', config = c('telescope'), dependencies = { 'nvim-lua/plenary.nvim' } },
+  { 'nvim-telescope/telescope.nvim', dependencies = { 'nvim-lua/plenary.nvim' }, config = c('telescope') },
   { 'nvim-lua/popup.nvim' },
   { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
   { 'nvim-telescope/telescope-file-browser.nvim' },
@@ -92,6 +91,9 @@ local plugins = {
   -- commenting
   { 'numToStr/Comment.nvim', config = c('comment') },
   { 'JoosepAlviste/nvim-ts-context-commentstring' },
+
+  -- refactoring
+  { 'ThePrimeagen/refactoring.nvim', dependencies = { 'nvim-treesitter/nvim-treesitter' }, config = c('refactoring') },
 
   -- diff
   { 'sindrets/diffview.nvim', dependencies = 'nvim-lua/plenary.nvim' },
@@ -131,7 +133,7 @@ local plugins = {
 
   -- Building & running code
   { 'michaelb/sniprun', build = 'bash ./install.sh', config = c('sniprun') },
-  { 'CRAG666/code_runner.nvim', config = c('code_runner'), dependencies = 'nvim-lua/plenary.nvim' },
+  { 'CRAG666/code_runner.nvim', dependencies = 'nvim-lua/plenary.nvim', config = c('code_runner') },
 
   -- testing
   { 'rest-nvim/rest.nvim', ft = 'http', config = c('rest') },
@@ -188,8 +190,7 @@ local plugins = {
 }
 
 local opts = {
-  git = { url_format = 'git@github.com:%s' }, -- use SSH whenever possible
-  colorscheme = { 'gruvbox' },
+  -- git = { url_format = 'git@github.com:%s' }, -- use SSH whenever possible
 }
 
 lazy.setup(plugins, opts)

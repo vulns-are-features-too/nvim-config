@@ -3,6 +3,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protoc
 local vtypes = require('virtualtypes').on_attach
 local is_linux = vim.fn.has('linux') or vim.fn.has('unix')
 local nmap = function(key, target) vim.keymap.set('n', key, target, { remap = false, silent = true }) end
+local nvmap = function(key, target) vim.keymap.set({'n', 'v'}, key, target, { remap = false, silent = true }) end
 
 local function map_keys()
   nmap('K', vim.lsp.buf.hover)
@@ -11,8 +12,8 @@ local function map_keys()
   nmap('gD', vim.lsp.buf.declaration)
   nmap('gt', vim.lsp.buf.type_definition)
   nmap('gi', vim.lsp.buf.implementation)
-  nmap('<space>r', vim.lsp.buf.rename)
-  nmap('<space>a', vim.lsp.buf.code_action)
+  nmap('<space>rr', vim.lsp.buf.rename)
+  nvmap('<space>a', vim.lsp.buf.code_action)
   nmap(']e', vim.diagnostic.goto_next)
   nmap('[e', vim.diagnostic.goto_prev)
   nmap('<leader>f', vim.lsp.buf.format)
@@ -75,6 +76,7 @@ lsp.tsserver.setup({
 -- JSON
 lsp.jsonls.setup({
   capabilities = capabilities,
+  on_attach = map_keys,
 })
 
 -- Lua
@@ -83,7 +85,7 @@ lsp.sumneko_lua.setup({
   settings = {
     Lua = {
       diagnostics = {
-        globals = { 'vim', 'packer_plugins' },
+        globals = { 'vim' },
       },
       workspace = {
         library = {
@@ -139,12 +141,23 @@ lsp.pylsp.setup({
 })
 
 -- Rust
-lsp.rust_analyzer.setup({
-  capabilities = capabilities,
-  on_attach = function()
-    vtypes()
-    map_keys()
-  end,
+local rt = require('rust-tools') -- this sets up rust-analyzer, so don't re-init RA which would create conflict
+rt.setup({
+  server = {
+    capabilities = capabilities,
+    on_attach = function()
+      vtypes()
+      map_keys()
+      rt.inlay_hints.enable()
+    end,
+  },
+  dap = {
+    adapter = {
+      type = 'executable',
+      command = '/usr/bin/lldb-vscode',
+      name = 'rt_lldb',
+    },
+  },
 })
 
 -- SQL

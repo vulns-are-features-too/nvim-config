@@ -40,6 +40,7 @@ null.setup({
 
     -- code actions
     act.gitsigns,
+    act.refactoring,
     act.shellcheck,
   },
 })

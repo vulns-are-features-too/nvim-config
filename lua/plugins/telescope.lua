@@ -1,7 +1,9 @@
 local t = require('telescope')
 local act = require('telescope.actions')
 local f = require('telescope.builtin') -- builtin functions
+local trouble = require('trouble.providers.telescope')
 local ext = t.load_extension
+local fb = t.extensions.file_browser.actions
 local map = function(key, target, mode) vim.keymap.set(mode or 'n', key, target, { remap = false, silent = true }) end
 
 -- setup
@@ -13,7 +15,6 @@ local fzf_opts = {
   case_mode = 'smart_case',
 }
 
-local fb = t.extensions.file_browser.actions
 local file_browser_opts = {
   hijack_netrw = true,
   mappings = {
@@ -57,10 +58,15 @@ t.setup({
         ['<C-j>'] = act.select_horizontal,
         ['<C-k>'] = act.select_vertical,
         ['<C-u>'] = false,
+        ['<C-t>'] = trouble.smart_open_with_trouble,
       },
       n = {
         ['<C-j>'] = act.select_horizontal,
+        ['<space>j'] = act.select_horizontal,
         ['<C-k>'] = act.select_vertical,
+        ['<space>k'] = act.select_vertical,
+        ['<C-t>'] = trouble.smart_open_with_trouble,
+        ['<space>t'] = trouble.smart_open_with_trouble,
       },
     },
   },
@@ -81,6 +87,7 @@ ext('fzf')
 ext('harpoon')
 ext('neoclip')
 ext('notify')
+ext('refactoring')
 ext('repo')
 ext('zoxide')
 
@@ -103,15 +110,20 @@ local edit_script = function() require('telescope.builtin').find_files({ search_
 
 -- builtins
 map('<space>/', f.current_buffer_fuzzy_find)
+map('<space>f.', f.resume)
 map('<space>f/', f.search_history)
 map('<space>f;', f.command_history)
 map('<space>fF', f.find_files)
+map('<space>fG', f.git_status)
+map('<space>fM', f.man_pages)
+map('<space>fT', f.builtin)
 map('<space>fb', f.buffers)
 map('<space>fd', f.diagnostics)
 map('<space>fg', f.live_grep)
 map('<space>fh', f.help_tags)
+map('<space>fj', f.jumplist)
 map('<space>fk', f.keymaps)
-map('<space>fm', f.man_pages)
+map('<space>fm', '<Cmd>Telescope harpoon marks<CR>')
 map('<space>fo', f.oldfiles)
 map('<space>fr', f.lsp_references)
 map('<space>ft', f.tags)
@@ -120,10 +132,11 @@ map('<space>fx', f.commands, { 'n', 'v' })
 
 -- extensions
 map('<space>fB', t.extensions.file_browser.file_browser)
-map('<space>fj', t.extensions.zoxide.list)
 map('<space>fl', t.extensions.repo.cached_list)
 map('<space>fp', t.extensions.repo.list)
+map('<space>fr', t.extensions.refactoring.refactors, 'v')
 map('<space>fy', t.extensions.neoclip.neoclip)
+map('<space>fz', t.extensions.zoxide.list)
 
 -- my functions
 map('<space>fc', edit_config)

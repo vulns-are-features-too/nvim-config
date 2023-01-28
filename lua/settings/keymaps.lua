@@ -53,6 +53,11 @@ vim.opt.mouse = ''
 -- Custom commands and Key Bindings
 --------------------------------------
 
+function P(i)
+  print(vim.inspect(i))
+  return i
+end
+
 -- Reload nvim configs
 cmd('Reload', ':source $MYVIMRC', { nargs = 0 })
 

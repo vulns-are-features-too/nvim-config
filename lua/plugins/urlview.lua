@@ -16,7 +16,7 @@ vim.api.nvim_create_autocmd(-- Open plugin on github
   {
     pattern = 'plugins.lua',
     callback = function()
-      nmap('<leader><leader>u', '<Cmd>UrlView packer<CR>', { buffer = true, remap = false, silent = true })
+      nmap('<leader><leader>u', '<Cmd>UrlView lazy<CR>', { buffer = true, remap = false, silent = true })
     end,
   }
 )
