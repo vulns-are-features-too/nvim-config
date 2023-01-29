@@ -68,7 +68,6 @@ local plugins = {
   { 'preservim/tagbar', config = c('tagbar') },
 
   -- LSP
-  { 'hrsh7th/cmp-nvim-lsp-signature-help' },
   { 'https://git.sr.ht/~whynothugo/lsp_lines.nvim', enabled = is_linux, config = c('lsp_lines') },
   { 'ray-x/lsp_signature.nvim', config = c('lsp_signature') },
 
@@ -107,7 +106,6 @@ local plugins = {
   { 'mfussenegger/nvim-dap', config = c('dap') },
   { 'mfussenegger/nvim-dap-python' },
   { 'nvim-telescope/telescope-dap.nvim' },
-  { 'rcarriga/cmp-dap' },
   { 'rcarriga/nvim-dap-ui' },
   { 'theHamsta/nvim-dap-virtual-text' },
   { 'folke/trouble.nvim', config = c('trouble') },
@@ -115,18 +113,25 @@ local plugins = {
   -- Autocomplete & Snippets
   { 'ChocolateOverflow/vim-snippets' }, -- my snippets
   { 'danymat/neogen', config = c('neogen') }, -- generate doc comments for classes, functions, and types
-  { 'hrsh7th/cmp-buffer' },
-  { 'hrsh7th/cmp-cmdline' },
-  { 'hrsh7th/cmp-nvim-lsp' },
-  { 'hrsh7th/cmp-nvim-lua' }, -- nvim lua config
-  { 'hrsh7th/cmp-path' },
-  { 'hrsh7th/nvim-cmp', config = c('cmp') },
+  {
+    'hrsh7th/nvim-cmp',
+    dependencies = {
+      { 'hrsh7th/cmp-buffer' },
+      { 'hrsh7th/cmp-cmdline' },
+      { 'hrsh7th/cmp-nvim-lsp' },
+      { 'hrsh7th/cmp-nvim-lsp-signature-help' },
+      { 'hrsh7th/cmp-nvim-lua' }, -- nvim lua config
+      { 'hrsh7th/cmp-path' },
+      { 'rcarriga/cmp-dap' },
+      { 'saadparwaiz1/cmp_luasnip' },
+      { 'tzachar/cmp-tabnine', build = './install.sh' }, -- AI trying to steal my job
+    },
+    config = c('cmp'),
+  },
   { 'onsails/lspkind.nvim' }, -- fancy completion menu
-  { 'saadparwaiz1/cmp_luasnip' },
   { 'windwp/nvim-autopairs', config = c('autopair') },
   { 'windwp/nvim-ts-autotag', config = true },
   { 'L3MON4D3/luasnip', config = c('luasnip'), rocks = { 'jsregexp' }, build = 'make install_jsregexp' }, -- snippets engine
-  { 'tzachar/cmp-tabnine', build = './install.sh' }, -- AI trying to steal my job
 
   -- git
   { 'lewis6991/gitsigns.nvim', config = c('gitsigns') },

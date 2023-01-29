@@ -1,6 +1,6 @@
 local ts_repeat_move = require('nvim-treesitter.textobjects.repeatable_move')
 
-local function nxo_map(key, target) vim.keymap.set({ 'n', 'x', 'o' }, key, target, { remap = false, silent = true }) end
+local nmap = function(key, target) vim.keymap.set('n', key, target, { remap = false, silent = true }) end
 
 require('nvim-treesitter.configs').setup({
   ensure_installed = {
@@ -136,9 +136,10 @@ require('nvim-treesitter.configs').setup({
 })
 
 -- Repeat movement with ; and ,
-nxo_map(';', ts_repeat_move.repeat_last_move_next)
-nxo_map(',', ts_repeat_move.repeat_last_move_previous)
-nxo_map('f', ts_repeat_move.builtin_f)
-nxo_map('F', ts_repeat_move.builtin_F)
-nxo_map('t', ts_repeat_move.builtin_t)
-nxo_map('T', ts_repeat_move.builtin_T)
+nmap(';', ts_repeat_move.repeat_last_move_next)
+nmap(',', ts_repeat_move.repeat_last_move_previous)
+nmap('f', ts_repeat_move.builtin_f)
+nmap('F', ts_repeat_move.builtin_F)
+nmap('t', ts_repeat_move.builtin_t)
+nmap('T', ts_repeat_move.builtin_T)
+nmap('<leader>ts', '<Cmd>TSPlaygroundToggle<CR>')

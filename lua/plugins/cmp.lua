@@ -92,3 +92,9 @@ cmp.setup.filetype({ 'dap-repl', 'dapui_watches' }, {
     { name = 'dap' },
   },
 })
+
+cmp.setup.filetype('gitcommit', {
+  sources = cmp.config.sources({
+    { name = 'buffer' },
+  }),
+})
