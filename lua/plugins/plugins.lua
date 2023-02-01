@@ -21,28 +21,48 @@ local function c(plugin)
 end
 
 local plugins = {
-  -- Core Plugins
-  { 'neovim/nvim-lspconfig', config = c('lsp') },
-  { 'jose-elias-alvarez/null-ls.nvim', config = c('null-ls') },
+  ---- Core Plugins ----
+  {
+    'neovim/nvim-lspconfig',
+    dependencies = {
+      { 'arkav/lualine-lsp-progress' },
+      { 'folke/lsp-colors.nvim' },
+      { 'glepnir/lspsaga.nvim', dependencies = { 'nvim-tree/nvim-web-devicons' } },
+      { 'https://git.sr.ht/~whynothugo/lsp_lines.nvim', enabled = is_linux },
+      { 'jubnzv/virtual-types.nvim' },
+      { 'ray-x/lsp_signature.nvim' },
+    },
+    config = c('lsp'),
+  },
   {
     'williamboman/mason.nvim',
     dependencies = {
-      'williamboman/mason-lspconfig.nvim',
-      'jay-babu/mason-nvim-dap.nvim',
       'jay-babu/mason-null-ls.nvim',
+      'jay-babu/mason-nvim-dap.nvim',
+      'williamboman/mason-lspconfig.nvim',
     },
     config = c('mason'),
   },
+  {
+    'nvim-treesitter/nvim-treesitter',
+    dependencies = {
+      { 'RRethy/nvim-treesitter-endwise' },
+      { 'nvim-treesitter/nvim-treesitter-context' },
+      { 'nvim-treesitter/nvim-treesitter-textobjects' },
+      { 'nvim-treesitter/playground' },
+    },
+    config = c('ts'),
+    build = ':TSUpdate',
+  },
+  { 'jose-elias-alvarez/null-ls.nvim', config = c('null-ls') },
 
   -- General UI
-  { 'arkav/lualine-lsp-progress' },
-  { 'kyazdani42/nvim-web-devicons' },
+  { 'nvim-tree/nvim-web-devicons' },
   { 'morhetz/gruvbox', lazy = false, priority = 1000 },
   { 'nvim-lualine/lualine.nvim', config = c('lualine') },
+  { 'preservim/tagbar', config = c('tagbar') },
   { 'rcarriga/nvim-notify', config = c('notify') },
   { 'szw/vim-maximizer', config = c('maximizer') },
-  { 'jubnzv/virtual-types.nvim' },
-  { 'folke/lsp-colors.nvim' },
 
   -- Extending basic motions and editing
   { 'ChocolateOverflow/toggle_words.vim', config = c('toggle_words') },
@@ -63,20 +83,6 @@ local plugins = {
   { 'tpope/vim-repeat' },
   { 'unblevable/quick-scope' },
   { 'wellle/targets.vim' },
-
-  -- Tags
-  { 'preservim/tagbar', config = c('tagbar') },
-
-  -- LSP
-  { 'https://git.sr.ht/~whynothugo/lsp_lines.nvim', enabled = is_linux, config = c('lsp_lines') },
-  { 'ray-x/lsp_signature.nvim', config = c('lsp_signature') },
-
-  -- tree-sitter
-  { 'nvim-treesitter/nvim-treesitter', config = c('ts'), build = ':TSUpdate' },
-  { 'nvim-treesitter/nvim-treesitter-context' },
-  { 'nvim-treesitter/nvim-treesitter-textobjects' },
-  { 'RRethy/nvim-treesitter-endwise' },
-  { 'nvim-treesitter/playground' },
 
   -- telescope
   { 'nvim-telescope/telescope.nvim', dependencies = { 'nvim-lua/plenary.nvim' }, config = c('telescope') },
@@ -122,13 +128,13 @@ local plugins = {
       { 'hrsh7th/cmp-nvim-lsp-signature-help' },
       { 'hrsh7th/cmp-nvim-lua' }, -- nvim lua config
       { 'hrsh7th/cmp-path' },
+      { 'onsails/lspkind.nvim' }, -- fancy completion menu
       { 'rcarriga/cmp-dap' },
       { 'saadparwaiz1/cmp_luasnip' },
       { 'tzachar/cmp-tabnine', build = './install.sh' }, -- AI trying to steal my job
     },
     config = c('cmp'),
   },
-  { 'onsails/lspkind.nvim' }, -- fancy completion menu
   { 'windwp/nvim-autopairs', config = c('autopair') },
   { 'windwp/nvim-ts-autotag', config = true },
   { 'L3MON4D3/luasnip', config = c('luasnip'), rocks = { 'jsregexp' }, build = 'make install_jsregexp' }, -- snippets engine

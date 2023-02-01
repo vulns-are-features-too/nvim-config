@@ -172,14 +172,14 @@ nmap(']j', '<Cmd>lnext<CR>')
 nmap(']k', '<Cmd>lprev<CR>')
 
 -- diff
-nvmap('<space>gg', '<Cmd>diffget<CR>')
-nvmap('<space>gh', '<Cmd>diffput<CR>')
-nvmap('<space>gd', '<Cmd>diffget //2<CR>')
-nvmap('<space>gk', '<Cmd>diffget //3<CR>')
+nvmap('<space>go', '<Cmd>diffget<CR>')
+nvmap('<space>gp', '<Cmd>diffput<CR>')
+nvmap('<space>gf', '<Cmd>diffget //2<CR>')
+nvmap('<space>gj', '<Cmd>diffget //3<CR>')
 
 -- git-fugitive
-nvmap('<space>G', '<Cmd>G<CR>')
-nvmap('<leader>gc', '<Cmd>Git commit<CR>')
+nvmap('<space>gg', '<Cmd>G<CR>')
+nvmap('<space>gc', '<Cmd>Git commit<CR>')
 nvmap('<leader>gp', '<Cmd>Git push<CR>')
 
 -- :terminal

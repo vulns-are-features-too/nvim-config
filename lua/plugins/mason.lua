@@ -1,7 +1,14 @@
 require('mason').setup()
 
-local is_linux = vim.fn.has('linux') or vim.fn.has('unix')
-local php_lsp = is_linux and 'phpactor' or 'intelephense'
+local php_lsp
+
+if vim.fn.has('linux') == 1 or vim.fn.has('unix') == 1 then
+  -- Linux/Unix
+  php_lsp = 'phpactor'
+else
+  -- Windows
+  php_lsp = 'intelephense'
+end
 
 require('mason-lspconfig').setup({
   ensure_installed = {

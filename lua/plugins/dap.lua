@@ -3,9 +3,8 @@ local dap = require('dap')
 local ui = require('dapui')
 
 local map = vim.keymap.set
-local o = { remap = false, silent = true } -- opts
-local nmap = function(key, target) map('n', key, target, o) end
-local vmap = function(key, target) map('v', key, target, o) end
+local nmap = function(key, target, desc) map('n', key, target, { remap = false, silent = true, desc = desc }) end
+local vmap = function(key, target, desc) map('v', key, target, { remap = false, silent = true, desc = desc }) end
 
 ---- Rust/C/C++ ----
 dap.adapters.lldb = {
@@ -29,11 +28,9 @@ dap.configurations.cpp = dap.configurations.rust
 
 ---- DAP UI ----
 -- Don't list the [dap-repl] buffer by default
-api.nvim_create_autocmd("FileType", {
-  pattern = "dap-repl",
-  callback = function(args)
-    vim.api.nvim_buf_set_option(args.buf, "buflisted", false)
-  end,
+api.nvim_create_autocmd('FileType', {
+  pattern = 'dap-repl',
+  callback = function(args) vim.api.nvim_buf_set_option(args.buf, 'buflisted', false) end,
 })
 
 ui.setup({
@@ -116,6 +113,8 @@ require('nvim-dap-virtual-text').setup({
 })
 
 ---- keymaps ----
+
+-- K evals word under cursor while debugging
 local keymap_restore = {}
 dap.listeners.after['event_initialized']['me'] = function()
   for _, buf in pairs(api.nvim_list_bufs()) do
@@ -129,7 +128,6 @@ dap.listeners.after['event_initialized']['me'] = function()
   end
   api.nvim_set_keymap('n', 'K', '<Cmd>lua require("dap.ui.widgets").hover()<CR>', { silent = true })
 end
-
 dap.listeners.after['event_terminated']['me'] = function()
   for _, keymap in pairs(keymap_restore) do
     api.nvim_buf_set_keymap(keymap.buffer, keymap.mode, keymap.lhs, keymap.rhs, { silent = keymap.silent == 1 })
@@ -137,11 +135,15 @@ dap.listeners.after['event_terminated']['me'] = function()
   keymap_restore = {}
 end
 
-nmap('<F5>', dap.continue)
-nmap('<F6>', dap.step_into)
-nmap('<F7>', dap.step_over)
-nmap('<F8>', dap.step_out)
-nmap('<space>db', dap.toggle_breakpoint)
-nmap('<space>dB', function() dap.set_breakpoint(vim.fn.input('Break condition: ')) end)
-nmap('<leader>du', function() ui.toggle() end)
-vmap('<leader><leader>e', function() ui.eval() end)
+nmap('<F5>', dap.continue, 'DAP continue')
+nmap('dc', dap.continue, '[D]ebug [C]ontinue')
+nmap('<F6>', dap.step_into, 'DAP step into')
+nmap('dx', dap.step_into, '[D]ebug e[X]it (step into)')
+nmap('<F7>', dap.step_over, 'DAP step over')
+nmap('d<space>', dap.step_over, '[D]ebug next (step over)')
+nmap('<F8>', dap.step_out, 'DAP step out')
+nmap('dy', dap.step_out, '[D]ebug [Y]eet (step out)')
+nmap('<space>db', dap.toggle_breakpoint, '[D]ebug [B]reakpoint')
+nmap('<space>dB', function() dap.set_breakpoint(vim.fn.input('Break condition: ')) end, '[D]ebug [B]reak conditional')
+vmap('<space>de', function() ui.eval() end, '[D]ebug [E]val')
+nmap('<leader>du', function() ui.toggle() end, '[D]ebug [U]I')

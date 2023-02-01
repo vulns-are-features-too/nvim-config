@@ -57,5 +57,6 @@ vim.g.toggle_words_dict = {
   },
 }
 
+nmap('<space>t', '<Cmd>ToggleWord<CR>')
 nmap('<C-T>', '<Cmd>ToggleWord<CR>')
 nmap('<C-S-T>', '<Cmd>ToggleWordRev<CR>')

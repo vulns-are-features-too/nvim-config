@@ -4,9 +4,9 @@ local executable = vim.fn.executable
 
 if os == 'Windows' or os == 'Windows_NT' then
   -- Native Windows
-  if executable('pwsh') then
+  if executable('pwsh') == 1 then
     o.shell = 'pwsh'
-  elseif executable('powershell') then
+  elseif executable('powershell') == 1 then
     o.shell = 'powershell'
   end -- No powershell? Install it. Preferably version 7.X
 
@@ -16,6 +16,6 @@ if os == 'Windows' or os == 'Windows_NT' then
   o.shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
   o.shellquote = ''
   o.shellxquote = ''
-elseif os == 'Linux' and vim.fn.isdirectory('/mnt/c/WINDOWS') then
+elseif os == 'Linux' and vim.fn.isdirectory('/mnt/c/WINDOWS') == 1 then
   -- WSL
 end
