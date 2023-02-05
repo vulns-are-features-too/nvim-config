@@ -58,18 +58,15 @@ local function setup_saga()
         confirm = '<CR>',
         in_select = false,
       },
-      callhierarchy = {
-        show_detail = false,
+      code_action = {
+        num_shortcut = true,
         keys = {
-          edit = '<CR>',
-          vsplit = '<C-c>k',
-          split = '<C-c>j',
-          tabe = '<C-c>t',
-          jump = 'o',
-          quit = { 'q', '<CR' },
-          expand_collapse = 'u',
+          quit = { 'q', '<ESC>' },
+          exec = '<CR>',
         },
       },
+      lightbulb = { enable = false },
+      beacon = { enable = false },
     })
 
     k_actions = '<Cmd>Lspsaga code_action<CR>'
@@ -79,8 +76,6 @@ local function setup_saga()
     k_hover = '<Cmd>Lspsaga hover_doc<CR>'
     k_rename = '<Cmd>Lspsaga rename ++project<CR>'
     nmap('<space>ld', '<Cmd>Lspsaga peek_definition<CR>', 'Peek definition')
-    nmap('<space>li', '<Cmd>Lspsaga incoming_calls<CR>', 'Incoming calls')
-    nmap('<space>lo', '<Cmd>Lspsaga outgoing_calls<CR>', 'Outgoing calls')
     nmap('gl', '<Cmd>Lspsaga lsp_finder<CR>', 'LSP find defintion, reference and implementation')
   end
 end
@@ -88,11 +83,10 @@ end
 local function setup_signature()
   local ok, sig = pcall(require, 'lsp_signature')
   if ok then sig.setup({
-      bind = true,
-      hint_prefix = '!',
-      extra_trigger_chars = { '(', ',' },
-    })
-  end
+    bind = true,
+    hint_prefix = '!',
+    extra_trigger_chars = { '(', ',' },
+  }) end
 end
 
 local function setup_lines()
@@ -127,6 +121,8 @@ local function on_attach(_, _)
 end
 
 capabilities.offsetEncoding = { 'utf-16' }
+
+require('neodev').setup({})
 
 -- General
 lsp.diagnosticls.setup({
@@ -280,5 +276,5 @@ lsp.yamlls.setup({
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {})
 vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {})
 
-nmap('<leader>ll', '<Cmd>LspInfo<CR>')
-nmap('<leader>lm', '<Cmd>Mason<CR>')
+nmap('<space>pl', '<Cmd>LspInfo<CR>')
+nmap('<space>pm', '<Cmd>Mason<CR>')

@@ -23,6 +23,7 @@ XSS
 XXE
 arg
 augroup
+autocmd
 bugfix
 cartesian
 cloudflare
@@ -48,6 +49,7 @@ io
 javascript
 jq
 keymap
+lang
 lua
 msg
 mysql
@@ -55,6 +57,7 @@ neovim
 netrwhist
 nop
 nvim
+plaintex
 powershell
 pwsh
 py

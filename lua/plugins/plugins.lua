@@ -27,7 +27,7 @@ local plugins = {
     dependencies = {
       { 'arkav/lualine-lsp-progress' },
       { 'folke/lsp-colors.nvim' },
-      { 'glepnir/lspsaga.nvim', dependencies = { 'nvim-tree/nvim-web-devicons' } },
+      { 'glepnir/lspsaga.nvim', dependencies = 'nvim-tree/nvim-web-devicons' },
       { 'https://git.sr.ht/~whynothugo/lsp_lines.nvim', enabled = is_linux },
       { 'jubnzv/virtual-types.nvim' },
       { 'ray-x/lsp_signature.nvim' },
@@ -47,7 +47,6 @@ local plugins = {
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
       { 'RRethy/nvim-treesitter-endwise' },
-      { 'nvim-treesitter/nvim-treesitter-context' },
       { 'nvim-treesitter/nvim-treesitter-textobjects' },
       { 'nvim-treesitter/playground' },
     },
@@ -56,10 +55,14 @@ local plugins = {
   },
   { 'jose-elias-alvarez/null-ls.nvim', config = c('null-ls') },
 
+  -- nvim config
+  { 'folke/neodev.nvim' },
+  { 'rafcamlet/nvim-luapad' },
+
   -- General UI
   { 'nvim-tree/nvim-web-devicons' },
   { 'morhetz/gruvbox', lazy = false, priority = 1000 },
-  { 'nvim-lualine/lualine.nvim', config = c('lualine') },
+  { 'nvim-lualine/lualine.nvim', dependencies = 'nvim-tree/nvim-web-devicons', config = c('lualine') },
   { 'preservim/tagbar', config = c('tagbar') },
   { 'rcarriga/nvim-notify', config = c('notify') },
   { 'szw/vim-maximizer', config = c('maximizer') },
@@ -208,8 +211,6 @@ local opts = {
 lazy.setup(plugins, opts)
 
 nmap('<space>pp', lazy.home)
-nmap('<space>pd', lazy.debug)
 nmap('<space>ph', lazy.health)
-nmap('<space>pl', lazy.log)
 nmap('<space>ps', lazy.sync)
 nmap('<space>pu', lazy.update)

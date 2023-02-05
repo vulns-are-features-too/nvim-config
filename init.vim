@@ -18,7 +18,7 @@ set rnu nu
 set scrolloff=10
 set shiftround
 set signcolumn=yes
-set spelllang=en
+set spelllang=en spelloptions=camel
 set splitbelow splitright
 set suffixes+=*.class$
 set tabstop=2 softtabstop=2 shiftwidth=2 expandtab smarttab
@@ -33,8 +33,6 @@ set wrap
 """"""""""""""""""""""""""""""""""""""""
 " Basic autocmd
 """"""""""""""""""""""""""""""""""""""""
-" Disable auto-commenting on new-line
-"au FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Automatically delete trailing white spaces on save
 au BufWritePre * %s/\s\+$//e
