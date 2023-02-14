@@ -70,8 +70,8 @@ local function setup_saga()
     })
 
     k_actions = '<Cmd>Lspsaga code_action<CR>'
-    k_diag_next = '<Cmd>Lspsaga diagnostic_jump_prev<CR>'
-    k_diag_prev = '<Cmd>Lspsaga diagnostic_jump_next<CR>'
+    k_diag_prev = '<Cmd>Lspsaga diagnostic_jump_prev<CR>'
+    k_diag_next = '<Cmd>Lspsaga diagnostic_jump_next<CR>'
     k_diagnostics = '<Cmd>Lspsaga show_line_diagnostics<CR>'
     k_hover = '<Cmd>Lspsaga hover_doc<CR>'
     k_rename = '<Cmd>Lspsaga rename ++project<CR>'
@@ -92,16 +92,15 @@ end
 local function setup_lines()
   local ok, lines = pcall(require, 'lsp_lines')
   if ok then
-    LspLineState = false
+    LspLineState = true
     local function toggle_lsp_lines()
       lines.toggle()
       LspLineState = not LspLineState
-      vim.diagnostic.config({ virtual_text = not LspLineState })
+      vim.diagnostic.config({ virtual_text = LspLineState })
     end
 
     lines.setup()
     lines.toggle() -- disabled by default
-    vim.diagnostic.config({ virtual_text = not LspLineState })
 
     nmap('<leader>L', toggle_lsp_lines, 'Toggle lsp_lines')
   end
@@ -179,7 +178,7 @@ lsp.jsonls.setup({
 })
 
 -- Lua
-lsp.sumneko_lua.setup({
+lsp.lua_ls.setup({
   capabilities = capabilities,
   settings = {
     Lua = {
