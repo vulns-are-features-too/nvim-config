@@ -18,7 +18,7 @@ local k_hover = vim.lsp.buf.hover
 
 local function setup_keymaps()
   nmap('K', k_hover, 'Signature hover')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature help')
+  nmap('H', vim.lsp.buf.signature_help, 'Signature help')
   nmap('<leader>f', vim.lsp.buf.format, 'Format')
   nmap('<space><space>f', vim.lsp.buf.format, 'Format')
   nmap('<space>dd', k_diagnostics, 'Line diagnostics')
@@ -144,6 +144,22 @@ lsp.clangd.setup({
   on_attach = function() on_attach() end,
 })
 
+-- C#
+-- TODO:
+-- https://github.com/Hoffs/omnisharp-extended-lsp.nvim
+-- https://github.com/williamboman/mason-lspconfig.nvim/blob/main/lua/mason-lspconfig/server_configurations/omnisharp/README.md
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#omnisharp
+-- local csharp_lsp
+-- if is_linux then
+--   csharp_lsp = lsp.omnisharp_mono
+-- else
+--   csharp_lsp = lsp.omnisharp
+-- end
+-- csharp_lsp.setup({
+--   capabilities = capabilities,
+--   on_attach = function() on_attach() end,
+-- })
+
 -- Go
 lsp.gopls.setup({
   capabilities = capabilities,
@@ -182,15 +198,15 @@ lsp.lua_ls.setup({
   capabilities = capabilities,
   settings = {
     Lua = {
+      runtime = { version = 'LuaJIT' },
       diagnostics = {
         globals = { 'vim' },
       },
       workspace = {
-        library = {
-          [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-          [vim.fn.stdpath('config') .. '/lua'] = true,
-        },
+        library = vim.api.nvim_get_runtime_file('', true),
+        checkThirdParty = false,
       },
+      telemetry = { enable = false },
     },
   },
   on_attach = on_attach,

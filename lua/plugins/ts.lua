@@ -57,8 +57,8 @@ require('nvim-treesitter.configs').setup({
       enable = true,
       lookahead = true,
       keymaps = {
-        ['ab'] = '@block.outer',
-        ['ib'] = '@block.inner',
+        ['aB'] = '@block.outer',
+        ['iB'] = '@block.inner',
         ['af'] = '@call.outer',
         ['if'] = '@call.inner',
         ['aC'] = '@class.outer',

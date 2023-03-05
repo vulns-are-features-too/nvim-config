@@ -1,9 +1,9 @@
-local p = require('portal')
+local jl = require('portal.builtin').jumplist
 local nmap = function(key, target) vim.keymap.set('n', key, target, {}) end
-p.setup({
-  query = { 'harpoon', 'modified', 'different', 'valid' },
+
+require('portal').setup({
   labels = { 'j', 'k', 'h', 'l', 'f', 'd', 's', 'g' },
 })
 
-nmap('<space>o', p.jump_backward)
-nmap('<space>i', p.jump_forward)
+nmap('<space>o', jl.tunnel_backward)
+nmap('<space>i', jl.tunnel_forward)

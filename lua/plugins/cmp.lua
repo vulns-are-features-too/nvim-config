@@ -27,7 +27,6 @@ cmp.setup({
     { name = 'nvim_lsp' },
     { name = 'nvim_lua' },
     { name = 'path' },
-    { name = 'tabnine' },
   },
 
   snippet = {
@@ -45,7 +44,6 @@ cmp.setup({
         buffer = '[Buffer]',
         luasnip = '[Snip]',
         path = '[Path]',
-        tabnine = '[TabNine]',
         cmdline = '[CMD]',
       },
     }),
@@ -93,8 +91,17 @@ cmp.setup.filetype({ 'dap-repl', 'dapui_watches' }, {
   },
 })
 
+-- git commit
 cmp.setup.filetype('gitcommit', {
   sources = cmp.config.sources({
     { name = 'buffer' },
+  }),
+})
+
+-- justfile
+cmp.setup.filetype('just', {
+  sources = cmp.config.sources({
+    { name = 'buffer' },
+    { name = 'path' },
   }),
 })

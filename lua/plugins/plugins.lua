@@ -6,7 +6,7 @@ if not vim.loop.fs_stat(lazypath) then
     '--depth=1',
     '--filter=blob:none',
     'https://github.com/folke/lazy.nvim.git',
-    '--branch=stable', -- latest stable release
+    -- '--branch=stable', -- issues/241
     lazypath,
   })
 end
@@ -68,24 +68,28 @@ local plugins = {
   { 'szw/vim-maximizer', config = c('maximizer') },
 
   -- Extending basic motions and editing
-  { 'ChocolateOverflow/toggle_words.vim', config = c('toggle_words') },
+  -- Moving
   { 'ThePrimeagen/harpoon', dependencies = { 'nvim-lua/plenary.nvim' }, config = c('harpoon') },
-  { 'Wansmer/sibling-swap.nvim', config = c('sibling-swap') },
-  { 'Wansmer/treesj', config = c('treesj') },
   { 'abecodes/tabout.nvim', dependencies = { 'nvim-treesitter' }, config = c('tabout') },
-  { 'andymass/vim-matchup' },
   { 'cbochs/portal.nvim', dependencies = { 'ThePrimeagen/harpoon' }, config = c('portal') },
-  { 'gbprod/substitute.nvim', config = c('substitute') },
   { 'ggandor/leap.nvim', config = c('leap') },
   { 'junegunn/vim-slash' },
+  { 'unblevable/quick-scope' },
+  -- Editing
+  { 'ChocolateOverflow/toggle_words.vim', config = c('toggle_words') },
+  { 'Wansmer/sibling-swap.nvim', config = c('sibling-swap') },
+  { 'Wansmer/treesj', config = c('treesj') },
+  { 'gbprod/substitute.nvim', config = c('substitute') },
+  { 'sQVe/sort.nvim', config = c('sort') },
+  { 'tpope/vim-repeat' },
+  -- Text objects
+  { 'andymass/vim-matchup' },
   { 'kiyoon/treesitter-indent-object.nvim', config = c('indent_object') },
   { 'kylechui/nvim-surround', version = '*', config = c('surround') },
-  { 'max397574/better-escape.nvim', config = c('better-escape') },
-  { 'sQVe/sort.nvim', config = c('sort') },
-  { 'tpope/vim-abolish' },
-  { 'tpope/vim-repeat' },
-  { 'unblevable/quick-scope' },
   { 'wellle/targets.vim' },
+  -- Misc
+  { 'max397574/better-escape.nvim', config = c('better-escape') },
+  { 'tpope/vim-abolish' },
 
   -- telescope
   { 'nvim-telescope/telescope.nvim', dependencies = { 'nvim-lua/plenary.nvim' }, config = c('telescope') },
@@ -134,7 +138,6 @@ local plugins = {
       { 'onsails/lspkind.nvim' }, -- fancy completion menu
       { 'rcarriga/cmp-dap' },
       { 'saadparwaiz1/cmp_luasnip' },
-      { 'tzachar/cmp-tabnine', build = './install.sh' }, -- AI trying to steal my job
     },
     config = c('cmp'),
   },
@@ -197,7 +200,7 @@ local plugins = {
   { 'akinsho/toggleterm.nvim', version = '*', config = c('toggleterm') },
 
   -- Misc files
-  { 'NoahTheDuke/vim-just', ft = 'just' },
+  { 'NoahTheDuke/vim-just' },
 
   -- Misc
   { 'axieax/urlview.nvim', config = c('urlview') },

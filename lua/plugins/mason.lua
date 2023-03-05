@@ -1,19 +1,23 @@
 require('mason').setup()
 
 local php_lsp
+local csharp_lsp
 
 if vim.fn.has('linux') == 1 or vim.fn.has('unix') == 1 then
   -- Linux/Unix
   php_lsp = 'phpactor'
+  csharp_lsp = 'omnisharp_mono'
 else
   -- Windows
   php_lsp = 'intelephense'
+  csharp_lsp = 'omnisharp'
 end
 
 require('mason-lspconfig').setup({
   ensure_installed = {
     'bashls',
     'clangd',
+    csharp_lsp,
     'diagnosticls',
     'efm',
     'eslint',
