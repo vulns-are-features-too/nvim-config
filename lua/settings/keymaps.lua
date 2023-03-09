@@ -121,10 +121,10 @@ au('Filetype', {
 })
 
 -- Moving between multiple files/windows
--- nmap('<C-h>', '<C-w>h')
--- nmap('<C-j>', '<C-w>j')
--- nmap('<C-k>', '<C-w>k')
--- nmap('<C-l>', '<C-w>l')
+nmap('<C-h>', '<C-w>h')
+nmap('<C-j>', '<C-w>j')
+nmap('<C-k>', '<C-w>k')
+nmap('<C-l>', '<C-w>l')
 nmap('<C-S-h>', '<C-w>H')
 nmap('<C-S-j>', '<C-w>J')
 nmap('<C-S-k>', '<C-w>K')

@@ -71,7 +71,7 @@ local plugins = {
   -- Moving
   { 'ThePrimeagen/harpoon', dependencies = { 'nvim-lua/plenary.nvim' }, config = c('harpoon') },
   { 'abecodes/tabout.nvim', dependencies = { 'nvim-treesitter' }, config = c('tabout') },
-  { 'cbochs/portal.nvim', dependencies = { 'ThePrimeagen/harpoon' }, config = c('portal') },
+  { 'cbochs/portal.nvim', config = c('portal') },
   { 'ggandor/leap.nvim', config = c('leap') },
   { 'junegunn/vim-slash' },
   { 'unblevable/quick-scope' },
@@ -195,8 +195,7 @@ local plugins = {
   -- Obsidian
   { 'epwalsh/obsidian.nvim', config = c('obsidian'), ft = { 'lua', 'markdown' } },
 
-  -- tmux & terminal integration
-  { 'christoomey/vim-tmux-navigator', config = c('tmux') },
+  -- terminal integration
   { 'akinsho/toggleterm.nvim', version = '*', config = c('toggleterm') },
 
   -- Misc files
