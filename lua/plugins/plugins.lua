@@ -83,7 +83,7 @@ local plugins = {
   { 'sQVe/sort.nvim', config = c('sort') },
   { 'tpope/vim-repeat' },
   -- Text objects
-  { 'andymass/vim-matchup' },
+  { 'andymass/vim-matchup', config = c('matchup') },
   { 'kiyoon/treesitter-indent-object.nvim', config = c('indent_object') },
   { 'kylechui/nvim-surround', version = '*', config = c('surround') },
   { 'wellle/targets.vim' },

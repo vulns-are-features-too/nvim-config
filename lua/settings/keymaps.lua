@@ -149,7 +149,7 @@ nmap('<C-y>', '<Cmd>call setreg("+", getline("."))<CR>')
 vmap('<C-y>', '"+y')
 -- system keyboard yanks
 nmap('<space>y', '"+y')
-nmap('<space>Y', '"+Y')
+nmap('<space>Y', '"+y$')
 nmap('yu', '"+yi(')
 nmap('y[', '"+yi[')
 nmap('y]', '"+yi{')

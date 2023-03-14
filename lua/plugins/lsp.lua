@@ -102,7 +102,7 @@ local function setup_lines()
     lines.setup()
     lines.toggle() -- disabled by default
 
-    nmap('<leader>L', toggle_lsp_lines, 'Toggle lsp_lines')
+    nmap('<leader><leader>l', toggle_lsp_lines, 'Toggle lsp_lines')
   end
 end
 
