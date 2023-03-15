@@ -21,7 +21,7 @@ local function c(plugin)
 end
 
 local plugins = {
-  ---- Core Plugins ----
+  -- LSP
   {
     'neovim/nvim-lspconfig',
     dependencies = {
@@ -34,6 +34,8 @@ local plugins = {
     },
     config = c('lsp'),
   },
+
+  -- Mason
   {
     'williamboman/mason.nvim',
     dependencies = {
@@ -43,6 +45,8 @@ local plugins = {
     },
     config = c('mason'),
   },
+
+  -- treesitter
   {
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
@@ -53,7 +57,10 @@ local plugins = {
     config = c('ts'),
     build = ':TSUpdate',
   },
+
+  -- formatting
   { 'jose-elias-alvarez/null-ls.nvim', config = c('null-ls') },
+  { 'echasnovski/mini.align', version = 'false', config = function() require('mini.align').setup() end },
 
   -- nvim config
   { 'folke/neodev.nvim' },

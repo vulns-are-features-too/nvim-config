@@ -20,9 +20,10 @@ local file_browser_opts = {
   mappings = {
     ['i'] = {
       ['<S-CR>'] = fb.create_from_prompt,
+      ['<C-CR>'] = fb.create_from_prompt,
     },
     ['n'] = {
-      ['a'] = fb.create,
+      ['n'] = fb.create,
       ['r'] = fb.rename,
       ['y'] = fb.copy,
       ['m'] = fb.move,
