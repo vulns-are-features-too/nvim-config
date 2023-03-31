@@ -22,7 +22,7 @@ require('rest-nvim').setup({
   yank_dry_run = true,
 })
 
-local nmap = function(key, target) vim.keymap.set('n', key, target) end
-nmap('<space>ee', '<Plug>RestNvim')
-nmap('<space>ep', '<Plug>RestNvimPreview')
-nmap('<space>er', '<Plug>RestNvimLast')
+local function nmap(key, target, desc) vim.keymap.set('n', key, target, {desc=desc}) end
+nmap('<space>ee', '<Plug>RestNvim', 'Execute/send Request')
+nmap('<space>ep', '<Plug>RestNvimPreview', 'Preview Request')
+nmap('<space>er', '<Plug>RestNvimLast', 'Resend Request')

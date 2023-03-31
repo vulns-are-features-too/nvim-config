@@ -2,11 +2,9 @@ local lsp = require('lspconfig')
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local is_linux = vim.fn.has('linux') == 1 or vim.fn.has('unix') == 1
 
-local function nmap(key, target, desc) vim.keymap.set('n', key, target, { remap = false, silent = true, desc = desc }) end
+local function nmap(key, target, desc) vim.keymap.set('n', key, target, { remap = false, desc = desc }) end
 
-local function nvmap(key, target, desc)
-  vim.keymap.set({ 'n', 'v' }, key, target, { remap = false, silent = true, desc = desc })
-end
+local function nvmap(key, target, desc) vim.keymap.set({ 'n', 'v' }, key, target, { remap = false, desc = desc }) end
 
 -- keymap targets
 local k_actions = vim.lsp.buf.code_action

@@ -1,4 +1,4 @@
-local nmap = function(key, target) vim.keymap.set('n', key, target, { remap = false }) end
+local function nmap(key, target) vim.keymap.set('n', key, target, { remap = false }) end
 
 require('code_runner').setup({
   mode = 'float',

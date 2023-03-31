@@ -14,7 +14,7 @@ vim.opt.rtp:prepend(lazypath)
 local lazy = require('lazy')
 
 local is_linux = vim.loop.os_uname().sysname == 'Linux'
-local function nmap(key, target) vim.keymap.set('n', key, target, { remap = false, silent = true }) end
+local function nmap(key, target, desc) vim.keymap.set('n', key, target, { remap = false, silent = true, desc = desc }) end
 
 local function c(plugin)
   return function() require('plugins.' .. plugin) end
@@ -219,7 +219,7 @@ local opts = {
 
 lazy.setup(plugins, opts)
 
-nmap('<space>pp', lazy.home)
-nmap('<space>ph', lazy.health)
-nmap('<space>ps', lazy.sync)
-nmap('<space>pu', lazy.update)
+nmap('<space>pp', lazy.home, '[P]lugins (lazy)')
+nmap('<space>ph', lazy.health, '[P]lugins [H]ealth')
+nmap('<space>ps', lazy.sync, '[P]lugins [S]ync')
+nmap('<space>pu', lazy.update, '[P]lugins [U]pdate')

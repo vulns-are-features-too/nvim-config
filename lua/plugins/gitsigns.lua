@@ -43,9 +43,10 @@ require('gitsigns').setup({
   on_attach = function(bufnr)
     local gs = package.loaded.gitsigns
 
-    local function map(mode, l, r, opts)
-      opts = opts or { remap = false, silent = true }
+    local function map(mode, l, r, desc, opts)
+      opts = opts or { remap = false }
       opts.buffer = bufnr
+      opts.desc = desc
       vim.keymap.set(mode, l, r, opts)
     end
 
@@ -54,27 +55,27 @@ require('gitsigns').setup({
       if vim.wo.diff then return ']g' end
       vim.schedule(function() gs.next_hunk() end)
       return '<Ignore>'
-    end, { expr = true })
+    end, 'Next git hunk', { expr = true })
 
     map('n', '[g', function()
       if vim.wo.diff then return '[g' end
       vim.schedule(function() gs.prev_hunk() end)
       return '<Ignore>'
-    end, { expr = true })
+    end, 'Previous git hunk', { expr = true })
 
     -- Actions
-    map('n', '<leader>gB', gs.toggle_current_line_blame)
-    map('n', '<leader>gD', gs.toggle_deleted)
-    map('n', '<leader>gR', gs.reset_buffer)
-    map('n', '<leader>gS', gs.stage_buffer)
-    map('n', '<leader>gb', function() gs.blame_line({ full = true }) end)
-    map('n', '<leader>gd', gs.diffthis)
-    map('n', '<space>gU', gs.undo_stage_hunk)
-    map('n', 'gs', gs.preview_hunk)
-    map({ 'n', 'v' }, '<space>gs', ':Gitsigns stage_hunk<CR>')
-    map({ 'n', 'v' }, '<space>gu', ':Gitsigns reset_hunk<CR>')
+    map('n', '<leader>gB', 'Git toggle current line blame', gs.toggle_current_line_blame)
+    map('n', '<leader>gD', 'Git toggle current line blame', gs.toggle_deleted)
+    map('n', '<leader>gR', 'Git reset buffer', gs.reset_buffer)
+    map('n', '<leader>gS', 'Git stage bufer', gs.stage_buffer)
+    map('n', '<leader>gb', 'Git blame line', function() gs.blame_line({ full = true }) end)
+    map('n', '<leader>gd', 'Git diff this', gs.diffthis)
+    map('n', '<space>gU', 'Git undo stage hunk', gs.undo_stage_hunk)
+    map('n', 'gs', 'Git preview hunk', gs.preview_hunk)
+    map({ 'n', 'v' }, '<space>gs', ':Gitsigns stage_hunk<CR>', 'Git stage hunk')
+    map({ 'n', 'v' }, '<space>gu', ':Gitsigns reset_hunk<CR>', 'Git undo/reset hunk')
 
     -- Text object
-    map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+    map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', 'Git hunk object')
   end,
 })

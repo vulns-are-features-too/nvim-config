@@ -1,10 +1,11 @@
 local refactoring = require('refactoring')
-local o = { remap = false, silent = true }
-local nmap = function(key, target) vim.keymap.set('n', key, target, o) end
-local vmap = function(key, target) vim.keymap.set('v', key, target, o) end
 
 local function ref(inp)
   return function() refactoring.refactor(inp) end
+end
+
+local function map(mode, key, target, desc)
+  vim.keymap.set(mode, key, ref(target), { remap = false, silent = true, desc = desc })
 end
 
 refactoring.setup({
@@ -22,10 +23,9 @@ refactoring.setup({
   },
 })
 
-vmap('<space>re', ref('Extract Function'))
-vmap('<space>rf', ref('Extract Function To File'))
-vmap('<space>rv', ref('Extract Variable'))
-vmap('<space>ri', ref('Inline Variable'))
-nmap('<space>re', ref('Extract Block'))
-nmap('<space>rf', ref('Extract Block To File'))
-nmap('<space>ri', ref('Inline Variable'))
+map('v', '<space>re', 'Extract Function', '[Refactor] Extract function')
+map('v', '<space>rf', 'Extract Function To File', '[Refactor] Extract function to file')
+map('v', '<space>rv', 'Extract Variable', '[Refactor] Extract variable')
+map('n', '<space>re', 'Extract Block', '[Refactor] Extract block')
+map('n', '<space>rf', 'Extract Block To File', '[Refactor] Extract block to file')
+map({ 'n', 'v' }, '<space>ri', 'Inline Variable', '[Refactor] Inline variable')

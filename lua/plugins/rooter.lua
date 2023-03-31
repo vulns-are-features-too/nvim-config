@@ -5,4 +5,4 @@ g.rooter_manual_only = 1
 g.rooter_cd_cmd = 'lcd'
 g.rooter_resolve_links = 1
 
-vim.keymap.set('n', 'g/', '<Cmd>Rooter<CR>', { remap = false, silent = true })
+vim.keymap.set('n', 'g/', '<Cmd>Rooter<CR>', { remap = false, silent = true, desc = 'Go to project root' })

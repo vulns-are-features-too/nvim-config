@@ -3,8 +3,8 @@ local dap = require('dap')
 local ui = require('dapui')
 
 local map = vim.keymap.set
-local nmap = function(key, target, desc) map('n', key, target, { remap = false, silent = true, desc = desc }) end
-local vmap = function(key, target, desc) map('v', key, target, { remap = false, silent = true, desc = desc }) end
+local function nmap(key, target, desc) map('n', key, target, { remap = false, silent = true, desc = desc }) end
+local function vmap(key, target, desc) map('v', key, target, { remap = false, silent = true, desc = desc }) end
 
 ---- Rust/C/C++ ----
 dap.adapters.lldb = {

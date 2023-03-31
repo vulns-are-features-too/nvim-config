@@ -1,6 +1,8 @@
 require('harpoon').setup()
 local ui = require('harpoon.ui')
-local nmap = function(key, target) vim.keymap.set('n', key, target) end
+local function nmap(key, target, desc) vim.keymap.set('n', key, target, { desc = desc }) end
 
-nmap('<space>m', require('harpoon.mark').add_file)
-nmap('<space>gm', ui.toggle_quick_menu)
+nmap("'a", require('harpoon.mark').add_file, 'Harpoon add file')
+nmap("'m", ui.toggle_quick_menu, 'Harpoon menu')
+nmap("'b", ui.nav_prev, 'Harpoon navigate back')
+nmap("'n", ui.nav_next, 'Harpoon navigate next')

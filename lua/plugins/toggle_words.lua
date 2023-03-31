@@ -1,4 +1,4 @@
-local nmap = function(key, target) vim.keymap.set('n', key, target, { remap = false, silent = true }) end
+local function nmap(key, target) vim.keymap.set('n', key, target, { remap = false, silent = true }) end
 
 vim.g.toggle_words_dict = {
   all = {

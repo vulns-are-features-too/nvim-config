@@ -4,7 +4,9 @@ local f = require('telescope.builtin') -- builtin functions
 local trouble = require('trouble.providers.telescope')
 local ext = t.load_extension
 local fb = t.extensions.file_browser.actions
-local map = function(key, target, mode) vim.keymap.set(mode or 'n', key, target, { remap = false, silent = true }) end
+local function map(key, target, desc, mode)
+  vim.keymap.set(mode or 'n', key, target, { remap = false, silent = true, desc = desc })
+end
 
 -- setup
 
@@ -95,51 +97,53 @@ ext('zoxide')
 -- keymaps
 
 -- git_files falling back to find_files if not in a git repo
-local project_files = function()
+local function project_files()
   local o = {}
   local ok = pcall(f.git_files, o)
   if not ok then f.find_files(o) end
 end
+
 -- configs & scripts
-local edit_config = function()
+local function edit_config()
   require('telescope.builtin').find_files({
     search_dirs = { '~/git/dotfiles/config', '~/git/dotfiles/home', '~/git/dotfiles/shells/shared.sh' },
     hidden = true,
   })
 end
-local edit_script = function() require('telescope.builtin').find_files({ search_dirs = { '~/git/scripts' } }) end
+
+local function edit_script() require('telescope.builtin').find_files({ search_dirs = { '~/git/scripts' } }) end
 
 -- builtins
-map('<space>/', f.current_buffer_fuzzy_find)
-map('<space>f.', f.resume)
-map('<space>f/', f.search_history)
-map('<space>f;', f.command_history)
-map('<space>fF', f.find_files)
-map('<space>fG', f.git_status)
-map('<space>fM', f.man_pages)
-map('<space>fT', f.builtin)
-map('<space>fb', f.buffers)
-map('<space>fd', f.diagnostics)
-map('<space>fg', f.live_grep)
-map('<space>fh', f.help_tags)
-map('<space>fj', f.jumplist)
-map('<space>fk', f.keymaps)
-map('<space>fm', '<Cmd>Telescope harpoon marks<CR>')
-map('<space>fo', f.oldfiles)
-map('<space>fr', f.lsp_references)
-map('<space>ft', f.tags)
-map('<space>fw', f.grep_string)
-map('<space>fx', f.commands, { 'n', 'v' })
+map('<space>/', f.current_buffer_fuzzy_find, 'Fuzzy find in current buffer')
+map('<space>f.', f.resume, 'Telescope Resume')
+map('<space>f/', f.search_history, 'Telescope search history')
+map('<space>f;', f.command_history, 'Telescope command history')
+map('<space>fF', f.find_files, 'Telescope find files in cwd')
+map('<space>fG', f.git_status, 'Telescope git status')
+map('<space>fM', f.man_pages, 'Telescope man pages')
+map('<space>fT', f.builtin, 'Telescope builtins')
+map('<space>fb', f.buffers, 'Telescope buffers')
+map('<space>fd', f.diagnostics, 'Telescope diagnostics')
+map('<space>fg', f.live_grep, 'Telescope live grep')
+map('<space>fh', f.help_tags, 'Telescope help tags')
+map('<space>fj', f.jumplist, 'Telescope jumplist')
+map('<space>fk', f.keymaps, 'Telescope keymaps')
+map('<space>fm', '<Cmd>Telescope harpoon marks<CR>', 'Telescope harpoon marks')
+map('<space>fo', f.oldfiles, 'Telescope old files')
+map('<space>fr', f.lsp_references, 'Telescope references')
+map('<space>ft', f.tags, 'Telescope tags')
+map('<space>fw', f.grep_string, 'Telescope grep word under cursor')
+map('<space>fx', f.commands, 'Telescope commands', { 'n', 'v' })
 
 -- extensions
-map('<space>fB', t.extensions.file_browser.file_browser)
-map('<space>fl', t.extensions.repo.cached_list)
-map('<space>fp', t.extensions.repo.list)
-map('<space>fr', t.extensions.refactoring.refactors, 'v')
-map('<space>fy', t.extensions.neoclip.neoclip)
-map('<space>fz', t.extensions.zoxide.list)
+map('<space>fB', t.extensions.file_browser.file_browser, 'Telescope file browser')
+map('<space>fl', t.extensions.repo.cached_list, 'Telescope files in repos')
+map('<space>fp', t.extensions.repo.list, 'Telescope repos list')
+map('<space>fr', t.extensions.refactoring.refactors, 'Telescope refactoring actions', 'v')
+map('<space>fy', t.extensions.neoclip.neoclip, 'Telescope yank ring')
+map('<space>fz', t.extensions.zoxide.list, 'Telescope zoxide jump list')
 
 -- my functions
-map('<space>fc', edit_config)
-map('<space>ff', project_files)
-map('<space>fs', edit_script)
+map('<space>fc', edit_config, 'Telescope edit config')
+map('<space>ff', project_files, 'Telescope project files')
+map('<space>fs', edit_script, 'Telescope edit scripts')

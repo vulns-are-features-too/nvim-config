@@ -1,5 +1,5 @@
 local Terminal = require('toggleterm.terminal').Terminal
-local nmap = function(key, target) vim.keymap.set('n', key, target, { noremap = true, silent = true }) end
+local function nmap(key, target, desc) vim.keymap.set('n', key, target, { noremap = true, silent = true, desc = desc }) end
 
 require('toggleterm').setup({
   open_mapping = '<space>gt',
@@ -13,5 +13,6 @@ require('toggleterm').setup({
 })
 
 local lazygit = Terminal:new({ cmd = 'lazygit' })
-local _lazygit_toggle = function() lazygit:toggle() end
-nmap('<space>gl', _lazygit_toggle)
+local function _lazygit_toggle() lazygit:toggle() end
+
+nmap('<space>gl', _lazygit_toggle, 'lazygit')

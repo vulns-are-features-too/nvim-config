@@ -1,5 +1,5 @@
 require('trouble').setup()
-local nmap = function(key, target) vim.keymap.set('n', key, target, { remap = false, silent = true }) end
+local function nmap(key, target) vim.keymap.set('n', key, target, { remap = false, silent = true }) end
 
 nmap('<space>xd', '<Cmd>TroubleToggle document_diagnostics<CR>')
 nmap('<space>xl', '<Cmd>TroubleToggle loclist<CR>')

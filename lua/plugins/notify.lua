@@ -36,8 +36,9 @@ local function format_title(title, client_name) return client_name .. (#title > 
 
 local function format_message(message, percentage) return (percentage and percentage .. '%\t' or '') .. (message or '') end
 
-vim.lsp.handlers['window/showMessage'] =
-  function(err, method, params, client_id) vim.notify(method.message, severity[params.type]) end
+vim.lsp.handlers['window/showMessage'] = function(err, method, params, client_id)
+  vim.notify(method.message, severity[params.type])
+end
 
 -- DAP integration
 -- Make sure to also have the snippet with the common helper functions in your config!
@@ -74,4 +75,4 @@ dap.listeners.before['event_progressEnd']['progress-notifications'] = function(s
   notif_data.spinner = nil
 end
 
-vim.keymap.set('n', '<leader><leader>c', notify.dismiss, { remap = false, silent = true })
+vim.keymap.set('n', '<leader><leader>c', notify.dismiss)

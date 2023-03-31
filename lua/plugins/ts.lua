@@ -1,6 +1,6 @@
 local ts_repeat_move = require('nvim-treesitter.textobjects.repeatable_move')
 
-local nmap = function(key, target) vim.keymap.set('n', key, target, { remap = false, silent = true }) end
+local function nmap(key, target) vim.keymap.set('n', key, target, { remap = false, silent = true }) end
 
 require('nvim-treesitter.configs').setup({
   ensure_installed = {

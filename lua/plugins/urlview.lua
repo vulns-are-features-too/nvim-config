@@ -1,4 +1,4 @@
-local nmap = function(key, target, opts) vim.keymap.set('n', key, target, opts) end
+local function nmap(key, target, opts) vim.keymap.set('n', key, target, opts) end
 
 require('urlview').setup({
   default_action = 'firefox',
@@ -11,7 +11,7 @@ require('urlview').setup({
 })
 
 nmap('<leader><leader>u', '<Cmd>UrlView buffer<CR>', { remap = false, silent = true })
-vim.api.nvim_create_autocmd(-- Open plugin on github
+vim.api.nvim_create_autocmd( -- Open plugin on github
   'BufRead',
   {
     pattern = 'plugins.lua',
