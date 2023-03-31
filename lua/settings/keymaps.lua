@@ -156,6 +156,11 @@ nmap('y]', '"+yi{')
 nmap('y"', '"+yi"')
 nmap("y'", [["+yi']])
 nmap('y`', '"+yi`')
+-- system keyboard put (<space>p is already for plugins)
+nmap('yp', '"+p')
+nmap('yP', '"+P')
+nmap('qp', 'o<C-r>+<Esc>')
+nmap('qP', 'O<C-r>+<Esc>')
 
 -- search non-ascii characters (C-/)
 nmap('<C-_>', '/[^\\x00-\\x7F]<CR>')
@@ -172,8 +177,8 @@ nmap(']k', '<Cmd>lprev<CR>')
 -- diff
 nvmap('<space>go', '<Cmd>diffget<CR>')
 nvmap('<space>gp', '<Cmd>diffput<CR>')
-nvmap('<space>gf', '<Cmd>diffget //2<CR>')
-nvmap('<space>gj', '<Cmd>diffget //3<CR>')
+nvmap('gj', '<Cmd>diffget //2<CR>')
+nvmap('gk', '<Cmd>diffget //3<CR>')
 
 -- git-fugitive
 nvmap('<space>gg', '<Cmd>G<CR>')
