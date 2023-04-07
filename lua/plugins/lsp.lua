@@ -121,15 +121,6 @@ capabilities.offsetEncoding = { 'utf-16' }
 
 require('neodev').setup({})
 
--- General
-lsp.diagnosticls.setup({
-  capabilities = capabilities,
-})
-
-lsp.efm.setup({
-  capabilities = capabilities,
-})
-
 -- Bash
 lsp.bashls.setup({
   capabilities = capabilities,
@@ -143,20 +134,10 @@ lsp.clangd.setup({
 })
 
 -- C#
--- TODO:
--- https://github.com/Hoffs/omnisharp-extended-lsp.nvim
--- https://github.com/williamboman/mason-lspconfig.nvim/blob/main/lua/mason-lspconfig/server_configurations/omnisharp/README.md
--- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#omnisharp
--- local csharp_lsp
--- if is_linux then
---   csharp_lsp = lsp.omnisharp_mono
--- else
---   csharp_lsp = lsp.omnisharp
--- end
--- csharp_lsp.setup({
---   capabilities = capabilities,
---   on_attach = function() on_attach() end,
--- })
+lsp.csharp_ls.setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+})
 
 -- Go
 lsp.gopls.setup({

@@ -18,7 +18,7 @@ null.setup({
     fmt.rustfmt,
     fmt.shellharden,
     fmt.shfmt.with({ extra_args = { '-i', '2', '-sr' } }),
-    -- fmt.stylish_haskell,
+    fmt.sqlfluff,
     fmt.stylua,
 
     -- linting & diagnostics
@@ -30,6 +30,7 @@ null.setup({
     diag.phpstan,
     diag.pylint,
     diag.revive,
+    diag.sqlfluff,
     diag.staticcheck,
     diag.zsh,
 

@@ -64,14 +64,14 @@ require('gitsigns').setup({
     end, 'Previous git hunk', { expr = true })
 
     -- Actions
-    map('n', '<leader>gB', 'Git toggle current line blame', gs.toggle_current_line_blame)
-    map('n', '<leader>gD', 'Git toggle current line blame', gs.toggle_deleted)
-    map('n', '<leader>gR', 'Git reset buffer', gs.reset_buffer)
-    map('n', '<leader>gS', 'Git stage bufer', gs.stage_buffer)
-    map('n', '<leader>gb', 'Git blame line', function() gs.blame_line({ full = true }) end)
-    map('n', '<leader>gd', 'Git diff this', gs.diffthis)
-    map('n', '<space>gU', 'Git undo stage hunk', gs.undo_stage_hunk)
-    map('n', 'gs', 'Git preview hunk', gs.preview_hunk)
+    map('n', '<leader>gB', gs.toggle_current_line_blame, 'Git toggle current line blame')
+    map('n', '<leader>gD', gs.toggle_deleted, 'Git toggle current line blame')
+    map('n', '<leader>gR', gs.reset_buffer, 'Git reset buffer')
+    map('n', '<leader>gS', gs.stage_buffer, 'Git stage bufer')
+    map('n', '<leader>gb', function() gs.blame_line({ full = true }) end, 'Git blame line')
+    map('n', '<leader>gd', gs.diffthis, 'Git diff this')
+    map('n', '<space>gU', gs.undo_stage_hunk, 'Git undo stage hunk')
+    map('n', 'gs', gs.preview_hunk, 'Git preview hunk')
     map({ 'n', 'v' }, '<space>gs', ':Gitsigns stage_hunk<CR>', 'Git stage hunk')
     map({ 'n', 'v' }, '<space>gu', ':Gitsigns reset_hunk<CR>', 'Git undo/reset hunk')
 

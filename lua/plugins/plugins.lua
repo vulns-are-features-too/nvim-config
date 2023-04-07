@@ -112,6 +112,9 @@ local plugins = {
   { 'numToStr/Comment.nvim', config = c('comment') },
   { 'JoosepAlviste/nvim-ts-context-commentstring' },
 
+  -- undo tree
+  { 'mbbill/undotree', config = c('undotree') },
+
   -- refactoring
   { 'ThePrimeagen/refactoring.nvim', dependencies = { 'nvim-treesitter/nvim-treesitter' }, config = c('refactoring') },
 
