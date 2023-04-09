@@ -26,7 +26,7 @@ local function setup_keymaps()
   nmap('gd', vim.lsp.buf.definition, 'Go to definition')
   nmap('gi', vim.lsp.buf.implementation, 'Go to implementation')
   nmap('gt', vim.lsp.buf.type_definition, 'Go to type definition')
-  nmap('<space>lr', k_rename, 'Rename')
+  nmap('<space>rr', k_rename, 'Rename')
   nvmap('<space>a', k_actions, 'Code action')
 end
 
