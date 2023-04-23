@@ -16,6 +16,7 @@ set lazyredraw
 set path+=**
 set rnu nu
 set scrolloff=10
+set sessionoptions+=winpos,terminal
 set shiftround
 set signcolumn=yes
 set spelllang=en spelloptions=camel

@@ -74,6 +74,7 @@ local function setup_saga()
     k_hover = '<Cmd>Lspsaga hover_doc<CR>'
     k_rename = '<Cmd>Lspsaga rename ++project<CR>'
     nmap('<space>ld', '<Cmd>Lspsaga peek_definition<CR>', 'Peek definition')
+    nmap('<space>lo', '<Cmd>Lspsaga outline<CR>', 'LSP outline')
     nmap('gl', '<Cmd>Lspsaga lsp_finder<CR>', 'LSP find defintion, reference and implementation')
   end
 end
@@ -130,7 +131,7 @@ lsp.bashls.setup({
 -- C/C++
 lsp.clangd.setup({
   capabilities = capabilities,
-  on_attach = function() on_attach() end,
+  on_attach = on_attach,
 })
 
 -- C#
@@ -208,12 +209,12 @@ if is_linux then
       ['language_server_phpstan.enabled'] = true,
       ['language_server_psalm.enabled'] = true,
     },
-    on_attach = function() on_attach() end,
+    on_attach = on_attach,
   })
 else
   -- phpactor isn't available on Windows so I'm stuck with this proprietary thing for now
   lsp.intelephense.setup({
-    on_attach = function() on_attach() end,
+    on_attach = on_attach,
   })
 end
 

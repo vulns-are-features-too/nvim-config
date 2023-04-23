@@ -142,8 +142,9 @@ map('<space>fp', t.extensions.repo.list, 'Telescope repos list')
 map('<space>fr', t.extensions.refactoring.refactors, 'Telescope refactoring actions', 'v')
 map('<space>fy', t.extensions.neoclip.neoclip, 'Telescope yank ring')
 map('<space>fz', t.extensions.zoxide.list, 'Telescope zoxide jump list')
+map('<space>fs', '<Cmd>Telescope session-lens search_session<CR>', 'Telescope sessions')
 
 -- my functions
 map('<space>fc', edit_config, 'Telescope edit config')
 map('<space>ff', project_files, 'Telescope project files')
-map('<space>fs', edit_script, 'Telescope edit scripts')
+map('<space>fS', edit_script, 'Telescope edit scripts')

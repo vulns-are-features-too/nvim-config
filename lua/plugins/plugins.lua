@@ -27,7 +27,7 @@ local plugins = {
     dependencies = {
       { 'arkav/lualine-lsp-progress' },
       { 'folke/lsp-colors.nvim' },
-      { 'glepnir/lspsaga.nvim', dependencies = 'nvim-tree/nvim-web-devicons' },
+      { 'glepnir/lspsaga.nvim', event = 'LspAttach', dependencies = 'nvim-tree/nvim-web-devicons' },
       { 'https://git.sr.ht/~whynothugo/lsp_lines.nvim', enabled = is_linux },
       { 'jubnzv/virtual-types.nvim' },
       { 'ray-x/lsp_signature.nvim' },
@@ -70,7 +70,6 @@ local plugins = {
   { 'nvim-tree/nvim-web-devicons' },
   { 'morhetz/gruvbox', lazy = false, priority = 1000 },
   { 'nvim-lualine/lualine.nvim', dependencies = 'nvim-tree/nvim-web-devicons', config = c('lualine') },
-  { 'preservim/tagbar', config = c('tagbar') },
   { 'rcarriga/nvim-notify', config = c('notify') },
   { 'szw/vim-maximizer', config = c('maximizer') },
 
@@ -104,6 +103,10 @@ local plugins = {
   { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
   { 'nvim-telescope/telescope-file-browser.nvim' },
   { 'jvgrootveld/telescope-zoxide' },
+
+  -- session management
+  { 'rmagatti/auto-session', config = true },
+  { 'rmagatti/session-lens', config = true },
 
   -- goto-preview
   { 'rmagatti/goto-preview', config = c('preview') },
@@ -153,7 +156,7 @@ local plugins = {
   },
   { 'windwp/nvim-autopairs', config = c('autopair') },
   { 'windwp/nvim-ts-autotag', config = true },
-  { 'L3MON4D3/luasnip', config = c('luasnip'), rocks = { 'jsregexp' }, build = 'make install_jsregexp' }, -- snippets engine
+  { 'L3MON4D3/luasnip', config = c('luasnip'), build = 'make install_jsregexp' }, -- snippets engine
 
   -- git
   { 'lewis6991/gitsigns.nvim', config = c('gitsigns') },
