@@ -33,6 +33,7 @@ vim.g.toggle_words_dict = {
     { 'up', 'down' },
     { 'yes', 'no' },
     { 'and', 'or' },
+    { 'GET', 'POST' },
   },
   sh = {
     { 'if', 'elif', 'else', 'fi' },

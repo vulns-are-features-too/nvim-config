@@ -28,7 +28,6 @@ local plugins = {
       { 'arkav/lualine-lsp-progress' },
       { 'folke/lsp-colors.nvim' },
       { 'glepnir/lspsaga.nvim', event = 'LspAttach', dependencies = 'nvim-tree/nvim-web-devicons' },
-      { 'https://git.sr.ht/~whynothugo/lsp_lines.nvim', enabled = is_linux },
       { 'jubnzv/virtual-types.nvim' },
       { 'ray-x/lsp_signature.nvim' },
     },
@@ -60,7 +59,7 @@ local plugins = {
 
   -- formatting
   { 'jose-elias-alvarez/null-ls.nvim', config = c('null-ls') },
-  { 'echasnovski/mini.align', version = 'false', config = function() require('mini.align').setup() end },
+  { 'echasnovski/mini.align', config = function() require('mini.align').setup() end },
 
   -- nvim config
   { 'folke/neodev.nvim' },

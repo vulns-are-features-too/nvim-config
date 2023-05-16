@@ -19,7 +19,7 @@ local function setup_keymaps()
   nmap('H', vim.lsp.buf.signature_help, 'Signature help')
   nmap('<leader>f', vim.lsp.buf.format, 'Format')
   nmap('<space><space>f', vim.lsp.buf.format, 'Format')
-  nmap('<space>dd', k_diagnostics, 'Line diagnostics')
+  nmap('<space>e', k_diagnostics, 'Line diagnostics')
   nmap('[e', k_diag_prev, 'Go to previous diagnostics')
   nmap(']e', k_diag_next, 'Go to next diagnostics')
   nmap('gD', vim.lsp.buf.declaration, 'Go to declaration')
@@ -63,6 +63,12 @@ local function setup_saga()
           exec = '<CR>',
         },
       },
+      outline = {
+        keys = {
+          expand_or_jump = '<CR>',
+          quit = 'q',
+        },
+      },
       lightbulb = { enable = false },
       beacon = { enable = false },
     })
@@ -88,23 +94,6 @@ local function setup_signature()
   }) end
 end
 
-local function setup_lines()
-  local ok, lines = pcall(require, 'lsp_lines')
-  if ok then
-    LspLineState = true
-    local function toggle_lsp_lines()
-      lines.toggle()
-      LspLineState = not LspLineState
-      vim.diagnostic.config({ virtual_text = LspLineState })
-    end
-
-    lines.setup()
-    lines.toggle() -- disabled by default
-
-    nmap('<leader><leader>l', toggle_lsp_lines, 'Toggle lsp_lines')
-  end
-end
-
 local function setup_vtypes()
   local ok, vtypes = pcall(require, 'virtualtypes')
   if ok then vtypes.on_attach() end
@@ -113,7 +102,6 @@ end
 local function on_attach(_, _)
   setup_saga()
   setup_signature()
-  setup_lines()
   setup_vtypes()
   setup_keymaps()
 end
@@ -161,10 +149,10 @@ lsp.hls.setup({
 -- Javascript/Typescript
 lsp.eslint.setup({
   capabilities = capabilities,
+  on_attach = on_attach,
 })
 lsp.tsserver.setup({
   capabilities = capabilities,
-  on_attach = on_attach,
 })
 
 -- JSON
@@ -176,6 +164,7 @@ lsp.jsonls.setup({
 -- Lua
 lsp.lua_ls.setup({
   capabilities = capabilities,
+  on_attach = on_attach,
   settings = {
     Lua = {
       runtime = { version = 'LuaJIT' },
@@ -189,7 +178,6 @@ lsp.lua_ls.setup({
       telemetry = { enable = false },
     },
   },
-  on_attach = on_attach,
 })
 
 -- Markdown
@@ -209,14 +197,22 @@ if is_linux then
       ['language_server_phpstan.enabled'] = true,
       ['language_server_psalm.enabled'] = true,
     },
+    capabilities = capabilities,
     on_attach = on_attach,
   })
 else
   -- phpactor isn't available on Windows so I'm stuck with this proprietary thing for now
   lsp.intelephense.setup({
+    capabilities = capabilities,
     on_attach = on_attach,
   })
 end
+
+-- Powershell
+lsp.powershell_es.setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+})
 
 -- Python
 lsp.pylsp.setup({
@@ -225,6 +221,16 @@ lsp.pylsp.setup({
     require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
     on_attach()
   end,
+  settings = {
+    pylsp = {
+      plugins = {
+        black = { enabled = true },
+        mypy = { enabled = true },
+        rope = { enabled = true },
+        ruff = { enabled = true },
+      },
+    },
+  },
 })
 
 -- Rust
@@ -255,6 +261,7 @@ lsp.sqlls.setup({
 -- LaTeX
 lsp.texlab.setup({
   capabilities = capabilities,
+  on_attach = on_attach,
 })
 
 -- Vim
@@ -266,6 +273,7 @@ lsp.vimls.setup({
 -- YAML
 lsp.yamlls.setup({
   capabilities = capabilities,
+  on_attach = on_attach,
 })
 
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {})
@@ -273,3 +281,4 @@ vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.s
 
 nmap('<space>pl', '<Cmd>LspInfo<CR>')
 nmap('<space>pm', '<Cmd>Mason<CR>')
+nmap('<space>pn', '<Cmd>NullLsInfo<CR>')

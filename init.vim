@@ -7,6 +7,7 @@ set breakindent smartindent
 set completeopt=menu,menuone,noselect,preview
 set cpoptions+=y
 set cursorcolumn cursorline
+set diffopt+=iwhite,iwhiteeol,vertical
 set foldexpr=nvim_treesitter#foldexpr()
 set foldmethod=expr foldminlines=5 nofoldenable
 set ignorecase smartcase

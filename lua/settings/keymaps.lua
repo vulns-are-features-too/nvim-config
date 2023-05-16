@@ -69,17 +69,10 @@ map('c', 'qw', 'wq', { remap = false })
 
 -- ctrl-S now saves file
 nmap('<C-s>', '<Cmd>w<CR>')
-nmap('<leader>s', '<Cmd>w<CR>')
-imap('<C-s>', '<Esc><Cmd>w<CR>a')
-vmap('<C-s>', '<Esc><Cmd>w<CR>')
 
 -- indent won't deselect
 vmap('<', '<gv')
 vmap('>', '>gv')
-
--- move selected stuff up/down
-vmap('<space>j', "<Cmd>m '>+1<CR>gv=gv")
-vmap('<space>k', "<Cmd>m '>-2<CR>gv=gv")
 
 -- closing stuff
 nmap('<leader>q', '<Cmd>bd<CR>')
