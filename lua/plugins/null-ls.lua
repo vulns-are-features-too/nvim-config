@@ -15,7 +15,7 @@ null.setup({
     fmt.prettier,
     fmt.shellharden,
     fmt.shfmt.with({ extra_args = { '-i', '2', '-sr' } }),
-    fmt.sqlfluff,
+    fmt.sqlfluff.with({ extra_args = { '--dialect', 'mysql' } }),
     fmt.stylua,
 
     -- linting & diagnostics
@@ -23,7 +23,7 @@ null.setup({
     diag.php,
     diag.phpstan,
     diag.revive,
-    diag.sqlfluff,
+    diag.sqlfluff.with({ extra_args = { '--dialect', 'mysql' } }),
     diag.staticcheck,
     diag.zsh,
 

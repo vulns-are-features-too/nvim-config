@@ -88,10 +88,11 @@ end
 local function setup_signature()
   local ok, sig = pcall(require, 'lsp_signature')
   if ok then sig.setup({
-    bind = true,
-    hint_prefix = '!',
-    extra_trigger_chars = { '(', ',' },
-  }) end
+      bind = true,
+      hint_prefix = '!',
+      extra_trigger_chars = { '(', ',' },
+    })
+  end
 end
 
 local function setup_vtypes()
