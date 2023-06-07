@@ -154,6 +154,9 @@ nmap('yp', '"+p')
 nmap('yP', '"+P')
 nmap('qp', 'o<C-r>+<Esc>')
 nmap('qP', 'O<C-r>+<Esc>')
+-- blackhole delete/replace
+nvmap('qd', '"_d')
+nvmap('qc', '"_c')
 
 -- search non-ascii characters (C-/)
 nmap('<C-_>', '/[^\\x00-\\x7F]<CR>')

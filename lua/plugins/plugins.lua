@@ -67,15 +67,31 @@ local plugins = {
 
   -- General UI
   { 'nvim-tree/nvim-web-devicons' },
-  { 'morhetz/gruvbox', lazy = false, priority = 1000 },
-  { 'nvim-lualine/lualine.nvim', dependencies = 'nvim-tree/nvim-web-devicons', config = c('lualine') },
+  {
+    'morhetz/gruvbox',
+    lazy = false,
+    priority = 1000,
+  },
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = 'nvim-tree/nvim-web-devicons',
+    config = c('lualine'),
+  },
   { 'rcarriga/nvim-notify', config = c('notify') },
   { 'szw/vim-maximizer', config = c('maximizer') },
 
   -- Extending basic motions and editing
   -- Moving
-  { 'ThePrimeagen/harpoon', dependencies = { 'nvim-lua/plenary.nvim' }, config = c('harpoon') },
-  { 'abecodes/tabout.nvim', dependencies = { 'nvim-treesitter' }, config = c('tabout') },
+  {
+    'ThePrimeagen/harpoon',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    config = c('harpoon'),
+  },
+  {
+    'abecodes/tabout.nvim',
+    dependencies = { 'nvim-treesitter' },
+    config = c('tabout'),
+  },
   { 'cbochs/portal.nvim', config = c('portal') },
   { 'ggandor/leap.nvim', config = c('leap') },
   { 'junegunn/vim-slash' },
@@ -90,14 +106,22 @@ local plugins = {
   -- Text objects
   { 'andymass/vim-matchup', config = c('matchup') },
   { 'kiyoon/treesitter-indent-object.nvim', config = c('indent_object') },
-  { 'kylechui/nvim-surround', version = '*', config = c('surround') },
+  {
+    'kylechui/nvim-surround',
+    version = '*',
+    config = c('surround'),
+  },
   { 'wellle/targets.vim' },
   -- Misc
   { 'max397574/better-escape.nvim', config = c('better-escape') },
   { 'tpope/vim-abolish' },
 
   -- telescope
-  { 'nvim-telescope/telescope.nvim', dependencies = { 'nvim-lua/plenary.nvim' }, config = c('telescope') },
+  {
+    'nvim-telescope/telescope.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    config = c('telescope'),
+  },
   { 'nvim-lua/popup.nvim' },
   { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
   { 'nvim-telescope/telescope-file-browser.nvim' },
@@ -118,13 +142,21 @@ local plugins = {
   { 'mbbill/undotree', config = c('undotree') },
 
   -- refactoring
-  { 'ThePrimeagen/refactoring.nvim', dependencies = { 'nvim-treesitter/nvim-treesitter' }, config = c('refactoring') },
+  {
+    'ThePrimeagen/refactoring.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    config = c('refactoring'),
+  },
 
   -- diff
   { 'sindrets/diffview.nvim', dependencies = 'nvim-lua/plenary.nvim' },
 
   -- yank
-  { 'AckslD/nvim-neoclip.lua', dependencies = { 'kkharji/sqlite.lua' }, config = c('neoclip') },
+  {
+    'AckslD/nvim-neoclip.lua',
+    dependencies = { 'kkharji/sqlite.lua' },
+    config = c('neoclip'),
+  },
   { 'tversteeg/registers.nvim' },
 
   -- Debugging
@@ -192,7 +224,7 @@ local plugins = {
   },
 
   -- Markdown, LaTeX, and text
-  { 'dkarter/bullets.vim', ft = { 'markdown', 'plaintex', 'text' } },
+  { 'dkarter/bullets.vim', ft = { 'markdown', 'plaintex', 'text' }, config = c('bullets') },
 
   -- files browsing
   { 'is0n/fm-nvim', config = c('fm') },

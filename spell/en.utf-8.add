@@ -1,5 +1,4 @@
-#astebin
-#o
+pastebin
 BLE
 BSON
 CORS
@@ -36,12 +35,14 @@ TLS
 TODO
 UI
 VLAN
+Virtualization
 WAF
 XML
 XSS
 XXE
 arg
 aslr
+async
 augroup
 autocmd
 backend
@@ -175,6 +176,7 @@ uefi
 unix
 url
 usr
+virt
 vishing
 vlan
 vpn
