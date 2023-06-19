@@ -27,6 +27,7 @@ cmp.setup({
     { name = 'nvim_lsp' },
     { name = 'nvim_lua' },
     { name = 'path' },
+    { name = 'cmdline' },
   },
 
   snippet = {
@@ -70,17 +71,15 @@ cmp.setup.cmdline(':!', {
   },
 })
 
--- shell
-cmp.setup.filetype('sh', {
-  sources = {
-    { name = 'cmdline' },
-  },
-})
-
 -- SQL
 cmp.setup.filetype({ 'sql', 'mysql', 'psql' }, {
   sources = {
     { name = 'vim-dadbod-completion' },
+    { name = 'buffer', option = { get_bufnrs = function() return vim.api.nvim_list_bufs() end } },
+    { name = 'luasnip' },
+    { name = 'nvim_lsp_signature_help' },
+    { name = 'nvim_lsp' },
+    { name = 'path' },
   },
 })
 
