@@ -62,7 +62,7 @@ local plugins = {
   { 'echasnovski/mini.align', config = function() require('mini.align').setup() end },
 
   -- nvim config
-  { 'folke/neodev.nvim' },
+  { 'folke/neodev.nvim', config = c('neodev') },
   { 'rafcamlet/nvim-luapad' },
 
   -- General UI
@@ -198,6 +198,16 @@ local plugins = {
   { 'CRAG666/code_runner.nvim', dependencies = 'nvim-lua/plenary.nvim', config = c('code_runner') },
 
   -- testing
+  {
+    'https://github.com/nvim-neotest/neotest',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-treesitter/nvim-treesitter',
+      'antoinemadec/FixCursorHold.nvim',
+      'thenbe/neotest-playwright',
+    },
+    config = c('neotest'),
+  },
   { 'rest-nvim/rest.nvim', ft = 'http', config = c('rest') },
 
   -- Shell
