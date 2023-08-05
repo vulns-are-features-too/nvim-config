@@ -214,7 +214,7 @@ local plugins = {
   { 'itspriddle/vim-shellcheck', ft = 'sh' },
 
   -- Rust
-  { 'rust-lang/rust.vim', ft = 'rust' },
+  { 'rust-lang/rust.vim' },
   { 'simrat39/rust-tools.nvim' },
 
   -- Go
@@ -245,9 +245,7 @@ local plugins = {
   -- Project management
   { 'cljoly/telescope-repo.nvim' },
   { 'airblade/vim-rooter', config = c('rooter') },
-
-  -- Obsidian
-  { 'epwalsh/obsidian.nvim', config = c('obsidian'), ft = { 'lua', 'markdown' } },
+  { 'tpope/vim-dotenv' },
 
   -- terminal integration
   { 'akinsho/toggleterm.nvim', version = '*', config = c('toggleterm') },

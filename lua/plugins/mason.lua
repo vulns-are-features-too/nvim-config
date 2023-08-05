@@ -40,7 +40,6 @@ require('mason-null-ls').setup({
     'phpstan',
     'prettier',
     'revive',
-    'rustfmt',
     'shellcheck',
     'shellharden',
     'shfmt',

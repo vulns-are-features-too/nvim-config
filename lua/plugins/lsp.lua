@@ -150,10 +150,10 @@ lsp.hls.setup({
 -- Javascript/Typescript
 lsp.eslint.setup({
   capabilities = capabilities,
-  on_attach = on_attach,
 })
 lsp.tsserver.setup({
   capabilities = capabilities,
+  on_attach = on_attach,
 })
 
 -- JSON
