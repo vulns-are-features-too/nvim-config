@@ -128,8 +128,8 @@ local plugins = {
   { 'jvgrootveld/telescope-zoxide' },
 
   -- session management
-  { 'rmagatti/auto-session', config = true },
-  { 'rmagatti/session-lens', config = true },
+  { 'rmagatti/auto-session', enabled = is_linux, config = true },
+  { 'rmagatti/session-lens', enabled = is_linux, config = true },
 
   -- goto-preview
   { 'rmagatti/goto-preview', config = c('preview') },
@@ -188,6 +188,7 @@ local plugins = {
   { 'windwp/nvim-autopairs', config = c('autopair') },
   { 'windwp/nvim-ts-autotag', config = true },
   { 'L3MON4D3/luasnip', config = c('luasnip'), build = 'make install_jsregexp' }, -- snippets engine
+  { 'Hoffs/omnisharp-extended-lsp.nvim' },
 
   -- git
   { 'lewis6991/gitsigns.nvim', config = c('gitsigns') },

@@ -88,11 +88,10 @@ end
 local function setup_signature()
   local ok, sig = pcall(require, 'lsp_signature')
   if ok then sig.setup({
-      bind = true,
-      hint_prefix = '!',
-      extra_trigger_chars = { '(', ',' },
-    })
-  end
+    bind = true,
+    hint_prefix = '!',
+    extra_trigger_chars = { '(', ',' },
+  }) end
 end
 
 local function setup_vtypes()
@@ -124,9 +123,16 @@ lsp.clangd.setup({
 })
 
 -- C#
-lsp.csharp_ls.setup({
+lsp.omnisharp.setup({
   capabilities = capabilities,
   on_attach = on_attach,
+  cmd = { 'dotnet', vim.fn.stdpath('data') .. '/mason/packages/omnisharp/libexec/OmniSharp.dll' },
+  handlers = {
+    ['textDocument/definition'] = require('omnisharp_extended').handler,
+  },
+  enable_roslyn_analyzers = true,
+  organize_imports_on_format = true,
+  enable_import_completion = true,
 })
 
 -- Go

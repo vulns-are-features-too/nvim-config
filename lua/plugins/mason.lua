@@ -21,8 +21,6 @@ require('mason-lspconfig').setup({
     'marksman',
     php_lsp,
     'psalm',
-    'pylsp',
-    'rust_analyzer',
     'sqlls',
     'texlab',
     'tsserver',
@@ -33,10 +31,8 @@ require('mason-lspconfig').setup({
 
 require('mason-null-ls').setup({
   ensure_installed = {
-    'black',
     'clang_format',
     'eslint',
-    'jq',
     'phpstan',
     'prettier',
     'revive',
@@ -50,8 +46,8 @@ require('mason-null-ls').setup({
 
 require('mason-nvim-dap').setup({
   ensure_installed = {
-    'bash',
-    'codelldb',
-    'python',
+    -- 'bash',
+    -- 'codelldb',
+    -- 'python',
   },
 })
