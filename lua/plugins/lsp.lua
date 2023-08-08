@@ -216,9 +216,11 @@ else
 end
 
 -- Powershell
+pses_path = vim.fn.stdpath('data') .. '/mason/packages/packages/powershell-editor-services/PowerShellEditorServices/Start-EditorServices.ps1'
 lsp.powershell_es.setup({
   capabilities = capabilities,
   on_attach = on_attach,
+  cmd = { 'pwsh', '-NoLogo', '-NoProfile', '-Command', pses_path },
 })
 
 -- Python
