@@ -134,6 +134,7 @@ map('<space>fr', f.lsp_references, 'Telescope references')
 map('<space>ft', f.tags, 'Telescope tags')
 map('<space>fw', f.grep_string, 'Telescope grep word under cursor')
 map('<space>fx', f.commands, 'Telescope commands', { 'n', 'v' })
+map('<space>fs', f.lsp_workspace_symbols, 'Telescope workspace symbols')
 
 -- extensions
 map('<space>fB', t.extensions.file_browser.file_browser, 'Telescope file browser')
@@ -142,9 +143,9 @@ map('<space>fp', t.extensions.repo.list, 'Telescope repos list')
 map('<space>fr', t.extensions.refactoring.refactors, 'Telescope refactoring actions', 'v')
 map('<space>fy', t.extensions.neoclip.neoclip, 'Telescope yank ring')
 map('<space>fz', t.extensions.zoxide.list, 'Telescope zoxide jump list')
-map('<space>fs', '<Cmd>Telescope session-lens search_session<CR>', 'Telescope sessions')
+map('<space>fS', '<Cmd>Telescope session-lens search_session<CR>', 'Telescope sessions')
 
 -- my functions
 map('<space>fc', edit_config, 'Telescope edit config')
 map('<space>ff', project_files, 'Telescope project files')
-map('<space>fS', edit_script, 'Telescope edit scripts')
+map('<space>fX', edit_script, 'Telescope edit scripts')
