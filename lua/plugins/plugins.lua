@@ -115,6 +115,7 @@ local plugins = {
   -- Misc
   { 'max397574/better-escape.nvim', config = c('better-escape') },
   { 'tpope/vim-abolish' },
+  { 'kevinhwang91/nvim-hlslens', config = c('hlslens') },
 
   -- telescope
   {
