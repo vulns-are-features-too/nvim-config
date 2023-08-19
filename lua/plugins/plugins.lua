@@ -128,10 +128,6 @@ local plugins = {
   { 'nvim-telescope/telescope-file-browser.nvim' },
   { 'jvgrootveld/telescope-zoxide' },
 
-  -- session management
-  { 'rmagatti/auto-session', enabled = is_linux, config = true },
-  { 'rmagatti/session-lens', enabled = is_linux, config = true },
-
   -- goto-preview
   { 'rmagatti/goto-preview', config = c('preview') },
 
