@@ -28,6 +28,7 @@ local function setup_keymaps()
   nmap('gt', vim.lsp.buf.type_definition, 'Go to type definition')
   nmap('<space>rr', k_rename, 'Rename')
   nvmap('<space>a', k_actions, 'Code action')
+  nmap('<leader>h', vim.api.inlay_hints(0, nil), 'Toggle inlay hints')
 end
 
 local function setup_saga()
@@ -182,6 +183,7 @@ lsp.lua_ls.setup({
         library = vim.api.nvim_get_runtime_file('', true),
         checkThirdParty = false,
       },
+      hint = { enable = true },
       telemetry = { enable = false },
     },
   },
