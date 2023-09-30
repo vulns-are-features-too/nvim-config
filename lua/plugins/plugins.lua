@@ -192,7 +192,7 @@ local plugins = {
   { 'tpope/vim-fugitive' },
 
   -- Building & running code
-  { 'michaelb/sniprun', build = 'bash ./install.sh', config = c('sniprun') },
+  { 'michaelb/sniprun', build = 'bash ./install.sh', enabled = is_linux, config = c('sniprun') },
   { 'CRAG666/code_runner.nvim', dependencies = 'nvim-lua/plenary.nvim', config = c('code_runner') },
 
   -- testing
