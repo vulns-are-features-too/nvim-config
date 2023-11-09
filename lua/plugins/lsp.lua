@@ -28,7 +28,7 @@ local function setup_keymaps()
   nmap('gt', vim.lsp.buf.type_definition, 'Go to type definition')
   nmap('<space>rr', k_rename, 'Rename')
   nvmap('<space>a', k_actions, 'Code action')
-  nmap('<leader>h', vim.api.inlay_hints(0, nil), 'Toggle inlay hints')
+  nmap('<leader>h', function() vim.lsp.inlay_hint(0, nil) end, 'Toggle inlay hints')
 end
 
 local function setup_saga()
