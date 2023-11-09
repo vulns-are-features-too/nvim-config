@@ -1,6 +1,4 @@
-""""""""""""""""""""""""""""""""""""""""
 " General settings
-""""""""""""""""""""""""""""""""""""""""
 filetype plugin on
 syntax on
 set breakindent smartindent
@@ -8,7 +6,7 @@ set completeopt=menu,menuone,noselect,preview
 set cpoptions+=y
 set cursorcolumn cursorline
 set diffopt+=iwhite,iwhiteeol,vertical
-set foldexpr=nvim_treesitter#foldexpr()
+set foldexpr=
 set foldmethod=expr foldminlines=5 nofoldenable
 set ignorecase smartcase
 set inccommand=nosplit
@@ -32,10 +30,6 @@ set wildmode=longest,full
 set wildoptions=pum,tagfile
 set wrap
 
-""""""""""""""""""""""""""""""""""""""""
-" Basic autocmd
-""""""""""""""""""""""""""""""""""""""""
-
 " Automatically delete trailing white spaces on save
 au BufWritePre * %s/\s\+$//e
 
@@ -47,21 +41,12 @@ au BufRead,BufNewFile *.opml set filetype=html
 au BufRead,BufNewFile fstab.* set filetype=fstab
 au BufRead,BufNewFile sxhkdrc set filetype=sxhkdrc
 
-""""""""""""""""""""""""""""""""""""""""
-" Config and plugins
-""""""""""""""""""""""""""""""""""""""""
-" general settings
-runtime settings/firenvim.vim
-runtime settings/abbr.vim
-
 " filetype-specific settings
 au Filetype plaintex runtime settings/latex.vim
 au Filetype markdown,plaintex set spell
 
-lua << EOF
-require('plugins.plugins')
-require('settings')
-require('lang')
-EOF
+" plugins
+runtime settings/firenvim.vim
+runtime settings/abbr.vim
 
 set secure

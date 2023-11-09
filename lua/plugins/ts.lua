@@ -135,6 +135,8 @@ require('nvim-treesitter.configs').setup({
   matchup = { enable = true },
 })
 
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+
 -- Repeat movement with ; and ,
 nmap(';', ts_repeat_move.repeat_last_move_next)
 nmap(',', ts_repeat_move.repeat_last_move_previous)
