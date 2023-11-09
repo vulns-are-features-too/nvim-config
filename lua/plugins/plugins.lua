@@ -58,7 +58,7 @@ local plugins = {
   },
 
   -- formatting
-  { 'jose-elias-alvarez/null-ls.nvim', config = c('null-ls') },
+  { 'nvimtools/none-ls.nvim', config = c('null-ls') },
   { 'echasnovski/mini.align', config = function() require('mini.align').setup() end },
 
   -- nvim config
