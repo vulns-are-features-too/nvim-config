@@ -107,9 +107,6 @@ au('Filetype', {
     imap('!<space>', '!<C-g>u<space>', bo)
     imap('?<space>', '?<C-g>u<space>', bo)
     imap(';<space>', ';<C-g>u<space>', bo)
-    -- bullets.vim
-    imap('<CR>', '<Plug>(bullets-newline)')
-    nmap('o', '<Plug>(bullets-newline)')
   end,
 })
 
