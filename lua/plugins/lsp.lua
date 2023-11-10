@@ -1,5 +1,5 @@
 local lsp = require('lspconfig')
-local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local is_linux = vim.fn.has('linux') == 1 or vim.fn.has('unix') == 1
 
 local function nmap(key, target, desc) vim.keymap.set('n', key, target, { remap = false, desc = desc }) end
@@ -108,8 +108,6 @@ local function on_attach(_, _)
 end
 
 capabilities.offsetEncoding = { 'utf-16' }
-
-require('neodev').setup({})
 
 -- Bash
 lsp.bashls.setup({

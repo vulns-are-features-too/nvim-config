@@ -26,10 +26,7 @@ local plugins = {
     'neovim/nvim-lspconfig',
     dependencies = {
       { 'arkav/lualine-lsp-progress' },
-      { 'folke/lsp-colors.nvim' },
       { 'glepnir/lspsaga.nvim', event = 'LspAttach', dependencies = 'nvim-tree/nvim-web-devicons' },
-      { 'jubnzv/virtual-types.nvim' },
-      { 'ray-x/lsp_signature.nvim' },
     },
     config = c('lsp'),
   },
@@ -62,8 +59,8 @@ local plugins = {
   { 'echasnovski/mini.align', config = function() require('mini.align').setup() end },
 
   -- nvim config
-  { 'folke/neodev.nvim', config = c('neodev') },
-  { 'rafcamlet/nvim-luapad' },
+  { 'folke/neodev.nvim', ft = 'lua', config = c('neodev') },
+  { 'rafcamlet/nvim-luapad', ft = 'lua' },
 
   -- General UI
   { 'nvim-tree/nvim-web-devicons' },
@@ -176,6 +173,7 @@ local plugins = {
       { 'hrsh7th/cmp-nvim-lua' }, -- nvim lua config
       { 'hrsh7th/cmp-path' },
       { 'onsails/lspkind.nvim' }, -- fancy completion menu
+      { 'rasulomaroff/cmp-bufname' },
       { 'rcarriga/cmp-dap' },
       { 'saadparwaiz1/cmp_luasnip' },
     },

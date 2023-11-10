@@ -4,6 +4,7 @@ local map = cmp.mapping
 
 cmp.setup({
   mapping = map.preset.insert({
+    ['<C-p>'] = map.complete(),
     ['<TAB>'] = map.select_next_item(),
     ['<S-TAB>'] = map.select_prev_item(),
     ['<C-j>'] = map.select_next_item(),
@@ -15,14 +16,20 @@ cmp.setup({
       c = map.close(),
     }),
     ['<C-space>'] = map.confirm({
-      behavior = cmp.ConfirmBehavior.Insert,
+      behavior = cmp.ConfirmBehavior.Replace,
       select = true,
+    }),
+    ['<CR>'] = map.confirm({
+      behavior = cmp.ConfirmBehavior.Insert,
+      select = false,
     }),
   }),
 
   sources = {
     { name = 'luasnip' },
+    -- source from all buffers
     { name = 'buffer', option = { get_bufnrs = function() return vim.api.nvim_list_bufs() end } },
+    { name = 'bufname' },
     { name = 'nvim_lsp_signature_help' },
     { name = 'nvim_lsp' },
     { name = 'nvim_lua' },
@@ -43,16 +50,13 @@ cmp.setup({
         nvim_lsp_signature_help = '[sig]',
         nvim_lua = '[NvimLua]',
         buffer = '[Buffer]',
+        bufname = '[Buffer]',
         luasnip = '[Snip]',
         path = '[Path]',
         cmdline = '[CMD]',
       },
     }),
-  },
-
-  window = {
-    completion = cmp.config.window.bordered(),
-    documentation = cmp.config.window.bordered(),
+    expandable_indicator = true,
   },
 
   experimental = {
@@ -61,7 +65,7 @@ cmp.setup({
 
   -- cmp-dap
   enabled = function()
-    return vim.api.nvim_buf_get_option(0, 'buftype') ~= 'prompt' or require('cmp_dap').is_dap_buffer()
+    return vim.api.nvim_get_option_value('buftype', {}) ~= 'prompt' or require('cmp_dap').is_dap_buffer()
   end,
 })
 
