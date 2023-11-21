@@ -2,6 +2,8 @@ local ts_repeat_move = require('nvim-treesitter.textobjects.repeatable_move')
 
 local function nmap(key, target) vim.keymap.set('n', key, target, { remap = false, silent = true }) end
 
+vim.g.skip_ts_context_commentstring_module = true
+
 require('nvim-treesitter.configs').setup({
   ensure_installed = {
     'bash',
@@ -100,11 +102,6 @@ require('nvim-treesitter.configs').setup({
     },
   },
 
-  context_commentstring = {
-    enable = true,
-    enable_autocmd = false,
-  },
-
   playground = {
     enable = true,
     disable = {},
@@ -134,6 +131,8 @@ require('nvim-treesitter.configs').setup({
   endwise = { enable = true },
   matchup = { enable = true },
 })
+
+require('ts_context_commentstring').setup({enable_autocmd = false})
 
 vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
 
