@@ -121,7 +121,6 @@ local plugins = {
   },
   { 'nvim-lua/popup.nvim' },
   { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-  { 'nvim-telescope/telescope-file-browser.nvim' },
   { 'jvgrootveld/telescope-zoxide' },
 
   -- goto-preview
@@ -232,7 +231,7 @@ local plugins = {
   { 'dkarter/bullets.vim', ft = { 'markdown', 'plaintex', 'text' }, config = c('bullets') },
 
   -- files browsing
-  { 'is0n/fm-nvim', config = c('fm') },
+  { 'stevearc/oil.nvim', config = c('oil') },
 
   -- Project management
   { 'cljoly/telescope-repo.nvim' },

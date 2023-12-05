@@ -3,7 +3,6 @@ local act = require('telescope.actions')
 local f = require('telescope.builtin') -- builtin functions
 local trouble = require('trouble.providers.telescope')
 local ext = t.load_extension
-local fb = t.extensions.file_browser.actions
 local function map(key, target, desc, mode)
   vim.keymap.set(mode or 'n', key, target, { remap = false, silent = true, desc = desc })
 end
@@ -15,30 +14,6 @@ local fzf_opts = {
   override_generic_sorter = true,
   override_file_sorter = true,
   case_mode = 'smart_case',
-}
-
-local file_browser_opts = {
-  hijack_netrw = true,
-  mappings = {
-    ['i'] = {
-      ['<S-CR>'] = fb.create_from_prompt,
-      ['<C-CR>'] = fb.create_from_prompt,
-    },
-    ['n'] = {
-      ['n'] = fb.create,
-      ['r'] = fb.rename,
-      ['y'] = fb.copy,
-      ['m'] = fb.move,
-      ['d'] = fb.remove,
-      ['o'] = fb.open,
-      ['h'] = fb.goto_parent_dir,
-      ['gh'] = fb.goto_home_dir,
-      ['g.'] = fb.goto_cwd,
-      ['gd'] = fb.change_cwd,
-      ['zz'] = fb.toggle_hidden,
-      ['<C-a>'] = fb.toggle_all,
-    },
-  },
 }
 
 local repo_opts = {
@@ -79,7 +54,6 @@ t.setup({
 
   extensions = {
     fzf = fzf_opts,
-    file_browser = file_browser_opts,
     repo = repo_opts,
   },
 
@@ -88,7 +62,6 @@ t.setup({
 
 -- extensions
 ext('dap')
-ext('file_browser')
 ext('fzf')
 ext('harpoon')
 ext('neoclip')
@@ -140,7 +113,6 @@ map('<space>fx', f.commands, 'Telescope commands', { 'n', 'v' })
 map('<space>fs', f.lsp_workspace_symbols, 'Telescope workspace symbols')
 
 -- extensions
-map('<space>fB', t.extensions.file_browser.file_browser, 'Telescope file browser')
 map('<space>fl', t.extensions.repo.cached_list, 'Telescope files in repos')
 map('<space>fp', t.extensions.repo.list, 'Telescope repos list')
 map('<space>fr', t.extensions.refactoring.refactors, 'Telescope refactoring actions', 'v')
