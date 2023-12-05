@@ -234,9 +234,6 @@ local plugins = {
   -- files browsing
   { 'is0n/fm-nvim', config = c('fm') },
 
-  -- Browser
-  { 'glacambre/firenvim', build = function() vim.fn['firenvim#install'](0) end },
-
   -- Project management
   { 'cljoly/telescope-repo.nvim' },
   { 'airblade/vim-rooter', config = c('rooter') },
