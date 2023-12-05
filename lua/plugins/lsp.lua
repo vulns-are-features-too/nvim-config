@@ -190,10 +190,7 @@ lsp.lua_ls.setup({
 -- Markdown
 lsp.marksman.setup({
   capabilities = capabilities,
-  on_attach = function()
-    require('lang.markdown')
-    on_attach()
-  end,
+  on_attach = on_attach,
 })
 
 -- PHP
