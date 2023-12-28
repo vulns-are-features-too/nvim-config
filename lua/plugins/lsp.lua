@@ -6,6 +6,10 @@ local function nmap(key, target, desc) vim.keymap.set('n', key, target, { remap 
 
 local function nvmap(key, target, desc) vim.keymap.set({ 'n', 'v' }, key, target, { remap = false, desc = desc }) end
 
+local function toggle_inlay_hints()
+  vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled(nil))
+end
+
 -- keymap targets
 local k_actions = vim.lsp.buf.code_action
 local k_rename = vim.lsp.buf.rename
@@ -28,7 +32,7 @@ local function setup_keymaps()
   nmap('gt', vim.lsp.buf.type_definition, 'Go to type definition')
   nmap('<space>rr', k_rename, 'Rename')
   nvmap('<space>a', k_actions, 'Code action')
-  nmap('<leader>h', function() vim.lsp.inlay_hint(0, nil) end, 'Toggle inlay hints')
+  nmap('<leader>h', toggle_inlay_hints, 'Toggle inlay hints')
 end
 
 local function setup_saga()
@@ -213,7 +217,8 @@ else
 end
 
 -- Powershell
-pses_path = vim.fn.stdpath('data') .. '/mason/packages/packages/powershell-editor-services/PowerShellEditorServices/Start-EditorServices.ps1'
+local pses_path = vim.fn.stdpath('data')
+  .. '/mason/packages/packages/powershell-editor-services/PowerShellEditorServices/Start-EditorServices.ps1'
 lsp.powershell_es.setup({
   capabilities = capabilities,
   on_attach = on_attach,
