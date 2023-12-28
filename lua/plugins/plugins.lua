@@ -91,7 +91,6 @@ local plugins = {
   },
   { 'cbochs/portal.nvim', config = c('portal') },
   { 'ggandor/leap.nvim', config = c('leap') },
-  { 'junegunn/vim-slash' },
   { 'unblevable/quick-scope' },
   -- Editing
   { 'ChocolateOverflow/toggle_words.vim', config = c('toggle_words') },
