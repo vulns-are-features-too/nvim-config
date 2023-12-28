@@ -6,4 +6,3 @@ end
 req('rust')
 req('go')
 req('java')
-req('markdown')
