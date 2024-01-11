@@ -227,7 +227,7 @@ local plugins = {
   },
 
   -- Markdown, LaTeX, and text
-  { 'dkarter/bullets.vim', ft = { 'markdown', 'plaintex', 'text' }, config = c('bullets') },
+  { 'dkarter/bullets.vim', ft = { 'markdown' }, config = c('bullets') },
 
   -- files browsing
   { 'stevearc/oil.nvim', config = c('oil') },

@@ -1,7 +1,7 @@
 local g = vim.g
 local map = vim.keymap.set
 
-g.bullets_enabled_file_types = { 'markdown', 'text', 'gitcommit' }
+g.bullets_enabled_file_types = { 'markdown' }
 g.bullets_set_mappings = false
 g.bullets_pad_right = false
 
