@@ -146,6 +146,8 @@ nmap('y]', '"+yi{')
 nmap('y"', '"+yi"')
 nmap("y'", [["+yi']])
 nmap('y`', '"+yi`')
+-- yank current file path to clipboard
+nmap('<space>yp', '<Cmd>call setreg("+", expand("%:p"))<CR>')
 -- system keyboard put (<space>p is already for plugins)
 nmap('yp', '"+p')
 nmap('yP', '"+P')
