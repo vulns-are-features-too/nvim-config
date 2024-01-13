@@ -186,10 +186,6 @@ local plugins = {
   { 'lewis6991/gitsigns.nvim', config = c('gitsigns') },
   { 'tpope/vim-fugitive' },
 
-  -- Building & running code
-  { 'michaelb/sniprun', build = 'bash ./install.sh', enabled = is_linux, config = c('sniprun') },
-  { 'CRAG666/code_runner.nvim', dependencies = 'nvim-lua/plenary.nvim', config = c('code_runner') },
-
   -- testing
   {
     'https://github.com/nvim-neotest/neotest',
