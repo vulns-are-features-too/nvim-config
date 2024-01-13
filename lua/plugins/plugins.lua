@@ -226,6 +226,9 @@ local plugins = {
     ft = { 'sql', 'mysql', 'plsql' },
   },
 
+  -- jq
+  { 'jrop/jq.nvim', ft = 'json' },
+
   -- Markdown, LaTeX, and text
   { 'dkarter/bullets.vim', ft = { 'markdown' }, config = c('bullets') },
 
