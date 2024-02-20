@@ -157,8 +157,8 @@ nmap('qP', 'O<C-r>+<Esc>')
 nvmap('qd', '"_d')
 nvmap('qc', '"_c')
 
--- search non-ascii characters (C-/)
-nmap('<C-_>', '/[^\\x00-\\x7F]<CR>')
+-- search non-ascii characters
+nmap('<C-/>', '/[^\\x00-\\x7F]<CR>')
 
 -- <++> as a placeholder
 nmap('<space><backspace>', '/<++><CR>ca<')
