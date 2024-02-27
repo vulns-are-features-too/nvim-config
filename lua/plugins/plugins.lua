@@ -206,12 +206,6 @@ local plugins = {
   { 'rust-lang/rust.vim' },
   { 'simrat39/rust-tools.nvim' },
 
-  -- Go
-  { 'fatih/vim-go', ft = 'go', build = ':GoUpdateBinaries' },
-  -- TODO: check out
-  -- ('ray-x/go.nvim')
-  -- ('olexsmir/gopher.nvim')
-
   -- SQL
   {
     'tpope/vim-dadbod',

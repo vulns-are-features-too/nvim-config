@@ -6,5 +6,3 @@ g.go_highlight_functions = 1
 g.go_highlight_function_calls = 1
 g.go_highlight_extra_types = 1
 g.go_metalinter_enabled = { 'vet', 'golint', 'errcheck' }
-
-vim.keymap.set('n', '<space>R', ':GoRename<CR>', { buffer = true, remap = false, silent = true })

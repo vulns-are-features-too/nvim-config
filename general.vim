@@ -38,6 +38,7 @@ au BufRead,BufNewFile *.desktop,*.service set filetype=dosini
 au BufRead,BufNewFile *.http,*.req set filetype=http
 au BufRead,BufNewFile *.jq set filetype=jq
 au BufRead,BufNewFile *.opml set filetype=html
+au BufRead,BufNewFile *.templ set filetype=templ
 au BufRead,BufNewFile fstab.* set filetype=fstab
 au BufRead,BufNewFile sxhkdrc set filetype=sxhkdrc
 

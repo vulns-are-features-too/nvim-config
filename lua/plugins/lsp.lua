@@ -146,15 +146,14 @@ lsp.gopls.setup({
     on_attach()
   end,
 })
-
--- Haskell
-lsp.hls.setup({
+lsp.templ.setup({
   capabilities = capabilities,
-  on_attach = on_attach,
+  on_attach = function(_, _)
+    require('lang.go')
+    on_attach()
+  end,
 })
 
--- Java
--- TODO
 
 -- Javascript/Typescript
 lsp.eslint.setup({
