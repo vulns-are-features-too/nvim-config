@@ -10,8 +10,6 @@ null.setup({
     -- formatting
     fmt.gofmt,
     fmt.goimports,
-    fmt.jq.with({ extra_args = { '-S' } }),
-    fmt.latexindent,
     fmt.prettier,
     fmt.shellharden,
     fmt.shfmt.with({ extra_args = { '-i', '2', '-sr' } }),
@@ -19,8 +17,6 @@ null.setup({
     fmt.stylua,
 
     -- linting & diagnostics
-    diag.chktex,
-    diag.php,
     diag.phpstan,
     diag.revive,
     diag.sqlfluff.with({ extra_args = { '--dialect', 'mysql' } }),
@@ -35,6 +31,5 @@ null.setup({
     -- code actions
     act.gitsigns,
     act.refactoring,
-    act.shellcheck,
   },
 })
