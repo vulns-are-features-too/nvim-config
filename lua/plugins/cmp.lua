@@ -34,7 +34,6 @@ cmp.setup({
     { name = 'luasnip' },
     { name = 'nvim_lua' },
     { name = 'path' },
-    { name = 'cmdline' },
   },
 
   snippet = {
@@ -69,11 +68,18 @@ cmp.setup({
   end,
 })
 
+-- cmdline
 cmp.setup.cmdline(':!', {
   sources = {
     { name = 'cmdline' },
   },
 })
+cmp.setup.filetype({ 'sh', 'zsh' }, {
+  sources = {
+    { name = 'cmdline' },
+  },
+})
+
 
 -- SQL
 cmp.setup.filetype({ 'sql', 'mysql', 'psql' }, {
