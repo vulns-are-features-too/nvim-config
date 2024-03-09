@@ -26,12 +26,12 @@ cmp.setup({
   }),
 
   sources = {
-    { name = 'luasnip' },
     -- source from all buffers
     { name = 'buffer', option = { get_bufnrs = function() return vim.api.nvim_list_bufs() end } },
     { name = 'bufname' },
     { name = 'nvim_lsp_signature_help' },
     { name = 'nvim_lsp' },
+    { name = 'luasnip' },
     { name = 'nvim_lua' },
     { name = 'path' },
     { name = 'cmdline' },
