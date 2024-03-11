@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 local ts_repeat_move = require('nvim-treesitter.textobjects.repeatable_move')
 
 local function nmap(key, target) vim.keymap.set('n', key, target, { remap = false, silent = true }) end
