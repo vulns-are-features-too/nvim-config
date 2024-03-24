@@ -154,7 +154,10 @@ local plugins = {
   { 'mfussenegger/nvim-dap', config = c('dap') },
   { 'mfussenegger/nvim-dap-python' },
   { 'nvim-telescope/telescope-dap.nvim' },
-  { 'rcarriga/nvim-dap-ui' },
+  {
+    'rcarriga/nvim-dap-ui',
+    dependencies = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' },
+  },
   { 'theHamsta/nvim-dap-virtual-text' },
   { 'folke/trouble.nvim', config = c('trouble') },
 
@@ -190,6 +193,7 @@ local plugins = {
   {
     'https://github.com/nvim-neotest/neotest',
     dependencies = {
+      'nvim-neotest/nvim-nio',
       'nvim-lua/plenary.nvim',
       'nvim-treesitter/nvim-treesitter',
       'antoinemadec/FixCursorHold.nvim',
@@ -197,7 +201,12 @@ local plugins = {
     },
     config = c('neotest'),
   },
-  { 'rest-nvim/rest.nvim', ft = 'http', config = c('rest') },
+  {
+    'rest-nvim/rest.nvim',
+    ft = 'http',
+    dependencies = { 'luarocks.nvim' },
+    config = c('rest'),
+  },
 
   -- Shell
   { 'itspriddle/vim-shellcheck', ft = 'sh' },
