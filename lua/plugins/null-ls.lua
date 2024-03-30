@@ -18,7 +18,6 @@ null.setup({
 
     -- linting & diagnostics
     diag.phpstan,
-    diag.revive,
     diag.sqlfluff.with({ extra_args = { '--dialect', 'mysql' } }),
     diag.staticcheck,
     diag.zsh,
