@@ -111,6 +111,7 @@ map('<space>ft', f.tags, 'Telescope tags')
 map('<space>fw', f.grep_string, 'Telescope grep word under cursor')
 map('<space>fx', f.commands, 'Telescope commands', { 'n', 'v' })
 map('<space>fs', f.lsp_workspace_symbols, 'Telescope workspace symbols')
+map('<space>fc', f.lsp_incoming_calls, 'Telescope incoming calls')
 
 -- extensions
 map('<space>fl', t.extensions.repo.cached_list, 'Telescope files in repos')
@@ -120,6 +121,6 @@ map('<space>fy', t.extensions.neoclip.neoclip, 'Telescope yank ring')
 map('<space>fz', t.extensions.zoxide.list, 'Telescope zoxide jump list')
 
 -- my functions
-map('<space>fc', edit_config, 'Telescope edit config')
+map('<space>fC', edit_config, 'Telescope edit config')
 map('<space>ff', project_files, 'Telescope project files')
 map('<space>fX', edit_script, 'Telescope edit scripts')
