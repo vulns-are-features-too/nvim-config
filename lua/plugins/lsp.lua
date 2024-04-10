@@ -6,9 +6,7 @@ local function nmap(key, target, desc) vim.keymap.set('n', key, target, { remap 
 
 local function nvmap(key, target, desc) vim.keymap.set({ 'n', 'v' }, key, target, { remap = false, desc = desc }) end
 
-local function toggle_inlay_hints()
-  vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled(nil))
-end
+local function toggle_inlay_hints() vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled(nil)) end
 
 -- keymap targets
 local k_actions = vim.lsp.buf.code_action
@@ -92,11 +90,13 @@ end
 
 local function setup_signature()
   local ok, sig = pcall(require, 'lsp_signature')
-  if ok then sig.setup({
-    bind = true,
-    hint_prefix = '!',
-    extra_trigger_chars = { '(', ',' },
-  }) end
+  if ok then
+    sig.setup({
+      bind = true,
+      hint_prefix = '!',
+      extra_trigger_chars = { '(', ',' },
+    })
+  end
 end
 
 local function setup_vtypes()
@@ -133,9 +133,39 @@ lsp.omnisharp.setup({
   handlers = {
     ['textDocument/definition'] = require('omnisharp_extended').handler,
   },
-  enable_roslyn_analyzers = true,
-  organize_imports_on_format = true,
-  enable_import_completion = true,
+  settings = {
+    FormattingOptions = {
+      -- Enables support for reading code style, naming convention and analyzer
+      -- settings from .editorconfig.
+      EnableEditorConfigSupport = true,
+      -- Specifies whether 'using' directives should be grouped and sorted during
+      -- document formatting.
+      OrganizeImports = true,
+    },
+    MsBuild = {
+      -- If true, MSBuild project system will only load projects for files that
+      -- were opened in the editor. This setting is useful for big C# codebases
+      -- and allows for faster initialization of code navigation features only
+      -- for projects that are relevant to code that is being edited. With this
+      -- setting enabled OmniSharp may load fewer projects and may thus display
+      -- incomplete reference lists for symbols.
+      LoadProjectsOnDemand = true,
+    },
+    RoslynExtensionsOptions = {
+      -- Enables support for roslyn analyzers, code fixes and rulesets.
+      EnableAnalyzersSupport = true,
+      -- Enables support for showing unimported types and unimported extension
+      -- methods in completion lists. When committed, the appropriate using
+      -- directive will be added at the top of the current file. This option can
+      -- have a negative impact on initial completion responsiveness,
+      -- particularly for the first few completion sessions after opening a
+      -- solution.
+      EnableImportCompletion = true,
+      -- Only run analyzers against open files when 'enableRoslynAnalyzers' is
+      -- true
+      AnalyzeOpenDocumentsOnly = nil,
+    },
+  },
 })
 
 -- Go
@@ -153,7 +183,6 @@ lsp.templ.setup({
     on_attach()
   end,
 })
-
 
 -- Javascript/Typescript
 lsp.eslint.setup({
@@ -217,7 +246,7 @@ end
 
 -- Powershell
 local pses_path = vim.fn.stdpath('data')
-  .. '/mason/packages/packages/powershell-editor-services/PowerShellEditorServices/Start-EditorServices.ps1'
+    .. '/mason/packages/packages/powershell-editor-services/PowerShellEditorServices/Start-EditorServices.ps1'
 lsp.powershell_es.setup({
   capabilities = capabilities,
   on_attach = on_attach,
