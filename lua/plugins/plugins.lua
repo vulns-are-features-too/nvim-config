@@ -58,9 +58,6 @@ local plugins = {
   { 'nvimtools/none-ls.nvim', config = c('null-ls') },
   { 'echasnovski/mini.align', config = function() require('mini.align').setup() end },
 
-  -- nvim config
-  { 'folke/neodev.nvim', ft = 'lua', config = c('neodev') },
-
   -- General UI
   { 'nvim-tree/nvim-web-devicons' },
   {
