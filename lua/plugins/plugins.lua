@@ -141,7 +141,6 @@ local plugins = {
     dependencies = { 'kkharji/sqlite.lua' },
     config = c('neoclip'),
   },
-  { 'tversteeg/registers.nvim' },
 
   -- Debugging
   { 'mfussenegger/nvim-dap', config = c('dap') },
