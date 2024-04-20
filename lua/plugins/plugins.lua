@@ -200,9 +200,6 @@ local plugins = {
     },
   },
 
-  -- Shell
-  { 'itspriddle/vim-shellcheck', ft = 'sh' },
-
   -- Rust
   { 'rust-lang/rust.vim' },
   { 'simrat39/rust-tools.nvim' },
