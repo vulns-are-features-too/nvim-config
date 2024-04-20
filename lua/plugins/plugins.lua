@@ -103,7 +103,6 @@ local plugins = {
   },
   { 'wellle/targets.vim' },
   -- Misc
-  { 'max397574/better-escape.nvim', config = c('better-escape') },
   { 'kevinhwang91/nvim-hlslens', config = c('hlslens') },
 
   -- telescope
