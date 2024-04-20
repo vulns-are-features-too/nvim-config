@@ -118,9 +118,6 @@ local plugins = {
   },
   { 'jvgrootveld/telescope-zoxide' },
 
-  -- goto-preview
-  { 'rmagatti/goto-preview', config = c('preview') },
-
   -- commenting
   { 'numToStr/Comment.nvim', config = c('comment') },
   { 'JoosepAlviste/nvim-ts-context-commentstring' },
