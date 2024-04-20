@@ -60,7 +60,6 @@ local plugins = {
 
   -- nvim config
   { 'folke/neodev.nvim', ft = 'lua', config = c('neodev') },
-  { 'rafcamlet/nvim-luapad', ft = 'lua' },
 
   -- General UI
   { 'nvim-tree/nvim-web-devicons' },
