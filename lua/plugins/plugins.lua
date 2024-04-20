@@ -83,11 +83,6 @@ local plugins = {
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = c('harpoon'),
   },
-  {
-    'abecodes/tabout.nvim',
-    dependencies = { 'nvim-treesitter' },
-    config = c('tabout'),
-  },
   { 'cbochs/portal.nvim', config = c('portal') },
   { 'ggandor/leap.nvim', config = c('leap') },
   { 'unblevable/quick-scope' },
