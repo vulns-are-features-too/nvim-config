@@ -94,7 +94,6 @@ local plugins = {
   { 'unblevable/quick-scope' },
   -- Editing
   { 'ChocolateOverflow/toggle_words.vim', config = c('toggle_words') },
-  { 'Wansmer/sibling-swap.nvim', config = c('sibling-swap') },
   { 'Wansmer/treesj', config = c('treesj') },
   { 'gbprod/substitute.nvim', config = c('substitute') },
   { 'sQVe/sort.nvim', config = c('sort') },
