@@ -231,9 +231,6 @@ local plugins = {
   -- terminal integration
   { 'akinsho/toggleterm.nvim', version = '*', config = c('toggleterm') },
 
-  -- Misc files
-  { 'NoahTheDuke/vim-just' },
-
   -- Misc
   { 'axieax/urlview.nvim', config = c('urlview') },
   { 'ethanholz/nvim-lastplace', config = c('lastplace') },
