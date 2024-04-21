@@ -64,6 +64,7 @@ local plugins = {
     'morhetz/gruvbox',
     lazy = false,
     priority = 1000,
+    config = c('gruvbox'),
   },
   {
     'nvim-lualine/lualine.nvim',

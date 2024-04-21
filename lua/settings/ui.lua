@@ -5,13 +5,6 @@ local function au(event, func) vim.api.nvim_create_autocmd(event, { pattern = '*
 -- highlight on yank
 au('TextYankPost', function() vim.highlight.on_yank({ timeout = 300 }) end)
 
--- theme
-vim.g.gruvbox_italic = 1
-vim.g.gruvbox_invert_signs = 1
-vim.g.gruvbox_contrast_dark = 'hard'
-vim.g.gruvbox_invert_selection = 0
-vim.cmd.colorscheme 'gruvbox'
-
 -- quick-scope
 hl('QuickScopePrimary', { fg = '#afff5f', underline = true, ctermfg = 155, cterm = { underline = true } })
 hl('QuickScopeSecondary', { fg = '#5fffff', underline = true, ctermfg = 81, cterm = { underline = true } })
