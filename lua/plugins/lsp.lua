@@ -90,13 +90,11 @@ end
 
 local function setup_signature()
   local ok, sig = pcall(require, 'lsp_signature')
-  if ok then
-    sig.setup({
-      bind = true,
-      hint_prefix = '!',
-      extra_trigger_chars = { '(', ',' },
-    })
-  end
+  if ok then sig.setup({
+    bind = true,
+    hint_prefix = '!',
+    extra_trigger_chars = { '(', ',' },
+  }) end
 end
 
 local function setup_vtypes()
@@ -184,6 +182,15 @@ lsp.templ.setup({
   end,
 })
 
+-- HTML/HTMX
+lsp.html.setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+})
+lsp.htmx.setup({
+  capabilities = capabilities,
+})
+
 -- Javascript/Typescript
 lsp.eslint.setup({
   capabilities = capabilities,
@@ -246,7 +253,7 @@ end
 
 -- Powershell
 local pses_path = vim.fn.stdpath('data')
-    .. '/mason/packages/packages/powershell-editor-services/PowerShellEditorServices/Start-EditorServices.ps1'
+  .. '/mason/packages/packages/powershell-editor-services/PowerShellEditorServices/Start-EditorServices.ps1'
 lsp.powershell_es.setup({
   capabilities = capabilities,
   on_attach = on_attach,
