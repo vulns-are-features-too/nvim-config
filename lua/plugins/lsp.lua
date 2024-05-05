@@ -1,6 +1,7 @@
 local lsp = require('lspconfig')
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local is_linux = vim.fn.has('linux') == 1 or vim.fn.has('unix') == 1
+local on_attach_ran = false
 
 local function nmap(key, target, desc) vim.keymap.set('n', key, target, { remap = false, desc = desc }) end
 
@@ -103,10 +104,14 @@ local function setup_vtypes()
 end
 
 local function on_attach(_, _)
+  if on_attach_ran then
+    return
+  end
   setup_saga()
   setup_signature()
   setup_vtypes()
   setup_keymaps()
+  on_attach_ran = true
 end
 
 capabilities.offsetEncoding = { 'utf-16' }
