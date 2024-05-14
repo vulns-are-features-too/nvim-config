@@ -218,6 +218,9 @@ local plugins = {
   -- Markdown, LaTeX, and text
   { 'dkarter/bullets.vim', ft = { 'markdown' }, config = c('bullets') },
 
+  -- plantuml
+  { 'aklt/plantuml-syntax' },
+
   -- files browsing
   { 'stevearc/oil.nvim', config = c('oil') },
 

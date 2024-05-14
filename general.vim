@@ -41,6 +41,7 @@ au BufRead,BufNewFile *.opml set filetype=html
 au BufRead,BufNewFile *.templ set filetype=templ
 au BufRead,BufNewFile fstab.* set filetype=fstab
 au BufRead,BufNewFile sxhkdrc set filetype=sxhkdrc
+au BufRead,BufNewFile *.uml set filetype=plantuml
 
 " filetype-specific settings
 au Filetype plaintex runtime settings/latex.vim
