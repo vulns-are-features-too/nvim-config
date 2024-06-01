@@ -1,7 +1,7 @@
 local t = require('telescope')
 local act = require('telescope.actions')
 local f = require('telescope.builtin') -- builtin functions
-local trouble = require('trouble.providers.telescope')
+local trouble = require('trouble.sources.telescope')
 local ext = t.load_extension
 local function map(key, target, desc, mode)
   vim.keymap.set(mode or 'n', key, target, { remap = false, silent = true, desc = desc })
@@ -36,15 +36,15 @@ t.setup({
         ['<C-j>'] = act.select_horizontal,
         ['<C-k>'] = act.select_vertical,
         ['<C-u>'] = false,
-        ['<C-t>'] = trouble.smart_open_with_trouble,
+        ['<C-t>'] = trouble.open,
       },
       n = {
         ['<C-j>'] = act.select_horizontal,
         ['<space>j'] = act.select_horizontal,
         ['<C-k>'] = act.select_vertical,
         ['<space>k'] = act.select_vertical,
-        ['<C-t>'] = trouble.smart_open_with_trouble,
-        ['<space>t'] = trouble.smart_open_with_trouble,
+        ['<C-t>'] = trouble.open,
+        ['<space>t'] = trouble.open,
       },
     },
 
