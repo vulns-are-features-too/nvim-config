@@ -86,10 +86,7 @@ cmp.setup.filetype({ 'sql', 'mysql', 'psql' }, {
   sources = {
     { name = 'vim-dadbod-completion' },
     { name = 'buffer', option = { get_bufnrs = function() return vim.api.nvim_list_bufs() end } },
-    { name = 'luasnip' },
-    { name = 'nvim_lsp_signature_help' },
     { name = 'nvim_lsp' },
-    { name = 'path' },
   },
 })
 
