@@ -1,7 +1,7 @@
 ---@diagnostic disable: missing-fields
 local ts_repeat_move = require('nvim-treesitter.textobjects.repeatable_move')
 
-local function nmap(key, target) vim.keymap.set('n', key, target, { remap = false, silent = true }) end
+local function nmap(key, target, opts) vim.keymap.set('n', key, target, opts) end
 
 vim.g.skip_ts_context_commentstring_module = true
 
@@ -136,10 +136,10 @@ require('ts_context_commentstring').setup({enable_autocmd = false})
 vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
 
 -- Repeat movement with ; and ,
-nmap(';', ts_repeat_move.repeat_last_move_next)
-nmap(',', ts_repeat_move.repeat_last_move_previous)
-nmap('f', ts_repeat_move.builtin_f)
-nmap('F', ts_repeat_move.builtin_F)
-nmap('t', ts_repeat_move.builtin_t)
-nmap('T', ts_repeat_move.builtin_T)
-nmap('<leader>ts', '<Cmd>TSPlaygroundToggle<CR>')
+nmap('f', ts_repeat_move.builtin_f_expr, { expr = true })
+nmap('F', ts_repeat_move.builtin_F_expr, { expr = true })
+nmap('t', ts_repeat_move.builtin_t_expr, { expr = true })
+nmap('T', ts_repeat_move.builtin_T_expr, { expr = true })
+nmap(';', ts_repeat_move.repeat_last_move_next, { remap = false, silent = true })
+nmap(',', ts_repeat_move.repeat_last_move_previous, { remap = false, silent = true })
+nmap('<leader>ts', '<Cmd>TSPlaygroundToggle<CR>', { remap = false, silent = true })
