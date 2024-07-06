@@ -11,6 +11,7 @@ HIDPS
 IDOR
 IDPS
 JSON
+JWT
 LDAP
 LFI
 LLM
@@ -102,6 +103,8 @@ iot
 javascript
 jinja
 jq
+json
+jwt
 keycode
 keycodes
 keymap
@@ -110,6 +113,7 @@ lang
 ldap
 lfi
 linux
+lstlisting
 lua
 metasploit
 microservice
@@ -168,6 +172,7 @@ stackoverflow
 steganography
 steganograpy
 stego
+struct
 sudo
 tcp
 thm
