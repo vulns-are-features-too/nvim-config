@@ -1,5 +1,5 @@
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
   vim.fn.system({
     'git',
     'clone',
@@ -13,7 +13,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 local lazy = require('lazy')
 
-local is_linux = vim.loop.os_uname().sysname == 'Linux'
+local is_linux = vim.uv.os_uname().sysname == 'Linux'
 local function nmap(key, target, desc) vim.keymap.set('n', key, target, { remap = false, silent = true, desc = desc }) end
 
 local function c(plugin)
