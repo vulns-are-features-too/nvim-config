@@ -8,14 +8,14 @@ local function nmap(key, target, desc) vim.keymap.set('n', key, target, { remap 
 
 local function nvmap(key, target, desc) vim.keymap.set({ 'n', 'v' }, key, target, { remap = false, desc = desc }) end
 
-local function toggle_inlay_hints() vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled(nil)) end
+local function toggle_inlay_hints() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end
 
 -- keymap targets
 local k_actions = vim.lsp.buf.code_action
 local k_rename = vim.lsp.buf.rename
 local k_diagnostics = vim.diagnostic.open_float
-local k_diag_next = vim.diagnostic.goto_next
-local k_diag_prev = vim.diagnostic.goto_prev
+local k_diag_next = function() vim.diagnostic.jump({count = 1}) end
+local k_diag_prev = function() vim.diagnostic.jump({count = -1}) end
 local k_hover = vim.lsp.buf.hover
 
 local function setup_keymaps()
