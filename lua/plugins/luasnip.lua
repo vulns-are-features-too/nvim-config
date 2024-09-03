@@ -11,10 +11,10 @@ luasnip.config.set_config({
 })
 
 -- navigate snippets
-map('<C-j>', function()
+map('<C-l>', function()
   if luasnip.expand_or_jumpable() then luasnip.expand_or_jump() end
 end, 'Next snippet')
-map('<C-k>', function()
+map('<C-h>', function()
   if luasnip.jumpable(-1) then luasnip.jump(-1) end
 end, 'Previous snippet')
 -- select option from list
