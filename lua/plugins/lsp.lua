@@ -2,6 +2,7 @@ local lsp = require('lspconfig')
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local is_linux = vim.fn.has('linux') == 1 or vim.fn.has('unix') == 1
 local on_attach_ran = false
+local g = vim.g
 
 local function nmap(key, target, desc) vim.keymap.set('n', key, target, { remap = false, desc = desc }) end
 
@@ -91,11 +92,13 @@ end
 
 local function setup_signature()
   local ok, sig = pcall(require, 'lsp_signature')
-  if ok then sig.setup({
-    bind = true,
-    hint_prefix = '!',
-    extra_trigger_chars = { '(', ',' },
-  }) end
+  if ok then
+    sig.setup({
+      bind = true,
+      hint_prefix = '!',
+      extra_trigger_chars = { '(', ',' },
+    })
+  end
 end
 
 local function setup_vtypes()
@@ -104,9 +107,7 @@ local function setup_vtypes()
 end
 
 local function on_attach(_, _)
-  if on_attach_ran then
-    return
-  end
+  if on_attach_ran then return end
   setup_saga()
   setup_signature()
   setup_vtypes()
@@ -175,16 +176,18 @@ lsp.omnisharp.setup({
 lsp.gopls.setup({
   capabilities = capabilities,
   on_attach = function(_, _)
-    require('lang.go')
+    g.go_fmt_command = 'goimports'
+    g.go_highlight_types = 1
+    g.go_highlight_fields = 1
+    g.go_highlight_functions = 1
+    g.go_highlight_function_calls = 1
+    g.go_highlight_extra_types = 1
+    g.go_metalinter_enabled = { 'vet', 'golint', 'errcheck' }
     on_attach()
   end,
 })
 lsp.templ.setup({
   capabilities = capabilities,
-  on_attach = function(_, _)
-    require('lang.go')
-    on_attach()
-  end,
 })
 
 -- HTML/HTMX
@@ -258,7 +261,7 @@ end
 
 -- Powershell
 local pses_path = vim.fn.stdpath('data')
-  .. '/mason/packages/packages/powershell-editor-services/PowerShellEditorServices/Start-EditorServices.ps1'
+    .. '/mason/packages/packages/powershell-editor-services/PowerShellEditorServices/Start-EditorServices.ps1'
 lsp.powershell_es.setup({
   capabilities = capabilities,
   on_attach = on_attach,
