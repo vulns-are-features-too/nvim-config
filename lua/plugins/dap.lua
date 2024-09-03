@@ -28,30 +28,30 @@ dap.configurations.cpp = dap.configurations.rust
 
 ---- bash ----
 dap.adapters.bashdb = {
-  type = 'executable';
-  command = vim.fn.stdpath("data") .. '/mason/packages/bash-debug-adapter/bash-debug-adapter';
-  name = 'bashdb';
+  type = 'executable',
+  command = vim.fn.stdpath('data') .. '/mason/packages/bash-debug-adapter/bash-debug-adapter',
+  name = 'bashdb',
 }
 dap.configurations.sh = {
   {
-    type = 'bashdb';
-    request = 'launch';
-    name = "Launch file";
-    showDebugOutput = true;
-    pathBashdb = vim.fn.stdpath("data") .. '/mason/packages/bash-debug-adapter/extension/bashdb_dir/bashdb';
-    pathBashdbLib = vim.fn.stdpath("data") .. '/mason/packages/bash-debug-adapter/extension/bashdb_dir';
-    trace = true;
-    file = "${file}";
-    program = "${file}";
-    cwd = '${workspaceFolder}';
-    pathCat = "cat";
-    pathBash = "/bin/bash";
-    pathMkfifo = "mkfifo";
-    pathPkill = "pkill";
-    args = {};
-    env = {};
-    terminalKind = "integrated";
-  }
+    type = 'bashdb',
+    request = 'launch',
+    name = 'Launch file',
+    showDebugOutput = true,
+    pathBashdb = vim.fn.stdpath('data') .. '/mason/packages/bash-debug-adapter/extension/bashdb_dir/bashdb',
+    pathBashdbLib = vim.fn.stdpath('data') .. '/mason/packages/bash-debug-adapter/extension/bashdb_dir',
+    trace = true,
+    file = '${file}',
+    program = '${file}',
+    cwd = '${workspaceFolder}',
+    pathCat = 'cat',
+    pathBash = '/bin/bash',
+    pathMkfifo = 'mkfifo',
+    pathPkill = 'pkill',
+    args = {},
+    env = {},
+    terminalKind = 'integrated',
+  },
 }
 
 ---- DAP UI ----
@@ -117,9 +117,10 @@ ui.setup({
   },
 })
 
-dap.listeners.after.event_initialized['dapui_config'] = function() ui.open() end
-dap.listeners.before.event_terminated['dapui_config'] = function() ui.close() end
-dap.listeners.before.event_exited['dapui_config'] = function() ui.close() end
+dap.listeners.before.attach.dapui_config = ui.open
+dap.listeners.before.launch.dapui_config = ui.open
+dap.listeners.before.event_terminated.dapui_config = ui.close
+dap.listeners.before.event_exited.dapui_config = ui.close
 
 ---- Virtual text ----
 require('nvim-dap-virtual-text').setup({
