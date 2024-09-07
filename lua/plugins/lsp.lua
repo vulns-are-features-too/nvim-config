@@ -203,7 +203,7 @@ lsp.htmx.setup({
 lsp.eslint.setup({
   capabilities = capabilities,
 })
-lsp.tsserver.setup({
+lsp.ts_ls.setup({
   capabilities = capabilities,
   on_attach = on_attach,
 })
