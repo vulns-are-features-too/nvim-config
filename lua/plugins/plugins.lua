@@ -85,7 +85,7 @@ local plugins = {
   { 'ggandor/leap.nvim', config = c('leap') },
   { 'unblevable/quick-scope' },
   -- Editing
-  { 'ChocolateOverflow/toggle_words.vim', config = c('toggle_words') },
+  { 'vulns-are-features-too/toggle_words.vim', config = c('toggle_words') },
   { 'Wansmer/treesj', config = c('treesj') },
   { 'gbprod/substitute.nvim', config = c('substitute') },
   { 'sQVe/sort.nvim', config = c('sort') },
@@ -152,7 +152,7 @@ local plugins = {
   { 'folke/trouble.nvim', config = c('trouble') },
 
   -- Autocomplete & Snippets
-  { 'ChocolateOverflow/vim-snippets' }, -- my snippets
+  { 'vulns-are-features-too/vim-snippets' }, -- my snippets
   { 'danymat/neogen', config = c('neogen') }, -- generate doc comments for classes, functions, and types
   {
     'hrsh7th/nvim-cmp',
