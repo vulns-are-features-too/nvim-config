@@ -26,7 +26,7 @@ local plugins = {
     'neovim/nvim-lspconfig',
     dependencies = {
       { 'arkav/lualine-lsp-progress' },
-      { 'glepnir/lspsaga.nvim', event = 'LspAttach', dependencies = 'nvim-tree/nvim-web-devicons' },
+      { 'nvimdev/lspsaga.nvim', event = 'LspAttach', dependencies = 'nvim-tree/nvim-web-devicons' },
     },
     config = c('lsp'),
   },
