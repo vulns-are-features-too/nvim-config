@@ -1,4 +1,3 @@
-local lsp = require('lspconfig')
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local is_linux = vim.fn.has('linux') == 1 or vim.fn.has('unix') == 1
 local on_attach_ran = false
@@ -9,6 +8,11 @@ local function nmap(key, target, desc) vim.keymap.set('n', key, target, { remap 
 local function nvmap(key, target, desc) vim.keymap.set({ 'n', 'v' }, key, target, { remap = false, desc = desc }) end
 
 local function toggle_inlay_hints() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end
+
+local function setup(server, config)
+  vim.lsp.config(server, config)
+  vim.lsp.enable(server)
+end
 
 -- keymap targets
 local k_actions = vim.lsp.buf.code_action
@@ -118,19 +122,19 @@ end
 capabilities.offsetEncoding = { 'utf-16' }
 
 -- Bash
-lsp.bashls.setup({
+setup('bashls', {
   capabilities = capabilities,
   on_attach = on_attach,
 })
 
 -- C/C++
-lsp.clangd.setup({
+setup('clangd', {
   capabilities = capabilities,
   on_attach = on_attach,
 })
 
 -- C#
-lsp.omnisharp.setup({
+setup('omnisharp', {
   capabilities = capabilities,
   on_attach = on_attach,
   cmd = { 'dotnet', vim.fn.stdpath('data') .. '/mason/packages/omnisharp/libexec/OmniSharp.dll' },
@@ -173,7 +177,7 @@ lsp.omnisharp.setup({
 })
 
 -- Go
-lsp.gopls.setup({
+setup('gopls', {
   capabilities = capabilities,
   on_attach = function(_, _)
     g.go_fmt_command = 'goimports'
@@ -186,36 +190,36 @@ lsp.gopls.setup({
     on_attach()
   end,
 })
-lsp.templ.setup({
+setup('templ', {
   capabilities = capabilities,
 })
 
 -- HTML/HTMX
-lsp.html.setup({
+setup('html', {
   capabilities = capabilities,
   on_attach = on_attach,
 })
-lsp.htmx.setup({
+setup('htmx', {
   capabilities = capabilities,
 })
 
 -- Javascript/Typescript
-lsp.eslint.setup({
+setup('eslint', {
   capabilities = capabilities,
 })
-lsp.ts_ls.setup({
+setup('ts_ls', {
   capabilities = capabilities,
   on_attach = on_attach,
 })
 
 -- JSON
-lsp.jsonls.setup({
+setup('jsonls', {
   capabilities = capabilities,
   on_attach = on_attach,
 })
 
 -- Lua
-lsp.lua_ls.setup({
+setup('lua_ls', {
   capabilities = capabilities,
   on_attach = on_attach,
   settings = {
@@ -235,15 +239,15 @@ lsp.lua_ls.setup({
 })
 
 -- Markdown
-lsp.marksman.setup({
+setup('marksman', {
   capabilities = capabilities,
   on_attach = on_attach,
 })
 
 -- PHP
-lsp.psalm.setup({})
+setup('psalm', {})
 if is_linux then
-  lsp.phpactor.setup({
+  setup('phpactor' ,{
     init_options = {
       ['language_server_phpstan.enabled'] = true,
       ['language_server_psalm.enabled'] = true,
@@ -253,7 +257,7 @@ if is_linux then
   })
 else
   -- phpactor isn't available on Windows so I'm stuck with this proprietary thing for now
-  lsp.intelephense.setup({
+  setup('intelephense', {
     capabilities = capabilities,
     on_attach = on_attach,
   })
@@ -262,14 +266,14 @@ end
 -- Powershell
 local pses_path = vim.fn.stdpath('data')
     .. '/mason/packages/packages/powershell-editor-services/PowerShellEditorServices/Start-EditorServices.ps1'
-lsp.powershell_es.setup({
+setup('powershell_es', {
   capabilities = capabilities,
   on_attach = on_attach,
   cmd = { 'pwsh', '-NoLogo', '-NoProfile', '-Command', pses_path },
 })
 
 -- Python
-lsp.pylsp.setup({
+setup('pylsp', {
   capabilities = capabilities,
   on_attach = function()
     require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
@@ -307,25 +311,25 @@ rt.setup({
 })
 
 -- SQL
-lsp.sqlls.setup({
+setup('sqlls', {
   capabilities = capabilities,
   on_attach = on_attach,
 })
 
 -- LaTeX
-lsp.texlab.setup({
+setup('texlab', {
   capabilities = capabilities,
   on_attach = on_attach,
 })
 
 -- Vim
-lsp.vimls.setup({
+setup('vimls', {
   capabilities = capabilities,
   on_attach = on_attach,
 })
 
 -- YAML
-lsp.yamlls.setup({
+setup('yamlls', {
   capabilities = capabilities,
   on_attach = on_attach,
 })
