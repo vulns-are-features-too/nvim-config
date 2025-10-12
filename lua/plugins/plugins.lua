@@ -48,7 +48,6 @@ local plugins = {
     dependencies = {
       { 'RRethy/nvim-treesitter-endwise' },
       { 'nvim-treesitter/nvim-treesitter-textobjects' },
-      { 'nvim-treesitter/playground' },
     },
     config = c('ts'),
     build = ':TSUpdate',
