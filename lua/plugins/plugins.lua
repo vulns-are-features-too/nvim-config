@@ -45,6 +45,8 @@ local plugins = {
   -- treesitter
   {
     'nvim-treesitter/nvim-treesitter',
+    branch = 'master',
+    lazy = false,
     dependencies = {
       { 'RRethy/nvim-treesitter-endwise' },
       { 'nvim-treesitter/nvim-treesitter-textobjects' },
