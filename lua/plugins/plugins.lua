@@ -111,7 +111,9 @@ local plugins = {
   { 'nvim-lua/popup.nvim' },
   {
     'nvim-telescope/telescope-fzf-native.nvim',
-    build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
+    -- using make instead of cmake due to
+    -- https://github.com/nvim-telescope/telescope-fzf-native.nvim/issues/120
+    build = 'make',
   },
   { 'jvgrootveld/telescope-zoxide' },
 
