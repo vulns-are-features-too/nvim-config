@@ -199,7 +199,11 @@ local plugins = {
 
   -- Rust
   { 'rust-lang/rust.vim' },
-  { 'simrat39/rust-tools.nvim' },
+  {
+    'mrcjkb/rustaceanvim',
+    version = '^6',
+    lazy = false,
+  },
 
   -- SQL
   {

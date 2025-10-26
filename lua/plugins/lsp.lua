@@ -292,23 +292,17 @@ setup('pylsp', {
 })
 
 -- Rust
-local rt = require('rust-tools') -- this sets up rust-analyzer, so don't re-init RA which would create conflict
-rt.setup({
+vim.g.rustaceanvim = {
+  tools = {},
   server = {
-    capabilities = capabilities,
-    on_attach = function()
-      on_attach()
-      rt.inlay_hints.enable()
-    end,
-  },
-  dap = {
-    adapter = {
-      type = 'executable',
-      command = '/usr/bin/lldb-vscode',
-      name = 'rt_lldb',
+    on_attach = on_attach,
+    default_settings = {
+      ['rust-analyzer'] = {
+      },
     },
   },
-})
+  dap = {},
+}
 
 -- SQL
 setup('sqlls', {
