@@ -1,0 +1,36 @@
+name: Security scan
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Install packages
+        run: sudo apt-get install --yes clamav-daemon clamav-freshclam
+      - name: Update clamav DB
+        run: |
+          set -euo pipefail
+          sudo systemctl stop clamav-freshclam.service
+          sudo freshclam
+      - name: Install neovim
+        run: |
+          set -euo pipefail
+          wget -O nvim https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage
+          chmod u+x nvim
+          ln -s ${{ github.workspace }} "$HOME/.config/nvim"
+      - name: Scan neovim executable
+        run: clamscan ./nvim
+      - name: Run neovim
+        run: |
+          set -euo pipefail
+          echo "vim.cmd(':q!')" >> ${{ github.workspace }}/init.lua
+          ./nvim --headless
+      - name: Scan neovim data
+        run: clamscan --recursive "$HOME/.local/share/nvim"
