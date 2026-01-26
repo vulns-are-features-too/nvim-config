@@ -1,0 +1,31 @@
+name: "Check IPs"
+description: "Check extracted IP addresses against a list of bad IPs"
+
+inputs:
+  extracted_ips_file:
+    description: 'File containing extracted IPs'
+    required: true
+  bad_ips_file:
+    description: 'Name of file containing bad IP addresses'
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Check for bad IP addresses
+      shell: bash
+      run: |
+        set -euo pipefail
+
+        if [[ -s '${{ inputs.bad_ips_file }}' ]]; then
+          echo 'No bad IP to check'
+          exit
+        fi
+
+        comm -12 '${{ inputs.extracted_ips_file }}' '${{ inputs.bad_ips_file }}' > matches.txt
+        bad_ips="$(wc -l matches.txt | cut -d' ' -f1)"
+        echo "$bad_ips bad IPs found"
+        if [[ "$bad_ips" != 0 ]]; then
+          cat matches.txt
+          exit 1
+        fi

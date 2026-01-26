@@ -10,29 +10,147 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+
+  nvim:
+    name: Download and run nvim
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
       - name: Install packages
-        run: sudo apt-get install --yes clamav-daemon clamav-freshclam
-      - name: Update clamav DB
-        run: |
-          set -euo pipefail
-          sudo systemctl stop clamav-freshclam.service
-          sudo freshclam
+        run: sudo apt-get install --yes tcpdump tshark
       - name: Install neovim
         run: |
           set -euo pipefail
           wget -O nvim https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage
           chmod u+x nvim
           ln -s ${{ github.workspace }} "$HOME/.config/nvim"
-      - name: Scan neovim executable
-        run: clamscan ./nvim
       - name: Run neovim
         run: |
           set -euo pipefail
           echo "vim.cmd(':q!')" >> ${{ github.workspace }}/init.lua
+          sudo tcpdump -U -q -i eth0 -w /tmp/tcpdump.pcap &
+          PID_TCPDUMP=$!
           ./nvim --headless
+          sleep 1s
+          sudo kill "$PID_TCPDUMP"
+      - name: Zip up nvim artifacts
+        run: zip --recurse-paths nvim-actifacts.zip ./nvim "$HOME/.config/nvim" "$HOME/.local/share/nvim"
+      - name: Upload nvim artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: nvim-actifacts
+          path: nvim-actifacts.zip
+      - name: Extract IP addresses
+        run: |
+          set -euo pipefail
+          local_ipv4_regex='(192\.168|172\.(1[6-9]|2[0-9]|3[0-1])|127|10)\.'
+          local_ipv6_regex='(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))'
+          tshark -r /tmp/tcpdump.pcap -E separator=, -T fields -e ip.dst -e ipv6.dst -Y 'not (ipv6.dst == fe80::/10 and ipv6.src == fe80::/10) and not (ip.dst == 192.168.0.0/16 and ip.src == 192.168.0.0/16) and not (ip.dst == 10.0.0.0/8 and ip.src==10.0.0.0/8) and not (eth.dst[0] & 1)' \
+            | tr -d '\\' \
+            | tr ',' '\n' \
+            | grep . \
+            | grep -Ev "^($local_ipv4_regex|$local_ipv6_regex)" \
+            | sort -u \
+            > ips.txt
+      - name: Upload IP addresses
+        uses: actions/upload-artifact@v4
+        with:
+          name: ips.txt
+          path: ips.txt
+
+  clamav:
+    name: ClamAV scan
+    runs-on: ubuntu-latest
+    needs: Nvim
+    steps:
+      - name: Install packages
+        run: sudo apt-get install --yes clamav-daemon clamav-freshclam
+      - name: Download nvim artifacts
+        uses: actions/download-artifact@v5
+        with:
+          name: nvim-actifacts
+      - name: Unzip nvim artifacts
+        run: unzip -d nvim-actifacts nvim-actifacts.zip
+      - name: Update clamav DB
+        run: |
+          set -euo pipefail
+          sudo systemctl stop clamav-freshclam.service
+          sudo freshclam
+      - name: Scan neovim executable
+        run: clamscan nvim-actifacts/nvim
+      - name: Scan neovim configs
+        run: clamscan --recursive nvim-actifacts/home/*/.config/nvim/
       - name: Scan neovim data
-        run: clamscan --recursive "$HOME/.local/share/nvim"
+        run: clamscan --recursive nvim-actifacts/home/*/.local/share/nvim/
+
+  cti_blocklist_de:
+    name: Check IPs against blocklist.de
+    runs-on: ubuntu-latest
+    needs: Nvim
+    steps:
+      - uses: actions/checkout@v6
+      - name: Download IP addresses
+        uses: actions/download-artifact@v5
+        with:
+          name: ips.txt
+      - name: Get bad IPs
+        run: curl --silent 'https://lists.blocklist.de/lists/strongips.txt' | sort > /tmp/blocklist-de.txt
+      - name: Check IPs
+        uses: ./.github/actions/check-ips
+        with:
+          extracted_ips_file: ips.txt
+          bad_ips_file: /tmp/blocklist-de.txt
+
+  cti_proofpoint:
+    name: Check IPs against Proofpoint Emerging Threats
+    runs-on: ubuntu-latest
+    needs: Nvim
+    steps:
+      - uses: actions/checkout@v6
+      - name: Download IP addresses
+        uses: actions/download-artifact@v5
+        with:
+          name: ips.txt
+      - name: Get bad IPs
+        run: curl --silent 'https://rules.emergingthreats.net/blockrules/compromised-ips.txt' | sort > /tmp/proofpoint-compromised-ips.txt
+      - name: Check IPs
+        uses: ./.github/actions/check-ips
+        with:
+          extracted_ips_file: ips.txt
+          bad_ips_file: /tmp/proofpoint-compromised-ips.txt
+
+  cti_threathive:
+    name: Check IPs against ThreatHive Blocklist
+    runs-on: ubuntu-latest
+    needs: Nvim
+    steps:
+      - uses: actions/checkout@v6
+      - name: Download IP addresses
+        uses: actions/download-artifact@v5
+        with:
+          name: ips.txt
+      - name: Get bad IPs
+        run: curl --silent 'https://threathive.net/hiveblocklist.txt' | sort > /tmp/threathive-blocklist.txt
+      - name: Check IPs
+        uses: ./.github/actions/check-ips
+        with:
+          extracted_ips_file: ips.txt
+          bad_ips_file: /tmp/threathive-blocklist.txt
+
+  cti_alienvault:
+    name: Check IPs against AlienVault
+    runs-on: ubuntu-latest
+    needs: Nvim
+    steps:
+      - uses: actions/checkout@v6
+      - name: Download IP addresses
+        uses: actions/download-artifact@v5
+        with:
+          name: ips.txt
+      - name: Get bad IPs
+        run: curl --silent 'http://reputation.alienvault.com/reputation.data' | cut -d'#' -f1 | sort > /tmp/alienvault.txt
+      - name: Check IPs
+        uses: ./.github/actions/check-ips
+        with:
+          extracted_ips_file: ips.txt
+          bad_ips_file: /tmp/alienvault.txt
