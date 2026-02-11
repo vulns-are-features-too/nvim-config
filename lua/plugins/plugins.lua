@@ -83,7 +83,7 @@ local plugins = {
     config = c('harpoon'),
   },
   { 'cbochs/portal.nvim', config = c('portal') },
-  { 'ggandor/leap.nvim', config = c('leap') },
+  { 'https://codeberg.org/andyg/leap.nvim.git', config = c('leap') },
   { 'unblevable/quick-scope' },
   -- Editing
   { 'vulns-are-features-too/toggle_words.vim', config = c('toggle_words') },
