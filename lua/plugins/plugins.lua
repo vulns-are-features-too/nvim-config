@@ -73,7 +73,6 @@ local plugins = {
     config = c('lualine'),
   },
   { 'rcarriga/nvim-notify', config = c('notify') },
-  { 'szw/vim-maximizer', config = c('maximizer') },
 
   -- Extending basic motions and editing
   -- Moving
@@ -82,7 +81,6 @@ local plugins = {
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = c('harpoon'),
   },
-  { 'cbochs/portal.nvim', config = c('portal') },
   { 'https://codeberg.org/andyg/leap.nvim.git', config = c('leap') },
   { 'unblevable/quick-scope' },
   -- Editing
@@ -110,14 +108,12 @@ local plugins = {
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = c('telescope'),
   },
-  { 'nvim-lua/popup.nvim' },
   {
     'nvim-telescope/telescope-fzf-native.nvim',
     -- using make instead of cmake due to
     -- https://github.com/nvim-telescope/telescope-fzf-native.nvim/issues/120
     build = 'make',
   },
-  { 'jvgrootveld/telescope-zoxide' },
 
   -- commenting
   { 'numToStr/Comment.nvim', config = c('comment') },
@@ -176,7 +172,6 @@ local plugins = {
   { 'windwp/nvim-autopairs', config = c('autopair') },
   { 'windwp/nvim-ts-autotag', config = true },
   { 'L3MON4D3/luasnip', config = c('luasnip'), build = 'make install_jsregexp' }, -- snippets engine
-  { 'Hoffs/omnisharp-extended-lsp.nvim' },
 
   -- git
   { 'lewis6991/gitsigns.nvim', config = c('gitsigns') },
@@ -225,9 +220,6 @@ local plugins = {
   -- Markdown, LaTeX, and text
   { 'dkarter/bullets.vim', ft = { 'markdown' }, config = c('bullets') },
 
-  -- plantuml
-  { 'aklt/plantuml-syntax' },
-
   -- files browsing
   { 'stevearc/oil.nvim', config = c('oil') },
 
@@ -235,9 +227,6 @@ local plugins = {
   { 'cljoly/telescope-repo.nvim' },
   { 'airblade/vim-rooter', config = c('rooter') },
   { 'tpope/vim-dotenv' },
-
-  -- terminal integration
-  { 'akinsho/toggleterm.nvim', version = '*', config = c('toggleterm') },
 
   -- Misc
   { 'axieax/urlview.nvim', config = c('urlview') },

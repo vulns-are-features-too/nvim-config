@@ -68,7 +68,6 @@ ext('neoclip')
 ext('notify')
 ext('refactoring')
 ext('repo')
-ext('zoxide')
 
 -- keymaps
 
@@ -117,7 +116,6 @@ map('<space>fl', t.extensions.repo.cached_list, 'Telescope files in repos')
 map('<space>fp', t.extensions.repo.list, 'Telescope repos list')
 map('<space>fr', t.extensions.refactoring.refactors, 'Telescope refactoring actions', 'v')
 map('<space>fy', t.extensions.neoclip.neoclip, 'Telescope yank ring')
-map('<space>fz', t.extensions.zoxide.list, 'Telescope zoxide jump list')
 
 -- my functions
 map('<space>fC', edit_config, 'Telescope edit config')
