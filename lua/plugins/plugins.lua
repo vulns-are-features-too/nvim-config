@@ -105,6 +105,7 @@ local plugins = {
   -- telescope
   {
     'nvim-telescope/telescope.nvim',
+    version = '*',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = c('telescope'),
   },
