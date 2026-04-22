@@ -66,7 +66,6 @@ ext('fzf')
 ext('harpoon')
 ext('neoclip')
 ext('notify')
-ext('refactoring')
 ext('repo')
 
 -- keymaps
@@ -114,7 +113,6 @@ map('<space>fc', f.lsp_incoming_calls, 'Telescope incoming calls')
 -- extensions
 map('<space>fl', t.extensions.repo.cached_list, 'Telescope files in repos')
 map('<space>fp', t.extensions.repo.list, 'Telescope repos list')
-map('<space>fr', t.extensions.refactoring.refactors, 'Telescope refactoring actions', 'v')
 map('<space>fy', t.extensions.neoclip.neoclip, 'Telescope yank ring')
 
 -- my functions

@@ -129,8 +129,9 @@ local plugins = {
   -- refactoring
   {
     'ThePrimeagen/refactoring.nvim',
-    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    dependencies = { 'lewis6991/async.nvim' },
     config = c('refactoring'),
+    lazy = false,
   },
 
   -- diff
