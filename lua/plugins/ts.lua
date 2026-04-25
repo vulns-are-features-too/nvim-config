@@ -1,145 +1,118 @@
----@diagnostic disable: missing-fields
-local ts_repeat_move = require('nvim-treesitter.textobjects.repeatable_move')
+local ts = require('nvim-treesitter')
 
 local function nmap(key, target, opts) vim.keymap.set('n', key, target, opts) end
+local function nxomap(key, target, opts) vim.keymap.set({ 'n', 'x', 'o' }, key, target, opts) end
 
-vim.g.skip_ts_context_commentstring_module = true
+---- general ----
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { '*' },
+  callback = function()
+    vim.treesitter.start()
 
-require('nvim-treesitter.configs').setup({
-  ensure_installed = {
-    'bash',
-    'c',
-    'comment',
-    'cpp',
-    'diff',
-    'dockerfile',
-    'go',
-    'haskell',
-    'html',
-    'http',
-    'java',
-    'javascript',
-    'jq',
-    'json',
-    'latex',
-    'lua',
-    'markdown',
-    'markdown_inline',
-    'php',
-    'python',
-    'query',
-    'rasi',
-    'regex',
-    'rust',
-    'sql',
-    'sxhkdrc',
-    'toml',
-    'typescript',
-    'vim',
-    'yaml',
-  },
-  auto_install = true,
+    vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+    vim.wo[0][0].foldmethod = 'expr'
 
-  highlight = {
-    enable = true,
-    additional_vim_regex_highlighting = true,
-  },
-
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = '<space>v',
-      node_incremental = 'sn',
-      scope_incremental = 'sN',
-      node_decremental = 'sm',
-    },
-  },
-
-  textobjects = {
-    select = {
-      enable = true,
-      lookahead = true,
-      keymaps = {
-        ['aB'] = '@block.outer',
-        ['iB'] = '@block.inner',
-        ['af'] = '@call.outer',
-        ['if'] = '@call.inner',
-        ['aC'] = '@class.outer',
-        ['iC'] = '@class.inner',
-        ['aF'] = '@function.outer',
-        ['iF'] = '@function.inner',
-        ['ac'] = '@conditional.outer',
-        ['ic'] = '@conditional.inner',
-        ['al'] = '@loop.outer',
-        ['il'] = '@loop.inner',
-        ['aa'] = '@parameter.outer',
-        ['ia'] = '@parameter.inner',
-      },
-    },
-    swap = {
-      enable = true,
-      swap_next = { ['<space><space>l'] = '@parameter.inner' },
-      swap_previous = { ['<space><space>h'] = '@parameter.inner' },
-    },
-    move = {
-      enable = true,
-      set_jumps = true,
-      goto_next_start = {
-        [']C'] = '@class.outer',
-        [']F'] = '@function.outer',
-        [']a'] = '@parameter.outer',
-        [']c'] = '@conditional.outer',
-        [']f'] = '@call.outer',
-        [']l'] = '@loop.outer',
-      },
-      goto_previous_start = {
-        ['[C'] = '@class.outer',
-        ['[F'] = '@function.outer',
-        ['[a'] = '@parameter.outer',
-        ['[c'] = '@conditional.outer',
-        ['[f'] = '@call.outer',
-        ['[l'] = '@loop.outer',
-      },
-    },
-  },
-
-  playground = {
-    enable = true,
-    disable = {},
-    updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-    persist_queries = false, -- Whether the query persists across vim sessions
-    keybindings = {
-      toggle_query_editor = 'o',
-      toggle_hl_groups = 'i',
-      toggle_injected_languages = 't',
-      toggle_anonymous_nodes = 'a',
-      toggle_language_display = 'I',
-      focus_language = 'f',
-      unfocus_language = 'F',
-      update = 'R',
-      goto_node = '<cr>',
-      show_help = '?',
-    },
-    query_linter = {
-      enable = true,
-      use_virtual_text = true,
-      lint_events = { 'BufWrite', 'CursorHold' },
-    },
-  },
-
-  endwise = { enable = true },
-  matchup = { enable = true },
+    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  end,
 })
 
-require('ts_context_commentstring').setup({enable_autocmd = false})
+nmap('<leader>ts', '<Cmd>InspectTree<CR>', { remap = false, silent = true })
 
-vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+ts.install({
+  'bash',
+  'c',
+  'comment',
+  'cpp',
+  'diff',
+  'dockerfile',
+  'go',
+  'haskell',
+  'html',
+  'http',
+  'java',
+  'javascript',
+  'jq',
+  'json',
+  'latex',
+  'lua',
+  'markdown',
+  'markdown_inline',
+  'php',
+  'python',
+  'query',
+  'rasi',
+  'regex',
+  'rust',
+  'sql',
+  'sxhkdrc',
+  'toml',
+  'typescript',
+  'vim',
+  'yaml',
+})
 
--- Repeat movement with ; and ,
-nmap('f', ts_repeat_move.builtin_f_expr, { expr = true })
-nmap('F', ts_repeat_move.builtin_F_expr, { expr = true })
-nmap('t', ts_repeat_move.builtin_t_expr, { expr = true })
-nmap('T', ts_repeat_move.builtin_T_expr, { expr = true })
-nmap(';', ts_repeat_move.repeat_last_move_next, { remap = false, silent = true })
-nmap(',', ts_repeat_move.repeat_last_move_previous, { remap = false, silent = true })
-nmap('<leader>ts', '<Cmd>TSPlaygroundToggle<CR>', { remap = false, silent = true })
+-- comment strings
+vim.g.skip_ts_context_commentstring_module = true
+require('ts_context_commentstring').setup({ enable_autocmd = false })
+
+---- text objects ----
+
+require('nvim-treesitter-textobjects').setup({
+  select = {
+    lookahead = true,
+    selection_modes = {
+      ['@parameter.outer'] = 'v', -- charwise
+      ['@function.outer'] = 'V',  -- linewise
+      ['@class.outer'] = '<c-v>', -- blockwise
+    },
+    include_surrounding_whitespace = false,
+  },
+})
+
+-- select
+local select_textobject = require('nvim-treesitter-textobjects.select').select_textobject
+local function map_obj(keys, target)
+  vim.keymap.set({ 'x', 'o' }, keys, function() select_textobject(target, 'textobjects') end)
+end
+
+map_obj('aB', '@block.outer')
+map_obj('iB', '@block.inner')
+map_obj('af', '@call.outer')
+map_obj('if', '@call.inner')
+map_obj('aC', '@class.outer')
+map_obj('iC', '@class.inner')
+map_obj('aF', '@function.outer')
+map_obj('iF', '@function.inner')
+map_obj('ac', '@conditional.outer')
+map_obj('ic', '@conditional.inner')
+map_obj('al', '@loop.outer')
+map_obj('il', '@loop.inner')
+map_obj('aa', '@parameter.outer')
+map_obj('ia', '@parameter.inner')
+
+-- swap
+local swap = require('nvim-treesitter-textobjects.swap')
+nmap('<space><space>l', function() swap.swap_next('@parameter.inner') end)
+nmap('<space><space>h', function() swap.swap_previous('@parameter.inner') end)
+
+-- move
+local move = require('nvim-treesitter-textobjects.move')
+local function map_move(key, target)
+  nxomap(']' .. key, function() move.goto_next_start(target, 'textobjects') end)
+  nxomap('[' .. key, function() move.goto_previous_start(target, 'textobjects') end)
+end
+map_move('C', '@class.outer')
+map_move('F', '@function.outer')
+map_move('a', '@parameter.outer')
+map_move('c', '@conditional.outer')
+map_move('f', '@call.outer')
+map_move('l', '@loop.outer')
+
+-- Repeat movement
+local ts_repeat_move = require('nvim-treesitter-textobjects.repeatable_move')
+nxomap('f', ts_repeat_move.builtin_f_expr, { expr = true })
+nxomap('F', ts_repeat_move.builtin_F_expr, { expr = true })
+nxomap('t', ts_repeat_move.builtin_t_expr, { expr = true })
+nxomap('T', ts_repeat_move.builtin_T_expr, { expr = true })
+nxomap(';', ts_repeat_move.repeat_last_move_next)
+nxomap(',', ts_repeat_move.repeat_last_move_previous)
