@@ -3,22 +3,7 @@ local ts = require('nvim-treesitter')
 local function nmap(key, target, opts) vim.keymap.set('n', key, target, opts) end
 local function nxomap(key, target, opts) vim.keymap.set({ 'n', 'x', 'o' }, key, target, opts) end
 
----- general ----
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = { '*' },
-  callback = function()
-    vim.treesitter.start()
-
-    vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-    vim.wo[0][0].foldmethod = 'expr'
-
-    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-  end,
-})
-
-nmap('<leader>ts', '<Cmd>InspectTree<CR>', { remap = false, silent = true })
-
-ts.install({
+local languages = {
   'bash',
   'c',
   'comment',
@@ -49,7 +34,24 @@ ts.install({
   'typescript',
   'vim',
   'yaml',
+}
+
+---- general ----
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = languages,
+  callback = function()
+    vim.treesitter.start()
+
+    vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+    vim.wo[0][0].foldmethod = 'expr'
+
+    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  end,
 })
+
+nmap('<leader>ts', '<Cmd>InspectTree<CR>', { remap = false, silent = true })
+
+ts.install(languages)
 
 -- comment strings
 vim.g.skip_ts_context_commentstring_module = true
