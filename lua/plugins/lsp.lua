@@ -285,9 +285,6 @@ setup('yamlls', {
   on_attach = on_attach,
 })
 
-vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {})
-vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {})
-
 nmap('<space>pl', '<Cmd>checkhealth vim.lsp<CR>')
 nmap('<space>pr', '<Cmd>lsp restart<CR>')
 nmap('<space>pm', '<Cmd>Mason<CR>')
