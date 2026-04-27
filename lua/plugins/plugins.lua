@@ -212,7 +212,7 @@ local plugins = {
   { 'rust-lang/rust.vim' },
   {
     'mrcjkb/rustaceanvim',
-    version = '^6',
+    version = '^9',
     lazy = false,
   },
 
