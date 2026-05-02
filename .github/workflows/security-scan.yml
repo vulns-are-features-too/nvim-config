@@ -24,7 +24,9 @@ jobs:
       - name: Install neovim
         run: |
           set -euo pipefail
-          wget -O nvim https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage
+          wget https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
+          tar xzvf nvim-linux-x86_64.tar.gz
+          mv nvim-linux-x86_64/bin/nvim ./nvim
           chmod u+x nvim
           ln -s ${{ github.workspace }} "$HOME/.config/nvim"
       - name: Run neovim
