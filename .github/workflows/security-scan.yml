@@ -14,6 +14,7 @@ jobs:
   nvim:
     name: Download and run nvim
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v6
       - name: System update
@@ -64,6 +65,7 @@ jobs:
     name: ClamAV scan
     runs-on: ubuntu-latest
     needs: Nvim
+    timeout-minutes: 3
     steps:
       - name: Install packages
         run: sudo apt-get install --yes clamav-daemon clamav-freshclam
@@ -89,6 +91,7 @@ jobs:
     name: Check IPs against blocklist.de
     runs-on: ubuntu-latest
     needs: Nvim
+    timeout-minutes: 1
     steps:
       - uses: actions/checkout@v6
       - name: Download IP addresses
@@ -107,6 +110,7 @@ jobs:
     name: Check IPs against Proofpoint Emerging Threats
     runs-on: ubuntu-latest
     needs: Nvim
+    timeout-minutes: 1
     steps:
       - uses: actions/checkout@v6
       - name: Download IP addresses
@@ -125,6 +129,7 @@ jobs:
     name: Check IPs against ThreatHive Blocklist
     runs-on: ubuntu-latest
     needs: Nvim
+    timeout-minutes: 1
     steps:
       - uses: actions/checkout@v6
       - name: Download IP addresses
@@ -143,6 +148,7 @@ jobs:
     name: Check IPs against AlienVault
     runs-on: ubuntu-latest
     needs: Nvim
+    timeout-minutes: 1
     steps:
       - uses: actions/checkout@v6
       - name: Download IP addresses
