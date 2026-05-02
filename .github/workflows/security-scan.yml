@@ -13,7 +13,7 @@ jobs:
 
   nvim:
     name: Download and run nvim
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v6
@@ -63,7 +63,7 @@ jobs:
 
   clamav:
     name: ClamAV scan
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     needs: Nvim
     timeout-minutes: 3
     steps:
@@ -89,7 +89,7 @@ jobs:
 
   cti_blocklist_de:
     name: Check IPs against blocklist.de
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     needs: Nvim
     timeout-minutes: 1
     steps:
@@ -108,7 +108,7 @@ jobs:
 
   cti_proofpoint:
     name: Check IPs against Proofpoint Emerging Threats
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     needs: Nvim
     timeout-minutes: 1
     steps:
@@ -127,7 +127,7 @@ jobs:
 
   cti_threathive:
     name: Check IPs against ThreatHive Blocklist
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     needs: Nvim
     timeout-minutes: 1
     steps:
@@ -146,7 +146,7 @@ jobs:
 
   cti_alienvault:
     name: Check IPs against AlienVault
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     needs: Nvim
     timeout-minutes: 1
     steps:
