@@ -10,7 +10,6 @@ on:
   workflow_dispatch:
 
 jobs:
-
   nvim:
     name: Download and run nvim
     runs-on: ubuntu-slim
@@ -38,6 +37,17 @@ jobs:
           ./nvim --headless
           sleep 1s
           sudo kill "$PID_TCPDUMP"
+      - name: Print versions
+        run: |
+          echo "=== nvim version ==="
+          ./nvim --version
+          md5sum ./nvim
+          sha256sum ./nvim
+          echo
+          echo "=== plugin revisions ==="
+          for plugin in ~/.local/share/nvim/lazy/*; do
+            cd "$plugin" && echo "${plugin##*/}: $(git rev-parse HEAD)"
+          done
       - name: Zip up nvim artifacts
         run: zip --recurse-paths nvim-actifacts.zip ./nvim "$HOME/.config/nvim" "$HOME/.local/share/nvim"
       - name: Upload nvim artifacts
