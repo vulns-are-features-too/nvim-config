@@ -90,7 +90,7 @@ local function setup_saga()
     k_rename = '<Cmd>Lspsaga rename ++project<CR>'
     nmap('<space>ld', '<Cmd>Lspsaga peek_definition<CR>', 'Peek definition')
     nmap('<space>lo', '<Cmd>Lspsaga outline<CR>', 'LSP outline')
-    nmap('gl', '<Cmd>Lspsaga lsp_finder<CR>', 'LSP find defintion, reference and implementation')
+    nmap('gl', '<Cmd>Lspsaga finder<CR>', 'LSP find defintion, reference and implementation')
   end
 end
 
