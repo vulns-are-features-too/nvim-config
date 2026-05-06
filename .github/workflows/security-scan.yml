@@ -16,8 +16,8 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v6
-      - name: System update
-        run: sudo apt-get update && sudo apt-get upgrade
+      - name: Apt update
+        run: sudo apt-get update
       - name: Install packages
         run: sudo apt-get install --yes tcpdump tshark
       - name: Install neovim
