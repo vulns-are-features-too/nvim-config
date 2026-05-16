@@ -9,6 +9,9 @@ on:
     - cron: "12 9 * * 6"
   workflow_dispatch:
 
+env:
+  NVIM_BIN: ./nvim-linux-x86_64/bin/nvim
+
 jobs:
   nvim:
     name: Download and run nvim
@@ -25,8 +28,6 @@ jobs:
           set -euo pipefail
           wget https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
           tar xzvf nvim-linux-x86_64.tar.gz
-          mv nvim-linux-x86_64/bin/nvim ./nvim
-          chmod u+x nvim
           ln -s ${{ github.workspace }} "$HOME/.config/nvim"
       - name: Run neovim
         run: |
@@ -34,22 +35,22 @@ jobs:
           echo "vim.cmd(':q!')" >> ${{ github.workspace }}/init.lua
           sudo tcpdump -U -q -i eth0 -w /tmp/tcpdump.pcap &
           PID_TCPDUMP=$!
-          ./nvim --headless
+          ${{ env.NVIM_BIN }} --headless
           sleep 1s
           sudo kill "$PID_TCPDUMP"
       - name: Print versions
         run: |
           echo "=== nvim version ==="
-          ./nvim --version
-          md5sum ./nvim
-          sha256sum ./nvim
+          ${{ env.NVIM_BIN }} --version
+          md5sum ${{ env.NVIM_BIN }}
+          sha256sum ${{ env.NVIM_BIN }}
           echo
           echo "=== plugin revisions ==="
           for plugin in ~/.local/share/nvim/lazy/*; do
             cd "$plugin" && echo "${plugin##*/}: $(git rev-parse HEAD)"
           done
       - name: Zip up nvim artifacts
-        run: zip --recurse-paths nvim-actifacts.zip ./nvim "$HOME/.config/nvim" "$HOME/.local/share/nvim"
+        run: zip --recurse-paths nvim-actifacts.zip "$HOME/.config/nvim" "$HOME/.local/share/nvim"
       - name: Upload nvim artifacts
         uses: actions/upload-artifact@v7
         with:
@@ -92,8 +93,6 @@ jobs:
           set -euo pipefail
           sudo systemctl stop clamav-freshclam.service
           sudo freshclam
-      - name: Scan neovim executable
-        run: clamscan nvim-actifacts/nvim
       - name: Scan neovim configs
         run: clamscan --recursive nvim-actifacts/home/*/.config/nvim/
       - name: Scan neovim data
