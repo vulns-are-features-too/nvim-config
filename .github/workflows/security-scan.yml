@@ -22,7 +22,7 @@ jobs:
       - name: Apt update
         run: sudo apt-get update
       - name: Install packages
-        run: sudo apt-get install --yes tcpdump tshark
+        run: sudo apt-get install --yes tcpdump tree-sitter-cli tshark
       - name: Install neovim
         run: |
           set -euo pipefail
