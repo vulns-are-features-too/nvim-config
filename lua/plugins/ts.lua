@@ -51,7 +51,10 @@ vim.api.nvim_create_autocmd('FileType', {
 
 nmap('<leader>ts', '<Cmd>InspectTree<CR>', { remap = false, silent = true })
 
-ts.install(languages)
+-- tmp github CI fix
+if (os.getenv("GITHUB_ACTIONS") == nil) then
+  ts.install(languages)
+end
 
 -- comment strings
 vim.g.skip_ts_context_commentstring_module = true
