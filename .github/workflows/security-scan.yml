@@ -32,7 +32,6 @@ jobs:
       - name: Run neovim
         run: |
           set -euo pipefail
-          git config --global init.defaultRefFormat files
           echo "vim.cmd(':q!')" >> ${{ github.workspace }}/init.lua
           sudo tcpdump -U -q -i eth0 -w /tmp/tcpdump.pcap &
           PID_TCPDUMP=$!
