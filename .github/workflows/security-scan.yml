@@ -80,6 +80,8 @@ jobs:
     needs: Nvim
     timeout-minutes: 3
     steps:
+      - name: Apt update
+        run: sudo apt-get update
       - name: Install packages
         run: sudo apt-get install --yes clamav-daemon clamav-freshclam
       - name: Download nvim artifacts
