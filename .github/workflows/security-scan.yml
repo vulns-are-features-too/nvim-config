@@ -16,7 +16,7 @@ jobs:
   nvim:
     name: Download and run nvim
     runs-on: ubuntu-slim
-    timeout-minutes: 30
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v6
       - name: Apt update
@@ -78,7 +78,7 @@ jobs:
     name: ClamAV scan
     runs-on: ubuntu-slim
     needs: Nvim
-    timeout-minutes: 3
+    timeout-minutes: 10
     steps:
       - name: Apt update
         run: sudo apt-get update
