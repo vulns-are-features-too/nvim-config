@@ -17,9 +17,9 @@ runs:
       run: |
         set -euo pipefail
 
-        if [[ -s '${{ inputs.bad_ips_file }}' ]]; then
+        if [[ ! -s '${{ inputs.bad_ips_file }}' ]]; then
           echo 'No bad IP to check'
-          exit
+          exit 1
         fi
 
         comm -12 '${{ inputs.extracted_ips_file }}' '${{ inputs.bad_ips_file }}' > matches.txt
